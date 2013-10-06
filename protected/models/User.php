@@ -58,7 +58,7 @@ class User extends CActiveRecord
 			array('last_login', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, email', 'safe', 'on'=>'search'),
+			array('id, username, email, firstname, lastname, homepage, hoursbyday, daysbyweek', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -90,6 +90,11 @@ class User extends CActiveRecord
 			'password' => 'Password',
 			'email' => 'Email',
 			'last_login' => 'Last Login',
+			'firstname' => 'Firstname',
+			'lastname' => 'Lastname',
+			'homepage' => 'Homepage',
+			'hoursbyday' => 'Hours by day',
+			'daysbyweek' => 'Days by week',
 		);
 	}
 
@@ -109,6 +114,9 @@ class User extends CActiveRecord
 		//$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('last_login',$this->last_login,true);
+		$criteria->compare('email',$this->email,true);
+		$criteria->compare('firstname',$this->firstname,true);
+		$criteria->compare('lastname',$this->lastname,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
