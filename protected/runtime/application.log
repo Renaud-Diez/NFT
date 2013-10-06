@@ -1,0 +1,1262 @@
+2013/10/04 09:47:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:47:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:49:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:49:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:50:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:50:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:51:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:51:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:51:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:51:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:52:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:52:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:52:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:52:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:57:19 [error] [exception.CException] exception 'CException' with message 'Property "ProjectController.issue" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /Users/renaud/Sites/Wii/protected/views/project/column2.php(70): CComponent->__get('issue')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#3 /Users/renaud/Sites/Yii/framework/web/CController.php(784): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#4 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(374): CController->render('gtd', Array)
+#5 [internal function]: ProjectController->actionGtd('16')
+#6 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#7 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#12 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#13 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#15 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#17 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#18 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php/project/gtd/16
+---
+2013/10/04 09:57:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:57:55 [error] [exception.CException] exception 'CException' with message 'Property "ProjectController.controller" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /Users/renaud/Sites/Wii/protected/views/project/column2.php(70): CComponent->__get('controller')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#3 /Users/renaud/Sites/Yii/framework/web/CController.php(784): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#4 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(374): CController->render('gtd', Array)
+#5 [internal function]: ProjectController->actionGtd('16')
+#6 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#7 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#12 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#13 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#15 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#17 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#18 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php/project/gtd/16
+---
+2013/10/04 09:57:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:58:07 [error] [exception.CException] exception 'CException' with message 'Property "ProjectController.issue" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /Users/renaud/Sites/Wii/protected/views/project/column2.php(70): CComponent->__get('issue')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#3 /Users/renaud/Sites/Yii/framework/web/CController.php(784): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#4 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(374): CController->render('gtd', Array)
+#5 [internal function]: ProjectController->actionGtd('16')
+#6 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#7 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#12 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#13 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#15 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#17 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#18 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php/project/gtd/16
+---
+2013/10/04 09:58:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:58:53 [error] [exception.CException] exception 'CException' with message 'Property "ProjectController.issue" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /Users/renaud/Sites/Wii/protected/views/project/column2.php(70): CComponent->__get('issue')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#3 /Users/renaud/Sites/Yii/framework/web/CController.php(784): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#4 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(374): CController->render('gtd', Array)
+#5 [internal function]: ProjectController->actionGtd('16')
+#6 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#7 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#12 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#13 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#15 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#17 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#18 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#19 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php/project/gtd/16
+---
+2013/10/04 09:58:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:59:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:59:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 09:59:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:00:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:00:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:00:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:00:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:02:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:02:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:03:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:03:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:03:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:04:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:04:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 10:04:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:17:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:17:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:17:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:17:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:18:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:20:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:20:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:20:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:22:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:22:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:22:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:23:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:24:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 12:24:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:00:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:16:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:19:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:20:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:21:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:21:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:21:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:22:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:28:53 [error] [exception.CException] exception 'CException' with message 'Property "TbButton.name" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWidgetFactory.php(161): CComponent->__set('name', 'scope')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(ProjectController), 'bootstrap.widge...', Array)
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /Users/renaud/Sites/Wii/protected/views/project/partials/_titleMenu.php(49): CBaseController->widget('bootstrap.widge...', Array)
+#4 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#5 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#6 /Users/renaud/Sites/Yii/framework/web/CController.php(869): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#7 /Users/renaud/Sites/Wii/protected/views/project/gtd.php(33): CController->renderPartial('partials/_title...', Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#9 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#10 /Users/renaud/Sites/Yii/framework/web/CController.php(869): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#11 /Users/renaud/Sites/Yii/framework/web/CController.php(782): CController->renderPartial('gtd', Array, true)
+#12 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(379): CController->render('gtd', Array)
+#13 [internal function]: ProjectController->actionGtd(NULL)
+#14 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#15 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#21 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#23 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#25 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#26 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#27 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/index.php/project/gtd
+---
+2013/10/04 16:28:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:29:43 [error] [exception.CException] exception 'CException' with message 'Property "TbButton.onChange" is not defined.' in /Users/renaud/Sites/Yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWidgetFactory.php(161): CComponent->__set('onChange', 'js:function($el...')
+#1 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(146): CWidgetFactory->createWidget(Object(ProjectController), 'bootstrap.widge...', Array)
+#2 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 /Users/renaud/Sites/Wii/protected/views/project/partials/_titleMenu.php(49): CBaseController->widget('bootstrap.widge...', Array)
+#4 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#5 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#6 /Users/renaud/Sites/Yii/framework/web/CController.php(869): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#7 /Users/renaud/Sites/Wii/protected/views/project/gtd.php(33): CController->renderPartial('partials/_title...', Array)
+#8 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(126): require('/Users/renaud/S...')
+#9 /Users/renaud/Sites/Yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/Users/renaud/S...', Array, true)
+#10 /Users/renaud/Sites/Yii/framework/web/CController.php(869): CBaseController->renderFile('/Users/renaud/S...', Array, true)
+#11 /Users/renaud/Sites/Yii/framework/web/CController.php(782): CController->renderPartial('gtd', Array, true)
+#12 /Users/renaud/Sites/Wii/protected/controllers/ProjectController.php(379): CController->render('gtd', Array)
+#13 [internal function]: ProjectController->actionGtd(NULL)
+#14 /Users/renaud/Sites/Yii/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(ProjectController), Array)
+#15 /Users/renaud/Sites/Yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProjectController), Object(ReflectionMethod), Array)
+#16 /Users/renaud/Sites/Yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 /Users/renaud/Sites/Yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /Users/renaud/Sites/Wii/protected/modules/rights/components/RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 /Users/renaud/Sites/Yii/framework/web/filters/CInlineFilter.php(58): RController->filterRights(Object(CFilterChain))
+#21 /Users/renaud/Sites/Yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 /Users/renaud/Sites/Yii/framework/web/CController.php(291): CFilterChain->run()
+#23 /Users/renaud/Sites/Yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(282): CController->run('gtd')
+#25 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('project/gtd')
+#26 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#27 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/index.php/project/gtd
+---
+2013/10/04 16:29:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:30:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:31:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:36:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:38:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:38:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:38:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:39:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:39:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:39:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:39:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:42:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:42:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:42:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:42:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:42:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:46:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:46:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:48:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:48:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:49:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:49:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:50:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:51:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:53:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:53:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:53:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:54:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:54:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:54:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:55:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:57:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:57:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:58:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 16:58:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:01:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:02:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:03:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:03:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:04:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:04:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:05:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:05:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:06:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:07:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:07:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:08:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:08:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:09:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:10:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:10:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:10:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:11:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:11:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:12:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:13:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:13:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:13:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:13:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 17:13:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:03:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:04:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:04:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:04:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:07:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:21:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:21:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/04 18:23:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2013/10/06 13:19:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/renaud/Sites/Yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/renaud/Sites/Yii/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/renaud/Sites/Yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/renaud/Sites/Wii/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
