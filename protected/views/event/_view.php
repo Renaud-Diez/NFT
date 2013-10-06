@@ -10,7 +10,7 @@ $GLOBALS['eventDate'] = Yii::app()->dateFormatter->format('y-MM-d', $data->creat
 	<i>@ <?php echo Yii::app()->dateFormatter->format('H:mm:ss', $data->creation_date);?> by <?php echo $data->user->username;?></i>
 	<br />
 		<div class="text-right" style="margin-top:-20px;padding-bottom: 10px;">
-			<a href="<?php 
+			<a href="<?php
 							if($data->ref_object == 'Issue')
 								$url = CController::createUrl('/issue/view', array('id'=>$data->ref_id));
 							elseif($data->ref_object == 'Version')
