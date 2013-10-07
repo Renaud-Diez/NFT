@@ -68,8 +68,10 @@ class UserController extends Controller
 
 		if(isset($_POST['User']))
 		{
+			$model->setScenario('update');
+				
 			$model->attributes=$_POST['User'];
-			if($model->save())
+			if($model->validate() && $model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
