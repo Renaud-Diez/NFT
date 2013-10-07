@@ -261,7 +261,7 @@ a:focus {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 100%;
 }
 .span12 {
   width: 940px;
@@ -521,6 +521,7 @@ a:focus {
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
+  width: 100%;
 }
 .container:before,
 .container:after {
