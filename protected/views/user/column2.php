@@ -8,6 +8,7 @@ function reloadGrid(data) {
 }
 </script>
 
+<?php if($this->user):?>
 <div class="span-5 last">
 
 	<?php 
@@ -31,7 +32,7 @@ function reloadGrid(data) {
 				$this->widget('zii.widgets.CListView', $highlightedProject);
 	
 	
-			$this->endWidget();
+				$this->endWidget();
 		?>
 		</div><!-- sidebar -->
 	<?php endif;?>
@@ -85,6 +86,7 @@ function reloadGrid(data) {
 	<?php endif;?>
 
 </div>
+<?php endif;?>
 
 <div class="span-19">
 	<div id="content">
