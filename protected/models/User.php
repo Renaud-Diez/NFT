@@ -48,14 +48,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.		
 		return array(
-			array('username, password, password_repeat', 'required'),
+			array('username, password, password_repeat', 'required', 'on' => 'create'),
+			array('username', 'required', 'on' => 'update'),
+			array('password, password_repeat', 'required', 'on' => 'recover'),
+			array('password', 'compare', 'on' => 'create, recover'),
 			array('password_repeat', 'safe'),
 			array('username, password', 'length', 'max'=>45),
 			array('email', 'length', 'max'=>100),
 			array('username', 'unique'),
 			array('email', 'email'),
-			array('password', 'compare'),
-			array('last_login', 'safe'),
+			array('last_login, firstname, lastname, homepage, hoursbyday, daysbyweek', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, email, firstname, lastname, homepage, hoursbyday, daysbyweek', 'safe', 'on'=>'search'),
@@ -187,12 +189,12 @@ class User extends CActiveRecord
 	
 	protected function afterValidate()
 	{
+		return parent::afterValidate();
+		
 		if(!$this->hasErrors())
 		{
 			$this->password = $this->hashPassword($this->password);
 		}
-		
-		return parent::afterValidate();
 	}
 	
 	public function hashPassword($password)
