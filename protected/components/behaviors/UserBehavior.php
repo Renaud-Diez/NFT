@@ -65,8 +65,27 @@ class UserBehavior extends CActiveRecordBehavior
 		
 		$criteria=new CDbCriteria;
 		$criteria->compare('i.user_id', $this->owner->id);
-		$criteria->addCondition('t.log_date >= :date');
-		$criteria->params['date'] = $date;
+		
+		
+		if($from && $to){
+			$criteria->addCondition('t.log_date between :from AND :to');
+			$criteria->params['from'] = $from;
+			$criteria->params['to'] = $to;
+		}elseif($from){
+			$criteria->addCondition('t.log_date >= :date');
+			$date = $from;
+			$criteria->params['date'] = $date;
+		}elseif($to){
+			$criteria->addCondition('t.log_date <= :date');
+			$date = $to;
+			$criteria->params['date'] = $date;
+		}else{
+			$criteria->addCondition('t.log_date >= :date');
+			$date = date('Y-m-d', strtotime('monday this week'));//strtotime('monday this week')
+			$criteria->params['date'] = $date;
+		}
+		//$criteria->addCondition('t.log_date >= :date');
+		//$criteria->params['date'] = $date;
 		
 		$where=$criteria->condition;
 		$params=$criteria->params;
