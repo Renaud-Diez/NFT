@@ -46,19 +46,31 @@
 	
 	
 	<?php 
-		$this->widget('zii.widgets.jui.CJuiAccordion', array(
-	    'panels'=>array(
-		'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
-	    'Issues'=>$this->renderPartial('_issues',array('model' => $model, 'gridId' => $data->id, 'type' =>'version'),true),
-	    ),
-	    // additional javascript options for the accordion plugin
-	    'options'=>array(
-	    //'active'=>false,
-		'collapsible'=>true,
-	    'heightStyle'=>'content',
-	    'animated'=>'bounceslide',
-	    )
-	    ));
+		$milestones = $data->getMilestones($model, $data->milestones);
+		
+		$issues = $model->getDataProviderIssues($model->issueFilter($_GET['Issue'], 'version', $data->id));
+		
+		if($milestones)
+			$arr['Milestones'] = $this->renderPartial('_milestones',array('milestones' => $milestones),true);
+		
+		//$arr['Issues'] = $this->renderPartial('_issues',array('model' => $model, 'gridId' => $data->id, 'type' =>'version'),true);
+		if(count($issues->getData()) > 0)
+			$arr['Issues'] = $this->renderPartial('_issues',array('dataProvider' => $issues, 'gridId' => $data->id),true);
+		
+		if(is_array($arr))
+		{
+			$this->widget('zii.widgets.jui.CJuiAccordion', array(
+					'panels'=> $arr,
+					// additional javascript options for the accordion plugin
+					'options'=>array(
+							//'active'=>false,
+							'collapsible'=>true,
+							'heightStyle'=>'content',
+							'animated'=>'bounceslide',
+					)
+			));
+		}
+		
     ?>
 	
 

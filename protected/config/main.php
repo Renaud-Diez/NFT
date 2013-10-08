@@ -101,6 +101,9 @@ return array(
 		'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',
         ),
+        'yexcel' => array(
+        		'class' => 'ext.yexcel.Yexcel'
+        ),
 	),
 
 	// application-level parameters that can be accessed

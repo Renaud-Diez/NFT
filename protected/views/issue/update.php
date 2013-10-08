@@ -20,4 +20,4 @@ $this->menu=array(
 
 <h1>Update Issue <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_update', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_update', array('model'=>$model, 'scenario' => 'update')); ?>

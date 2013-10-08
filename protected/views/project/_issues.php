@@ -1,19 +1,22 @@
 <div style="margin-top:-24px">
 <?php 
-	$issue=new Issue('search');
-	$issue->unsetAttributes();
-		
-	if(isset($_GET['Issue']))
-		$issue->attributes=$_GET['Issue'];
-		
-	if($type == 'version')
-		$issue->attributes=array('version_id'=>$gridId);
-	elseif($type == 'milestone')
-		$issue->attributes=array('milestone_id'=>$gridId);
-	elseif($type == 'project')
-		$issue->attributes=array('version_id' => array(0=>NULL), 'milestone_id' => NULL);
-		
-	$dataProvider = $model->getDataProviderIssues($issue);
+	/*if(!$dataProvider)
+	{
+		$issue=new Issue('search');
+		$issue->unsetAttributes();
+			
+		if(isset($_GET['Issue']))
+			$issue->attributes=$_GET['Issue'];
+			
+		if($type == 'version')
+			$issue->attributes=array('version_id'=>$gridId);
+		elseif($type == 'milestone')
+			$issue->attributes=array('milestone_id'=>$gridId);
+		elseif($type == 'project')
+			$issue->attributes=array('version_id' => array(0=>NULL), 'milestone_id' => NULL);
+			
+		$dataProvider = $model->getDataProviderIssues($issue);
+	}*/
 
 	$name = 'issue-grid'.$gridId;
     $this->widget('bootstrap.widgets.TbExtendedGridView', array(

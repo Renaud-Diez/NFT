@@ -116,4 +116,18 @@ class ProjectRelation extends CActiveRecord
 		else
 			return false;
 	}
+	
+	public function afterDelete()
+	{
+		parent::afterDelete();
+		
+		$criteria = new CDbCriteria;
+		$criteria->compare('project_id', $this->related_id);
+		$criteria->compare('related_id', $this->project_id);
+		
+		$model=ProjectRelation::model()->find($criteria);
+		
+		if(!is_null($model))
+			$model->delete();
+	}
 }

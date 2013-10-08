@@ -6,38 +6,33 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'project-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+	'id'=>'issue-form',
+	'type'=>'vertical',
+	'enableAjaxValidation'=>true,
+	));
+ ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'topic_id'); ?>
-		<?php //echo $form->textField($model,'topic_id');
-				echo $form->dropDownList(
+		<?php echo $form->dropDownListRow(
                     $model,
                     'topic_id', 
                     CHtml::listData(Topic::model()->findAll(),
                     'id', 
                     'label'), 
 					array('empty'=>'Select Topic')) ?>
-		<?php echo $form->error($model,'topic_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'code'); ?>
-		<?php echo $form->textField($model,'code',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'code'); ?>
+		<?php echo $form->textFieldRow($model,'code',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'label'); ?>
-		<?php echo $form->textField($model,'label',array('style'=>'width: 350px;','maxlength'=>255)); ?>
-		<?php echo $form->error($model,'label'); ?>
+		<?php echo $form->textFieldRow($model,'label',array('style'=>'width: 350px;','maxlength'=>255)); ?>
 	</div>
 
 	<div class="row" id="editor">
@@ -69,21 +64,37 @@ $this->widget('ext.editMe.widgets.ExtEditMe', array(
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 	
-	<div class="row">
-		<?php echo $form->labelEx($model,'allowed_effort'); ?>
-		<?php echo $form->textField($model,'allowed_effort',array('style'=>'width: 60px;','maxlength'=>150)); ?>
-		<?php echo $form->error($model,'allowed_effort'); ?>
+	<div class="row-fluid">
+		<div class="span1">
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'allowed_effort',array('style'=>'width: 60px;','maxlength'=>150)); ?> hours
+			</div>
+			
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'allowed_budget',array('style'=>'width: 60px;','maxlength'=>150)); ?> EUR
+			</div>
+		</div>
+			
+		<div class="span1">
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'days',array('style'=>'width: 60px;','maxlength'=>150)); ?> days
+			</div>
+			
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'hours',array('style'=>'width: 60px;','maxlength'=>150)); ?> hours
+			</div>
+		</div>
 	</div>
-		
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'user_id'); ?>
-		<?php echo $form->dropDownList($model, 'user_id', $model->getUserOptions());?>
-		<?php echo $form->error($model,'user_id'); ?>
+			<?php echo $form->dropDownListRow($model, 'user_id', $model->getUserOptions());?>
 	</div>
-
+	<br />
+	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php 
+			$this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>$model->isNewRecord ? 'Create' : 'Save'));
+		?>
 	</div>
 
 <?php $this->endWidget(); ?>

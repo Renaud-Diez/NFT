@@ -164,16 +164,19 @@ class ProjectBehavior extends CActiveRecordBehavior
 		->group('it.id')
 		->queryAll();
 		
-		//echo $sql;
+		//echo $sql->text;
 		
 		foreach($sql as $record){
-			if($type == 'issue-workload')
+			if($type == 'issue-workload'){
 				$arrData[] = array($record['label'], (float) $record['value']);
-			else
+				$sum += $record['value'];
+			}else{
 				$arrData[] = array($record['label'], (float) $record['count']);
+				$sum += $record['count'];
+			}
 		}
 		
-		if(count($arrData) > 0)
+		if(count($arrData) > 0 && $sum > 0)
 			return $arrData;
 			
 		return false;
@@ -257,6 +260,10 @@ class ProjectBehavior extends CActiveRecordBehavior
 	{
 		if(is_null($id))
 			$id = $this->owner->id;
+		
+		$hoursbyday = Project::HOURSBYDAY;
+		if($model->hours > 0)
+			$hoursbyday = $model->hours;
 			
 			
 		Yii::trace('IDD: ' . $id,'models.project');
@@ -270,19 +277,19 @@ class ProjectBehavior extends CActiveRecordBehavior
 		foreach($arrCompletion as $record){
 			$date = $this->formatJSDate($record->creation_date);
 			
-			$tre = $record->theorical_remaining_effort-$record->theorical_effort;
+			$tre = ($record->theorical_remaining_effort-$record->theorical_effort)/$hoursbyday;
 			if($tre < 0)
 				$tre = 0;
-			$ere = $record->estimated_remaining_effort-$record->spent_time;
+			$ere = ($record->estimated_remaining_effort-$record->spent_time)/$hoursbyday;
 			if($ere < 0)
 				$ere = 0;
 			
 			$arr[1][] = array($date, (float) $tre);
 			$arr[0][] = array($date, (float) $ere);
-			$arr[2][] = array($date, (float) $this->greaterThanZero($record->overrun));
-			$arr[3][] = array($date, (float) $this->greaterThanZero($record->theorical_effort));
-			$arr[4][] = array($date, (float) $this->greaterThanZero($record->spent_time));
-			$arr[5][] = array($date, (float) $this->greaterThanZero($record->budget));
+			$arr[2][] = array($date, (float) $this->greaterThanZero($record->overrun/$hoursbyday));
+			$arr[3][] = array($date, (float) $this->greaterThanZero($record->theorical_effort/$hoursbyday));
+			$arr[4][] = array($date, (float) $this->greaterThanZero($record->spent_time/$hoursbyday));
+			$arr[5][] = array($date, (float) $this->greaterThanZero($record->budget/$hoursbyday));
 		}
 		
 		$arrData = array(
@@ -690,6 +697,24 @@ class ProjectBehavior extends CActiveRecordBehavior
 		));
 	}
 	
+	public function issueFilter($attributes = false, $type, $gridId)
+	{
+		$issue=new Issue('search');
+		$issue->unsetAttributes();
+		
+		if($attributes)
+			$issue->attributes = $attributes;
+		
+		if($type == 'version')
+			$issue->attributes=array('version_id' => $gridId);
+		elseif($type == 'milestone')
+			$issue->attributes=array('milestone_id' => $gridId);
+		elseif($type == 'project')
+			$issue->attributes=array('version_id' => array(0=>NULL), 'milestone_id' => NULL);
+		
+		return $issue;
+	}
+	
 	public function getDataProviderIssues($issue, $order = null)
 	{
 		$criteria=new CDbCriteria;
@@ -739,6 +764,14 @@ class ProjectBehavior extends CActiveRecordBehavior
 			$criteria->with = array('projectIssues');
 			$criteria->together = true;
 		}
+		
+		if(!is_null($project)){
+			$criteria->with['project'] = array('together' => true);
+			$criteria->addCondition('project.label LIKE :project  OR project.code LIKE :project');
+			$criteria->params['project'] = $project;
+		}
+	
+		
 		
 		if(strstr('ist', $order) || $filter)
 			$criteria->join = 'LEFT OUTER JOIN issue_status ist ON (ist.id = t.status_id)';

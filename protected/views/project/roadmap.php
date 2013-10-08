@@ -29,19 +29,24 @@ $this->issueMenu=array(
 <i><small><?php echo $dataCompletion['count']?> Issues: <?php echo $dataCompletion['closed']?> closed - <?php echo $dataCompletion['opened']?> opened (<?php echo $dataCompletion['warning']?>% done)</small></i>
 
 <?php 
+	$issues = $model->getDataProviderIssues($model->issueFilter($_GET['Issue'], 'project', $data->id));
+	
+	if(count($issues->getData()) > 0)
+	{
 		$this->widget('zii.widgets.jui.CJuiAccordion', array(
-	    'panels'=>array(
-		//'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
-	    'Issues'=>$this->renderPartial('_issues',array('model' => $model, 'gridId' => $data->id, 'type' => NULL),true),
-	    ),
-	    // additional javascript options for the accordion plugin
-	    'options'=>array(
-	    //'active'=>false,
-		'collapsible'=>true,
-	    'heightStyle'=>'content',
-	    'animated'=>'bounceslide',
-	    )
-	    ));
+				'panels'=>array(
+						//'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
+						'Issues'=>$this->renderPartial('_issues',array('dataProvider' => $issues, 'gridId' => $data->id),true),
+				),
+				// additional javascript options for the accordion plugin
+				'options'=>array(
+						//'active'=>false,
+						'collapsible'=>true,
+						'heightStyle'=>'content',
+						'animated'=>'bounceslide',
+				)
+		));
+	}
 ?>
 	
 <?php $this->renderPartial('_sidebar', array('model'=>$model)); ?>

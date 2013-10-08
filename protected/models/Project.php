@@ -67,12 +67,14 @@ class Project extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		array('code, topic_id', 'required'),
-		array('user_id, topic_id, budget, allowed_effort, hours, days', 'numerical', 'integerOnly'=>true),
+		array('code', 'unique'),
+		array('user_id, topic_id, allowed_effort', 'numerical', 'integerOnly'=>true),
+		array('allowed_budget, hours, days', 'numerical'),
 		array('code, label', 'length', 'max'=>45),
 		array('description', 'safe'),
 		// The following rule is used by search().
 		// Please remove those attributes that should not be searched.
-		array('id, user_id, code, label, description, topic_id, budget', 'safe', 'on'=>'search'),
+		array('id, user_id, code, label, description, topic_id, allowed_budget, allowed_effort, hours, days', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -165,8 +167,17 @@ class Project extends CActiveRecord
 	 */
 	protected function beforeSave()
 	{
-		if(empty($this->budget))
-			$this->budget = 0;
+		if(empty($this->allowed_budget))
+			$this->allowed_budget = 0;
+		
+		if(empty($this->allowed_effort))
+			$this->allowed_effort = 0;
+		
+		if(empty($this->hours))
+			$this->hours = Project::HOURSBYDAY;
+		
+		if(empty($this->days))
+			$this->days = Project::DAYSBYWEEK;
 		
 		$projectLog = new ProjectLogs;
 		$projectLog->project_id = $this->id;
@@ -174,7 +185,10 @@ class Project extends CActiveRecord
 		$projectLog->owner_id = $this->user_id;
 		$projectLog->topic_id = $this->topic_id;
 		$projectLog->label = $this->label;
-		$projectLog->budget = $this->budget;
+		$projectLog->allowed_budget = $this->allowed_budget;
+		$projectLog->allowed_effort = $this->allowed_effort;
+		$projectLog->hours = $this->hours;
+		$projectLog->days = $this->days;
 		$projectLog->creation_date = date('Y-m-d H:i:s');
 
 		if(!is_null($this->description))

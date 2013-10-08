@@ -24,8 +24,10 @@
 	<small><i>(<?php echo CHtml::encode(substr($data->due_date,0,10)); ?>)</i></small>
 	<br /><br />
 	
+	<?php $milestones = $data->getMilestones($model, $data->milestones);
+	if($milestones):?>
 	<b>Milestones:</b>
-	<?php $this->widget('zii.widgets.CListView', $data->getMilestones($model, $data->milestones));?>
-
+	<?php $this->widget('zii.widgets.CListView', $milestones);?>
+	<?php endif;?>
 
 </div>

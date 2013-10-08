@@ -9,10 +9,11 @@ $this->breadcrumbs=array(
 <h1>Roadmap - Version: <?php echo $version->label?></h1>
 
 <?php 
-
+	$hcData = Version::model()->getScheduledMilestones($version->getAvailableMilestones());
+	if($hcData){
 		$this->widget('zii.widgets.jui.CJuiAccordion', array(
 	    'panels'=>array(
-		'Gantt'=>$this->renderPartial('_highchartProject', array('dataProvider'=> $version->getAvailableMilestones(), 'type' => 'milestones'), true),
+		'Gantt'=>$this->renderPartial('_highchartProject', array('hcData' => $hcData), true),
 	    ),
 	    // additional javascript options for the accordion plugin
 	    'options'=>array(
@@ -22,11 +23,12 @@ $this->breadcrumbs=array(
 	    'animated'=>'bounceslide',
 	    )
 	    ));
+	}
 ?>
 
 <br />
 
-<div class="text-right" style="margin-top:-40px;padding-bottom: 15px;">
+<div class="text-right" style="margin-top:-60px;padding-bottom: 15px;">
 		<a href="#" onClick="<?php echo ";updateJS('/index.php/version/update/".$version->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;"?>">
 			<i class="icon-pencil"></i>
 			Update
@@ -50,24 +52,34 @@ $this->breadcrumbs=array(
 	<i><small><?php echo $dataCompletion['count']?> Issues: <?php echo $dataCompletion['closed']?> closed - <?php echo $dataCompletion['opened']?> opened (<?php echo $dataCompletion['warning']?>% done)</small></i>
 
 <?php 
+	$issues = $model->getDataProviderIssues($model->issueFilter($_GET['Issue'], 'version', $version->id));
+
+	if(count($issues->getData()) > 0)
+	{
 		$this->widget('zii.widgets.jui.CJuiAccordion', array(
-	    'panels'=>array(
-		//'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
-	    'Issues'=>$this->renderPartial('_issues',array('model' => $model, 'gridId' => $version->id, 'type' => 'version'),true),
-	    ),
-	    // additional javascript options for the accordion plugin
-	    'options'=>array(
-	    'active'=>false,
-		'collapsible'=>true,
-	    'heightStyle'=>'content',
-	    'animated'=>'bounceslide',
-	    )
-	    ));
+				'panels'=>array(
+						//'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
+						'Issues'=>$this->renderPartial('_issues',array('dataProvider' => $issues, 'gridId' => $version->id),true),
+				),
+				// additional javascript options for the accordion plugin
+				'options'=>array(
+						//'active'=>false,
+						'collapsible'=>true,
+						'heightStyle'=>'content',
+						'animated'=>'bounceslide',
+				)
+		));
+	}
+		
+		
 ?>
-	
+<?php 
+	$milestones = $version->getMilestones($model, $version->milestones, '_viewRoadmap');//$data->getMilestones($model, $data->milestones);
+		
+	if($milestones):?>
 	<h3>Milestones:</h3>
 	<div style="margin-top: -20px;">
-	<?php $this->widget('zii.widgets.CListView', $version->getMilestones($model, $version->milestones, '_viewRoadmap'));?>
+	<?php $this->widget('zii.widgets.CListView', $milestones);?>
 	</div>
-
+	<?php endif;?>
 <?php $this->renderPartial('_sidebar', array('model'=>$model)); ?>

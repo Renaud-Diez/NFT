@@ -421,9 +421,9 @@ class IssueBehavior extends CActiveRecordBehavior
 		$newAttributes = $this->owner->getAttributes();
 		$oldAttributes = $this->getOldAttributes();
 
-		if($this->owner->isNewRecord){
+		//if($this->owner->isNewRecord){
 			$this->projectIssue();
-		}
+		//}
 
 		$this->issueLog($newAttributes);
 		$this->eventLog($newAttributes, $oldAttributes);
@@ -526,11 +526,18 @@ class IssueBehavior extends CActiveRecordBehavior
 			if(!empty($this->owner->version_id))
 			$model->version_id = $this->owner->version_id;
 
-			if(!empty($this->milestone_id))
+			if(!empty($this->owner->milestone_id))
 			$model->milestone_id = $this->owner->milestone_id;
-
-			$model->save();
 		}
+		else
+		{
+			if(!empty($this->owner->version_id) && $model->version_id != $this->owner->version_id)
+				$model->version_id = $this->owner->version_id;
+			
+			if(!empty($this->owner->milestone_id) && $model->milestone_id != $this->owner->milestone_id)
+				$model->milestone_id = $this->owner->milestone_id;
+		}
+		$model->save();
 	}
 
 	protected function issueLog($newAttributes)

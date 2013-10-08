@@ -150,6 +150,8 @@ class ProjectController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$this->layout='//layouts/column1';
+		
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -192,7 +194,12 @@ class ProjectController extends Controller
 		
 		$criteria=new CDbCriteria;
 		
-		if($_GET['v'] == 'highlighted'){
+		
+		if($_POST['Project']){
+			$criteria->compare('label', $_POST['Project']['label'], true);
+			$criteria->compare('code', $_POST['Project']['label'], true, 'OR');
+		}
+		elseif($_GET['v'] == 'highlighted'){
 			$criteria->with = array('projectUsers');
 			$criteria->together = true;
 			$criteria->addcondition('projectUsers.user_id=:user_id');
@@ -206,10 +213,6 @@ class ProjectController extends Controller
 		
 		if($_GET['topic']){
 			$criteria->addNotInCondition('topic_id', split(',', $_GET['topic']));
-		}
-		
-		if($_POST['Project']){
-			$criteria->compare('label', $_POST['Project']['label'], true);
 		}
 
 
@@ -360,6 +363,11 @@ class ProjectController extends Controller
 			$order = 'project_id ASC';
 		}
 		
+		$project = null;
+		if($_POST['Project'] && !empty($_POST['Project']['label'])){
+			$project = $_POST['Project']['label'];
+		}
+		
 		$issue=new Issue('search');
 		$issue->unsetAttributes();
 		
@@ -370,9 +378,9 @@ class ProjectController extends Controller
 			$issue->assignee_id = Yii::App()->user->id;
 		
 		//$dataProvider = $model->getDataProviderIssues($issue, 'ist.alias ASC, ist.rank ASC, type_id ASC');
-		$openIssues = $model->getIssues($issue, $filter = 'open');
-		$todoIssues = $model->getIssues($issue, $filter = 'todo');
-		$doneIssues = $model->getIssues($issue, $filter = 'done');
+		$openIssues = $model->getIssues($issue, $filter = 'open', null, $project);
+		$todoIssues = $model->getIssues($issue, $filter = 'todo', null, $project);
+		$doneIssues = $model->getIssues($issue, $filter = 'done', null, $project);
 
 		$this->render('gtd',array(
 			'model'=>$model, 'openIssues'=>$openIssues,'todoIssues'=>$todoIssues,'doneIssues' => $doneIssues
@@ -578,6 +586,7 @@ class ProjectController extends Controller
 				$related->related_id = $model->project_id;
 				
 				$related->relation = $model->getOppositeRelation();
+				Yii::trace('RELATION ID: ' . $related->relation,'models.project');
 				if($related->relation)
 					$related->save();
             	

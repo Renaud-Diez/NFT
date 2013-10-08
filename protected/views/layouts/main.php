@@ -49,6 +49,7 @@
 			                	'---',
 			                	array('label'=>'CONFIGURATION'),
 			                	array('label'=>'Issue Type by Topic', 'url'=> array('/IssueType/typetopic')),
+			                	array('label'=>'Issue Type by Role', 'url'=> array('/IssueType/typerole')),
 			                	array('label'=>'Issue Status by Type', 'url'=> array('/IssueType/typestatus')),
 			                )),
 			                array('label'=>'Projects', 'url'=>'#', 'authItemName' => 'Project.View', 'visible' => Yii::app()->user->checkAccess('Project.*')? true: false, 'active'=>$activeProject,  'items'=>array(

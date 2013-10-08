@@ -26,8 +26,8 @@
 	</div>
 	
 	<div class="row">
-		<?php echo $form->redactorRow($model, 'comment', array('class'=>'span4', 'options'=>array('minHeight'=>200))); ?>
-		<?php echo $form->error($model,'comment'); ?>
+		<?php echo $form->redactorRow($model, 'description', array('class'=>'span4', 'options'=>array('minHeight'=>200))); ?>
+		<?php echo $form->error($model, 'description'); ?>
 	</div>
 	
 	<div class="row-fluid">
@@ -118,7 +118,7 @@
 				</div>
 				<div class="span3">
 					<div class="row">
-						<?php echo $form->textFieldRow($model,'completion',array('style'=>'width: 30px;','maxlength'=>2)); ?> %
+						<?php echo $form->textFieldRow($model,'completion',array('style'=>'width: 30px;','maxlength'=>3)); ?> %
 						<?php echo $form->error($model,'completion'); ?>
 					</div>
 				</div>

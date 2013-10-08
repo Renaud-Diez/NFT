@@ -187,6 +187,36 @@ class IssueController extends Controller
 			'model'=>$model,
 		));
 	}
+	
+	
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionComment($id)
+	{
+		$this->layout='column1';
+	
+		$model=$this->loadModel($id);
+		$this->project = $this->loadProject($model->project_id);
+	
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+	
+		if(isset($_POST['Issue']))
+		{
+			$model->attributes=$_POST['Issue'];
+			$model->comment = $_POST['Issue']['comment'];
+				
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+	
+		$this->render('comment',array(
+				'model'=>$model,
+		));
+	}
 
 	/**
 	 * Deletes a particular model.

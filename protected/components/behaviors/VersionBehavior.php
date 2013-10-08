@@ -84,12 +84,19 @@ class VersionBehavior extends CActiveRecordBehavior
    							 ));
    		$dataProvider->sort->defaultOrder='due_date ASC';
    		
-   		return array('id' => 'milestones-grid',
+   		Yii::trace('COUNT DATA: ' . count($dataProvider->getData()),'models.project');
+   		
+   		if(count($dataProvider->getData()) > 0)
+   		{
+   			return array('id' => 'milestones-grid',
 							'ajaxUpdate'=>true,
 							'dataProvider' => $dataProvider,
 							'itemView' => '/milestone/'.$itemView,
 							'enableSorting' => true,
 							'viewData' => array('model' => $model));
+   		}
+   		
+   		return false;
 	}
 	
 	public function getAvailableMilestones($status = null)

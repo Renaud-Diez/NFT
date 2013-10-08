@@ -26,12 +26,12 @@ $this->breadcrumbs=array(
 					array(
 					//'type' => 'info',
 					'buttons' => array(
-					array('label' => 'Update', 'url' => CController::createUrl('update', array('id'=>$model->id)), 'icon' => 'icon-pencil'),
+					array('label' => 'Comment', 'url' => array('comment', 'id' => $model->id), 'icon' => 'icon-pencil'),
 					array('label' => 'Log Time', 
 							'url' => '#',
 							'htmlOptions' => array('onclick'=>';logTime();$("#dialogTimetracker").dialog("open");return false;'),
 							'icon' => 'icon-time'),
-					array('label' => 'New sub-isue', 'url' => CController::createUrl('create', array('parent_id'=>$model->id)), 'icon' => 'icon-tasks'),
+					array('label' => 'New sub-isue', 'url' => array('create', 'parent_id'=>$model->id), 'icon' => 'icon-tasks'),
 					),
 					)
 					);	
@@ -43,6 +43,8 @@ $this->breadcrumbs=array(
 					'buttons' => array(
 					array(	'label' => 'More',
 							'items' => array(
+											array('label' => 'Update', 'url' => array('update', 'id' => $model->id), 'icon' => 'icon-pencil'),
+											'---',
 											array('label' => 'VIEWS'),
 											array('label' => 'Detail', 'url' => array('view', 'id' => $model->id)),
 											array('label' => 'Event History', 'url' => '#'),

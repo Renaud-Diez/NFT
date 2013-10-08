@@ -16,10 +16,12 @@ $this->viewMenu=array(
 <h1>Projects</h1>
 
 <?php 
-
+	$hcData = Project::model()->getScheduledProjects($dataProvider);
+		
+	if($hcData){
 		$this->widget('zii.widgets.jui.CJuiAccordion', array(
 	    'panels'=>array(
-		'Gantt'=>$this->renderPartial('_highchartProject', array('dataProvider'=> $dataProvider), true),
+		'Gantt'=>$this->renderPartial('_highchartProject', array('hcData' => $hcData), true),
 	    ),
 	    // additional javascript options for the accordion plugin
 	    'options'=>array(
@@ -29,6 +31,7 @@ $this->viewMenu=array(
 	    'animated'=>'bounceslide',
 	    )
 	    ));
+	}
 ?>
 
 <?php $this->widget('zii.widgets.CListView', array(

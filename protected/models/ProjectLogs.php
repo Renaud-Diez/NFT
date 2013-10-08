@@ -49,7 +49,7 @@ class ProjectLogs extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_id, user_id, label, owner_id', 'required'),
-			array('project_id, user_id, topic_id, parent_id, owner_id, budget', 'numerical', 'integerOnly'=>true),
+			array('project_id, user_id, topic_id, parent_id, owner_id, allowed_budget, allowed_effort, hours, days', 'numerical', 'integerOnly'=>true),
 			array('label', 'length', 'max'=>45),
 			array('creation_date, description', 'safe'),
 			// The following rule is used by search().

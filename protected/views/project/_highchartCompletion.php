@@ -1,10 +1,10 @@
 <?php 
 if($type == 'versions')
-$series = Project::model()->getScheduledVersions($dataProvider);
+	$series = Project::model()->getScheduledVersions($dataProvider);
 elseif($type == 'milestones')
-$series = Version::model()->getScheduledMilestones($dataProvider);
+	$series = Version::model()->getScheduledMilestones($dataProvider);
 else
-$series = Project::model()->dataCompletion($model->id);
+	$series = Project::model()->dataCompletion($model->id);
 
 $this->Widget('ext.highcharts.HighchartsWidget', array(
 //'scripts' => array('highcharts-more'),   

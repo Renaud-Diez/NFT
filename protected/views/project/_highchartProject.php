@@ -1,11 +1,11 @@
 
 <?php 
-if($type == 'versions')
+/*if($type == 'versions')
 $hcData = Project::model()->getScheduledVersions($dataProvider);
 elseif($type == 'milestones')
 $hcData = Version::model()->getScheduledMilestones($dataProvider);
 else
-$hcData = Project::model()->getScheduledProjects($dataProvider);
+$hcData = Project::model()->getScheduledProjects($dataProvider);*/
 
 $categories = $hcData['categories'];
 $series = $hcData['series'];

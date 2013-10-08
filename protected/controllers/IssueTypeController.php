@@ -164,6 +164,30 @@ class IssueTypeController extends Controller
 		));
 	}
 	
+	public function actionTyperole()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('name', 'Project', true);
+		$criteria->compare('type', 2);
+		
+		$this->title = 'Association Types & Roles';
+		$arrType = CHtml::listData(IssueType::model()->findAll(), 'id', 'label');
+		$arrRole = CHtml::listData(AuthItem::model()->findAll($criteria), 'name', 'name');
+	
+		if(isset($_POST['Matrix']))
+		{
+			IssueType::model()->saveRoleRelation($_POST['Matrix'], 'Role');
+		}
+	
+		$objTypeRole = RoleIssueType::model()->findAll();
+		foreach($objTypeRole as $obj)
+			$objTypeRole[] = $obj->type_id.':'.$obj->role;
+	
+		$this->render('typeMatrix',array(
+				'arrType'=>$arrType, 'arrRelation'=>$arrRole, 'arrTypeRelation' => $objTypeRole
+		));
+	}
+	
 	public function actionTypestatus()
 	{
 		$this->title = 'Association Types & Status';

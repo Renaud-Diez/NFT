@@ -15,10 +15,26 @@ class IssueTypeBehavior extends CActiveRecordBehavior
 			}
 	}
 	
+	public function saveRoleRelation($arrValues, $relationName)
+	{
+		$this->deleteRelations($relationName);
+		foreach($arrValues as $value){
+			$arr = explode(':', $value);
+			$typeId = $arr[0];
+			$relationId = $arr[1];
+	
+			if(is_null($this->findRelatedObject($relationName, $relationId, $typeId))){
+				$this->saveRelation($relationName, $typeId, $relationId);
+			}
+		}
+	}
+	
 	protected function deleteRelations($relationName)
 	{
 		if($relationName == 'Topic')
 			IssueTypeTopic::model()->deleteAll();
+		elseif($relationName == 'Role')
+			RoleIssueType::model()->deleteAll();
 		else
 			IssueTypeStatus::model()->deleteAll();
 	}
@@ -27,6 +43,8 @@ class IssueTypeBehavior extends CActiveRecordBehavior
 	{
 		if($relationName == 'Topic')
 			return IssueTypeTopic::model()->findByAttributes(array('type_id' => $typeId, 'topic_id' => $relationId));
+		elseif($relationName == 'Topic')
+			return RoleIssueType::model()->findByAttributes(array('type_id' => $typeId, 'role' => $relationId));
 		else
 			return IssueTypeStatus::model()->findByAttributes(array('type_id' => $typeId, 'status_id' => $relationId));
 	}
@@ -36,6 +54,10 @@ class IssueTypeBehavior extends CActiveRecordBehavior
 		if($relationName == 'Topic'){
 			$model = new IssueTypeTopic;
 			$model->topic_id = $relationId;
+		}
+		elseif($relationName == 'Role'){
+			$model = new RoleIssueType;
+			$model->role = $relationId;
 		}
 		else{
 			$model = new IssueTypeStatus;

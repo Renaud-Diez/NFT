@@ -47,7 +47,7 @@ class Timetracker extends CActiveRecord
 		return array(
 			array('user_id, issue_id, time_spent, billable, activity_id', 'required'),
 			array('user_id, issue_id, billable, activity_id', 'numerical', 'integerOnly'=>true),
-			array('time_spent', 'length', 'max'=>2),
+			array('time_spent', 'length', 'max'=>5),
 			array('comment', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
