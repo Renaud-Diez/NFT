@@ -10,6 +10,25 @@ function reloadGrid(data) {
 
 <div class="span-5 last">
 
+	<?php if(!$this->project):?>
+	<div id="sidebar">
+	<?php 
+
+			$this->beginWidget('zii.widgets.CPortlet', array(
+				'title'=>'Search',
+			));
+			
+			$this->renderPartial('_searchRight',array(
+			'model'=>$this->issue,
+			));
+
+			$this->endWidget();
+	?>
+	</div>
+	<?php endif;?>
+	
+
+	<?php if($this->project):?>
 	<div id="sidebar">
 	<?php 
 
@@ -40,11 +59,6 @@ function reloadGrid(data) {
 				);
 
 			$this->endWidget();
-			
-			 
-			
-		
-	
 	?>
 	</div>
 	
@@ -182,6 +196,7 @@ function reloadGrid(data) {
 	?>
 	
 	</div><!-- sidebar -->
+	<?php endif;?>
 </div>
 
 <div class="span-19">

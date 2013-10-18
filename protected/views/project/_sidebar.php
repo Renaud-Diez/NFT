@@ -222,4 +222,16 @@ function updateJS(url,title)
     return false; 
  
 }
+
+function checkDate()
+{
+	$from = $('#DateRangeForm_from').val();
+	$to = $('#DateRangeForm_to').val();
+	if($from != '' && $to != ''){
+		if($from > $to){
+			$('#DateRangeForm_to').val($from);
+		}
+	}
+    return false; 
+}
 </script>

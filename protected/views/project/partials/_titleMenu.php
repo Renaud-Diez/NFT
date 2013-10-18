@@ -46,6 +46,8 @@
 					'buttons' => array(
 					array(	'label' => 'More',
 							'items' => array(
+											array('label' => 'Set Project Roles', 'url' => '#', 'linkOptions'=>array('onclick'=>';updateJS("/ProjectRole/create/pid/'.$model->id.'", "Project Role");$("#dialogModal").dialog("open"); return false;')),
+											'---',
 											array('label' => 'VIEWS'),
 											array('label' => 'Detail', 'url' => array('view', 'id' => $model->id)),
 											array('label' => 'Event History', 'url' => '#'),

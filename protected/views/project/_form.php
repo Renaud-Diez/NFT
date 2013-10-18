@@ -9,7 +9,7 @@
 <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id'=>'issue-form',
 	'type'=>'vertical',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 	));
  ?>
 

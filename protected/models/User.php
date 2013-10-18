@@ -21,6 +21,8 @@ class User extends CActiveRecord
 {
 	public $password_repeat;
 	public $uname;
+	public $from;
+	public $to;
 	
 	/**
 	 * Returns the static model of the specified AR class.

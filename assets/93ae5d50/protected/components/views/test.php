@@ -1,1 +1,0 @@
-<p>Milestone successfully created!</p>

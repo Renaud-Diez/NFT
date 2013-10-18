@@ -1,1 +1,0 @@
-var CKEDITOR_BASEPATH="/assets/9c517b10/";

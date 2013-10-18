@@ -5,10 +5,139 @@ class ProjectBehavior extends CActiveRecordBehavior
 	 * PUBLIC
 	 */
 	
+	/**
+	 * CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `remaining_completion` AS 
+	 * select `i`.`id` AS `id`,`i`.`project_id` AS `project_id`,`i`.`version_id` AS `version_id`,`i`.`milestone_id` AS `milestone_id`,
+	 * ifnull(`i`.`completion`,0) AS `completion`,ifnull(`i`.`estimated_time`,0) AS `estimated_time`,ifnull(sum(`t`.`time_spent`),0) AS `time_spent` 
+	 * from (`issue` `i` left join `timetracker` `t` on((`t`.`issue_id` = `i`.`id`))) 
+	 * where `i`.`status_id` in (select `is`.`id` from `issue_status` `is` where (`is`.`closed_alias` = 0)) group by `i`.`id`
+	 */
+	
 	public function evalStatus()
 	{
 		//evaluate if there is enough resources in regards of number of tasks and related efforts set for each of them 
 	}
+	
+	/**
+	 *
+	 * Save the current data into the Project Logs object before saving the new data ...
+	 */
+	public function beforeSave($event)
+	{
+		if(empty($this->owner->allowed_budget))
+			$this->owner->allowed_budget = 0;
+	
+		if(empty($this->owner->allowed_effort))
+			$this->owner->allowed_effort = 0;
+	
+		if(empty($this->owner->hours))
+			$this->owner->hours = Project::HOURSBYDAY;
+	
+		if(empty($this->owner->days))
+			$this->owner->days = Project::DAYSBYWEEK;
+	
+		$projectLog = new ProjectLogs;
+		$projectLog->project_id = $this->owner->id;
+		$projectLog->user_id = Yii::app()->user->id;
+		$projectLog->owner_id = $this->owner->user_id;
+		$projectLog->topic_id = $this->owner->topic_id;
+		$projectLog->label = $this->owner->label;
+		$projectLog->allowed_budget = $this->owner->allowed_budget;
+		$projectLog->allowed_effort = $this->owner->allowed_effort;
+		$projectLog->hours = $this->owner->hours;
+		$projectLog->days = $this->owner->days;
+		$projectLog->creation_date = date('Y-m-d H:i:s');
+	
+		if(!is_null($this->owner->description))
+			$projectLog->description = $this->owner->description;
+	
+		if(!is_null($this->owner->parent_id))
+			$projectLog->parent_id = $this->owner->parent_id;
+	
+		$projectLog->save();
+	
+		return parent::beforeSave();
+	}
+	
+	public function afterFind($event)
+	{
+		$this->owner->oldRecord = clone $this->owner;
+		return parent::afterFind();
+	}
+	
+	public function afterSave($event)
+	{
+		$this->registerParticipant(array($this->owner->user_id) , 'Project Owner');
+	
+		$this->owner->eventLog();
+	}
+	
+	public function registerParticipant($userIds = false, $role = 'Project Member')
+	{
+		if(is_array($userIds) && count($userIds) > 0){
+			
+			foreach($userIds as $userID){
+				$member = ProjectUser::model()->findByAttributes(array('project_id'=>$this->owner->id, 'user_id'=>$userID));
+					
+				if(is_null($member)){
+					$member = new ProjectUser;
+					$member->project_id = $this->owner->id;
+					$member->user_id = $userID;
+					$member->role = 'Project Owner';
+					$member->save();
+				}
+				/*elseif($member->role != 'Project Owner'){
+					$member->role = 'Project Owner';
+					$member->save();
+				}*/
+			}
+			
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	protected function eventLog()
+	{
+		$event = new Event;
+		$event->user_id = Yii::app()->user->id;
+		$event->project_id = $event->ref_id = $this->owner->id;
+		$event->ref_object = 'Project';
+		$event->creation_date = date('Y-m-d H:i:s');
+			
+		if(!is_null($this->owner->oldRecord->id))
+		{
+			if($this->owner->oldRecord->label != $this->owner->label)
+				$changeLog = '<br>Name has been modified from <i>'.$this->owner->oldRecord->label.'</i> to <i>' . $this->owner->label . '</i>';
+			if($this->owner->oldRecord->code != $this->owner->code)
+				$changeLog .= '<br>Code has been modified from <i>'.$this->owner->oldRecord->code.'</i> to <i>' . $this->owner->code. '</i>';
+			if($this->owner->oldRecord->user_id != $this->owner->user_id){
+				$changeLog .= '<br>Owner has been modified from <i>'.$this->owner->oldRecord->owner->owner->username.'</i> to <i>' . $this->owner->owner->username. '</i>';
+				$event->criticity = $event->CRITICITY_HIGH;
+			}
+				
+			if($this->owner->oldRecord->topic_id != $this->owner->topic_id)
+				$changeLog .= '<br>Topic has been modified from <i>'.$this->owner->oldRecord->topic->label.'</i> to <i>' . $this->owner->topic->label. '</i>';
+	
+			$event->description = '<b>Project has been updated</b>' . $changeLog;
+		}
+		else {
+			$changeLog .= '<br>Owner is <i>'.$this->owner->owner->username.'</i>';
+				
+			if(!is_null($this->owner->parent_id)){
+				$changeLog .= '<br>Project is a subproject of <i>' . $this->owner->parent->label .'</i>';
+			}
+	
+				
+			$event->description = '<b>New Project <i>'.$this->owner->label.'</i> has been added</b>' . $changeLog;
+		}
+	
+		$event->save();
+	}
+	
 	
 	public function getVisibility()
 	{
@@ -25,18 +154,18 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return false;
 	}
 	
-	public function getWorkload($type = 'issue')
+	public function getWorkload($type = 'issue', $search = null)
 	{
 		if($type == 'issue-workload')
-			return $this->workloadIssue($type);
+			return $this->workloadIssue($type, $search);
 		elseif($type == 'issue-workload-type')
 			return $this->workloadIssue($type);
 		elseif($type == 'issue-type')
-			return $this->issueType();
+			return $this->issueType($search);
 		elseif($type == 'activity')
-			return $this->workloadActivity();
+			return $this->workloadActivity($search);
 		elseif($type == 'users')
-			return $this->workloadUsers();
+			return $this->workloadUsers($search);
 		
 		return false;
 	}
@@ -119,10 +248,14 @@ class ProjectBehavior extends CActiveRecordBehavior
 	}
 	
 	
-	protected function issueType()
+	protected function issueType($search = null)
 	{
+		$from = $to = false;
+		
 		$criteria=new CDbCriteria;
 		$criteria->compare('i.project_id', $this->owner->id);
+
+		$this->setDateRangeCriteria($criteria, 'i.creation_date', $search->from, $search->to);
 		
 		$where=$criteria->condition;
 		$params=$criteria->params;
@@ -147,10 +280,12 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return false;
 	}
 	
-	protected function workloadIssue($type)
+	protected function workloadIssue($type, $search = null)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->compare('i.project_id', $this->owner->id);
+		
+		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
 		$where=$criteria->condition;
 		$params=$criteria->params;
@@ -182,10 +317,12 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return false;
 	}
 	
-	protected function workloadActivity()
+	protected function workloadActivity($search = null)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->compare('i.project_id', $this->owner->id);
+		
+		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
 		$where=$criteria->condition;
 		$params=$criteria->params;
@@ -210,10 +347,12 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return false;
 	}
 	
-	protected function workloadUsers()
+	protected function workloadUsers($search = null)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->compare('i.project_id', $this->owner->id);
+		
+		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
 		$where=$criteria->condition;
 		$params=$criteria->params;
@@ -256,7 +395,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return false;
 	}
 	
-	public function dataCompletion($id = null)
+	public function dataCompletion($id = null, $search = null)
 	{
 		if(is_null($id))
 			$id = $this->owner->id;
@@ -270,6 +409,9 @@ class ProjectBehavior extends CActiveRecordBehavior
 		
 		$criteria=new CDbCriteria;
 		$criteria->compare('project_id', $id);
+		
+		$this->setDateRangeCriteria($criteria, 'creation_date', $search->from, $search->to);
+		
 		$criteria->order = 'creation_date ASC';
 			
 		$arrCompletion = ProjectCompletion::model()->findAll($criteria);
@@ -419,15 +561,8 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$p = 0;
 		foreach($arrVersion as $version){
 			$categories[] = $version->label;
-			
-			if(!empty($version->start_date) && !empty($version->due_date)){
-				$start = $this->formatJSDate($version->start_date);
-				$end = $this->formatJSDate($version->due_date);
-						
-				$arr[$p][] = array($start, $end);
-			}
 
-			$i = 1;
+			$i = 0;
 			$arrMilestones = $version->getAvailableMilestones();
 			if(!empty($arrMilestones)){
 				foreach($arrMilestones as $milestone){
@@ -440,7 +575,15 @@ class ProjectBehavior extends CActiveRecordBehavior
 					}
 				}
 				
+			}else{
+				if(!empty($version->start_date) && !empty($version->due_date)){
+					$start = $this->formatJSDate($version->start_date);
+					$end = $this->formatJSDate($version->due_date);
+				
+					$arr[$p][] = array($start, $end);
+				}
 			}
+			
 			if($i > $count)
 				$count = $i;
 			$p++;
@@ -922,6 +1065,29 @@ class ProjectBehavior extends CActiveRecordBehavior
 		else
 		{
 			$criteria->compare('projectIssues.'.$field.'',$issue->{$field});
+		}
+		
+		return $criteria;
+	}
+	
+	protected function setDateRangeCriteria($criteria, $field, $from = false, $to = false)
+	{
+		if($from && $to){
+			$criteria->addCondition($field .' between :from AND :to');
+			$criteria->params['from'] = $from;
+			$criteria->params['to'] = $to . ' 23:59:59';
+		}elseif($from){
+			$criteria->addCondition($field . ' >= :date');
+			$date = $from;
+			$criteria->params['date'] = $date;
+		}elseif($to){
+			$criteria->addCondition($field . ' <= :date');
+			$date = $to;
+			$criteria->params['date'] = $date . ' 23:59:59';
+		}else{
+			$criteria->addCondition($field . ' >= :date');
+			$date = date('Y-m-d', strtotime('monday this week'));//strtotime('monday this week')
+			$criteria->params['date'] = $date;
 		}
 		
 		return $criteria;

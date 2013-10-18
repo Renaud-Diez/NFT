@@ -1,6 +1,7 @@
-<div style="padding: 10px;">
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$model->getUserWeeklyIssues(),
+<div style="padding: 10px; margin-top:-30px;">
+<?php 
+	$this->widget('zii.widgets.CListView', array(
+	'dataProvider' => $issueLogs,
 	'itemView'=>'_issueLogs',
 )); ?>
 </div>

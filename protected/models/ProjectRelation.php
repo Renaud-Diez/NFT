@@ -110,16 +110,51 @@ class ProjectRelation extends CActiveRecord
 		elseif($this->relation == 4)
 			return 3;
 		elseif($this->relation == 5)
-			return 5;
+			return 6;
 		elseif($this->relation == 6)
 			return 5;
+		elseif($this->relation == 7)
+			return 8;
+		elseif($this->relation == 8)
+			return 7;
 		else
 			return false;
+	}
+	
+	public function afterSave()
+	{
+		if($this->relation == Project::RELATED_CHILD){
+			$this->setParentId($this->related_id, $this->project_id);
+		}
+		
+		if($this->relation == Project::RELATED_PARENT){
+			$this->setParentId($this->project_id, $this->related_id);
+		}
+		
+		return parent::afterSave();
+	}
+	
+	protected function setParentId($projectId, $parentId)
+	{
+		$model = Project::model()->findByPk($projectId);
+		$model->parent_id = $parentId;
+		$model->save();
+	}
+	
+	protected function resetParentId()
+	{
+		$model = Project::model()->findByPk($this->related_id);
+		$model->parent_id = null;
+		$model->save();
 	}
 	
 	public function afterDelete()
 	{
 		parent::afterDelete();
+		
+		if($this->relation == Project::RELATED_CHILD){
+			$this->resetParentId();
+		}
 		
 		$criteria = new CDbCriteria;
 		$criteria->compare('project_id', $this->related_id);

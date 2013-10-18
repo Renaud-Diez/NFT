@@ -6,68 +6,78 @@
 
 <div class="wide form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+	'id' =>'search-form',
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
-)); ?>
+));
+$users = CHtml::listData(User::model()->findAll(array('order'=>'id')),'id','username');
+?>
 
-	<div class="row">
+	<div>
 		<?php echo $form->label($model,'id'); ?>
 		<?php echo $form->textField($model,'id'); ?>
 	</div>
 
-	<div class="row">
+	<div>
 		<?php echo $form->label($model,'label'); ?>
 		<?php echo $form->textField($model,'label',array('size'=>60,'maxlength'=>150)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'project_id'); ?>
-		<?php echo $form->textField($model,'project_id'); ?>
+	<div>
+		<?php echo $form->dropDownListRow(
+                    $model,
+                    'user_id', 
+                    $users,
+					 array('prompt'=>'Select a User'));
+		?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'user_id'); ?>
-		<?php echo $form->textField($model,'user_id'); ?>
+	<div>
+		<?php echo $form->dropDownListRow(
+                    $model,
+                    'assignee_id', 
+                    $users,
+					 array('prompt'=>'Select an Assignee'));
+		?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'assignee_id'); ?>
-		<?php echo $form->textField($model,'assignee_id'); ?>
+	<div>
+		<?php echo $form->dropDownListRow(
+                    $model,
+                    'status_id', 
+                    CHtml::listData(IssueStatus::model()->findAll(array('order'=>'id')),
+                    'id', 
+                    'label'), 
+					array('empty'=>'Select a Status')); 
+		?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'status_id'); ?>
-		<?php echo $form->textField($model,'status_id'); ?>
+	<div>
+		<?php echo $form->dropDownListRow(
+                    $model,
+                    'type_id', 
+                    CHtml::listData(IssueType::model()->findAll(array('order'=>'id')),
+                    'id', 
+                    'label'), 
+					array('empty'=>'Select a Type'));
+					 ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'type_id'); ?>
-		<?php echo $form->textField($model,'type_id'); ?>
+	<div>
+		<?php echo $form->dropDownListRow($model,'priority', $model->getPriorities(), array('empty'=>'Select a Priority')); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'milestone_id'); ?>
-		<?php echo $form->textField($model,'milestone_id'); ?>
+	<div>
+		<?php echo $form->toggleButtonRow($model,'private', array('options'=>array('enabledLabel'=>'Yes' , 'disabledLabel'=>'No'))); ?>
 	</div>
+	
+	<br />
 
-	<div class="row">
-		<?php echo $form->label($model,'priority'); ?>
-		<?php echo $form->textField($model,'priority'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'estimated_time'); ?>
-		<?php echo $form->textField($model,'estimated_time',array('size'=>2,'maxlength'=>2)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'private'); ?>
-		<?php echo $form->textField($model,'private'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="buttons">
+		<?php //echo CHtml::submitButton('Search'); ?>
+		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save');
+				$this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Search')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

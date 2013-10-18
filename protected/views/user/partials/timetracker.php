@@ -1,4 +1,4 @@
-<div style="padding: 10px;">
+<div style="padding: 10px; margin-top:-30px;">
 <?php 
 	if($dataProvider)
 	{

@@ -12,6 +12,8 @@ class IssueBehavior extends CActiveRecordBehavior
 
 	}
 	
+	
+	
 	public function getSubissues($parent_id = null)
 	{
 		$criteria = new CDbCriteria;
@@ -473,13 +475,15 @@ class IssueBehavior extends CActiveRecordBehavior
 	public function getRelatedOptions($value = null)
 	{
 		$return = array(
-		Project::RELATED_TO 			=> 'Related',
-		Project::RELATED_DUPLICATES		=> 'Duplicates',
-		Project::RELATED_DUPLICATEBY	=> 'Duplicate by',
-		Project::RELATED_BLOCKS			=> 'Blocks',
-		Project::RELATED_BLOCKEDBY		=> 'Blocked by',
-		Project::RELATED_PRECEDES		=> 'Precedes',
-		Project::RELATED_FOLLOWS		=> 'Follows',
+		Issue::RELATED_TO 			=> 'Related',
+		Issue::RELATED_DUPLICATES	=> 'Duplicates',
+		Issue::RELATED_DUPLICATEBY	=> 'Duplicate by',
+		Issue::RELATED_BLOCKS		=> 'Blocks',
+		Issue::RELATED_BLOCKEDBY	=> 'Blocked by',
+		Issue::RELATED_PRECEDES		=> 'Precedes',
+		Issue::RELATED_FOLLOWS		=> 'Follows',
+		Issue::RELATED_PARENT		=> 'Parent',
+		Issue::RELATED_CHILD		=> 'Child',
 		);
 
 		if(!is_null($value))

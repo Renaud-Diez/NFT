@@ -60,6 +60,54 @@ function reloadGrid(data) {
 	 	</div>
 	<?php endif;?>
 	
+	<?php if($this->search):?>
+		<div id="sidebar" style="margin-bottom: -20px;">
+	 		<?php 
+	 			$form = $this->beginWidget(
+				'bootstrap.widgets.TbActiveForm',
+				array(
+				'id' => 'searchForm',
+				'type' => 'form',
+				'htmlOptions' => array('class' => 'well', 'style' => 'width: 268px;'),
+				)
+				);
+
+	 			echo 'From date:';
+				echo '<div class="input-prepend"><span class="add-on"><i class="icon-calendar"></i></span>';
+				$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$this->search,                                // Model object
+						'attribute'=>'from', // Attribute name
+						'options'=>array('dateFormat' => 'yy-mm-dd', 'onSelect' => 'js:function(){checkDate();}'),                     // jquery plugin options
+				));
+				echo '</div>';
+				
+				echo '<br />To date:';
+				echo '<div class="input-prepend"><span class="add-on"><i class="icon-calendar"></i></span>';
+				$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$this->search,                                // Model object
+						'attribute'=>'to', // Attribute name
+						'options'=>array('dateFormat' => 'yy-mm-dd', 'onSelect' => 'js:function(){checkDate();}'),                     // jquery plugin options
+						//'htmlOptions'=>array('prepend' => '<i class="icon-calendar"></i>') // HTML options
+				));
+				echo '</div>';
+				
+				/*echo 'User name:';
+				echo '<div class="input-prepend"><span class="add-on"><i class="icon-search"></i></span>';
+				echo $form->textField($this->search,'name',array('style'=>45,'maxlength'=>45));
+				echo '</div><br />';*/
+
+				echo '<br />';
+				$this->widget(
+				'bootstrap.widgets.TbButton',
+				array('buttonType' => 'submit', 'label' => 'Filter', 'block' => true)
+				);
+				 
+				$this->endWidget();
+				unset($form);
+	 		?>
+	 </div>
+	<?php endif;?>
+	
 	<?php if(in_array($this->action->id, array('gtd', 'kanban', 'issues'))):?>
 		<div id="sidebar" style="margin-bottom: 0px;">
 			<?php

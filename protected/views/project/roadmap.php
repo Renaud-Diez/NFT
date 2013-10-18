@@ -47,6 +47,8 @@ $this->issueMenu=array(
 				)
 		));
 	}
+		
+		
 ?>
 	
 <?php $this->renderPartial('_sidebar', array('model'=>$model)); ?>

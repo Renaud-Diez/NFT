@@ -58,6 +58,26 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',
 <?php $this->endWidget();?>
 
 
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', 
+					array( // the dialog
+			    			'id'=>'deleteModal',
+			    			'options'=>array(
+			        		'title'=>'Delete',
+			       			'autoOpen'=>false,
+			        		'modal'=>true,
+			        		'width'=>'320',
+                    		'height'=>'auto',
+							'minHeight'=>'160',
+							'close' => 'js:function(){location.reload();}',
+			    		),
+			));
+			
+?>
+<div class="deleteForm"></div>		 
+<?php $this->endWidget();?>
+
+
 <script type="text/javascript">
 var _dialogurl;
 var _dialogtitle;

@@ -93,8 +93,9 @@ class Project extends CActiveRecord
 			'issues' => array(self::MANY_MANY, 'Issue', 'project_issues(project_id, issue_id)'),
 			'projectLogs' => array(self::HAS_MANY, 'ProjectLogs', 'project_id'),
 			'projectRelations' => array(self::HAS_MANY, 'ProjectRelation', 'project_id'),
-			'projectRelations1' => array(self::HAS_MANY, 'ProjectRelation', 'related_id'),
+			'projectRelated' => array(self::HAS_MANY, 'ProjectRelation', 'related_id'),
 			'projectUsers' => array(self::HAS_MANY, 'ProjectUser', 'project_id'),
+			'projectRoles' => array(self::HAS_MANY, 'ProjectRole', 'project_id'),
 			'users' => array(self::HAS_MANY, 'User', array('user_id'=>'id'),'through' => 'projectUsers'),
 			'versions' => array(self::HAS_MANY, 'Version', 'project_id'),
 			'events' => array(self::HAS_MANY, 'Event', 'project_id'),
@@ -145,13 +146,7 @@ class Project extends CActiveRecord
 		));
 	}
 
-	public function afterFind()
-	{
-		$this->oldRecord=clone $this;
-		return parent::afterFind();
-	}
-	
-	
+
 	public function behaviors()
 	{
 		return array(
@@ -161,96 +156,4 @@ class Project extends CActiveRecord
 		);
 	}
 
-	/**
-	 *
-	 * Save the current data into the Project Logs object before saving the new data ...
-	 */
-	protected function beforeSave()
-	{
-		if(empty($this->allowed_budget))
-			$this->allowed_budget = 0;
-		
-		if(empty($this->allowed_effort))
-			$this->allowed_effort = 0;
-		
-		if(empty($this->hours))
-			$this->hours = Project::HOURSBYDAY;
-		
-		if(empty($this->days))
-			$this->days = Project::DAYSBYWEEK;
-		
-		$projectLog = new ProjectLogs;
-		$projectLog->project_id = $this->id;
-		$projectLog->user_id = Yii::app()->user->id;
-		$projectLog->owner_id = $this->user_id;
-		$projectLog->topic_id = $this->topic_id;
-		$projectLog->label = $this->label;
-		$projectLog->allowed_budget = $this->allowed_budget;
-		$projectLog->allowed_effort = $this->allowed_effort;
-		$projectLog->hours = $this->hours;
-		$projectLog->days = $this->days;
-		$projectLog->creation_date = date('Y-m-d H:i:s');
-
-		if(!is_null($this->description))
-			$projectLog->description = $this->description;
-
-		if(!is_null($this->parent_id))
-			$projectLog->parent_id = $this->parent_id;
-
-		$projectLog->save();
-
-		return parent::beforeSave();
-	}
-
-	protected function afterSave()
-	{
-		$member = ProjectUser::model()->findByAttributes(array('project_id'=>$this->id, 'user_id'=>$this->user_id));
-
-		if(is_null($member))
-		$member = new ProjectUser;
-		elseif($member->role != 'Project Owner'){
-			$member->role = 'Project Owner';
-			$member->save();
-		}
-
-		$this->eventLog();
-	}
-
-	protected function eventLog()
-	{
-		$event = new Event;
-		$event->user_id = Yii::app()->user->id;
-		$event->project_id = $event->ref_id = $this->id;
-		$event->ref_object = 'Project';
-		$event->creation_date = date('Y-m-d H:i:s');
-			
-		if(!is_null($this->oldRecord->id))
-		{
-			if($this->oldRecord->label != $this->label)
-			$changeLog = '<br>Name has been modified from <i>'.$this->oldRecord->label.'</i> to <i>' . $this->label . '</i>';
-			if($this->oldRecord->code != $this->code)
-			$changeLog .= '<br>Code has been modified from <i>'.$this->oldRecord->code.'</i> to <i>' . $this->code. '</i>';
-			if($this->oldRecord->user_id != $this->user_id){
-				$changeLog .= '<br>Owner has been modified from <i>'.$this->oldRecord->owner->username.'</i> to <i>' . $this->owner->username. '</i>';
-				$event->criticity = $event->CRITICITY_HIGH;
-			}
-			
-			if($this->oldRecord->topic_id != $this->topic_id)
-			$changeLog .= '<br>Topic has been modified from <i>'.$this->oldRecord->topic->label.'</i> to <i>' . $this->topic->label. '</i>';
-	
-			$event->description = '<b>Project has been updated</b>' . $changeLog;
-		}
-		else {
-			$changeLog .= '<br>Owner is <i>'.$this->owner->username.'</i>';
-			
-			if(!is_null($this->parent_id)){
-				$changeLog .= '<br>Project is a subproject of <i>' . $this->parent->label .'</i>';
-			}
-				
-			
-			$event->description = '<b>New Project <i>'.$this->label.'</i> has been added</b>' . $changeLog;
-		}
-		
-		$event->save();
-	}
 }

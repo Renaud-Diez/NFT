@@ -8,6 +8,7 @@ class ProjectController extends Controller
 	 */
 	public $layout='//project/column2';
 	public $project;
+	public $search = null;
 	public $hiddenMenu=array();
 	public $viewMenu=array();
 	public $issueMenu=array();
@@ -89,6 +90,19 @@ class ProjectController extends Controller
 		));
 	}
 	
+	
+	public function actionImport()
+	{
+		$model = $this->loadModel($id);
+		$model->attachBehavior('ProjectImportBehavior', new ProjectImportBehavior);
+		
+		$this->loadSidebar($model);
+		
+		$this->render('import',array(
+				'sheet'=>$arrSheet,
+		));
+	}
+	
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -96,8 +110,9 @@ class ProjectController extends Controller
 	public function actionStatistic($id)
 	{
 		$model = $this->loadModel($id);
-		
 		$this->loadSidebar($model);
+		
+		$this->setDateRangeSearch();
 		
 		$this->render('statistic',array(
 			'model'=>$model,
@@ -587,7 +602,7 @@ class ProjectController extends Controller
 				
 				$related->relation = $model->getOppositeRelation();
 				Yii::trace('RELATION ID: ' . $related->relation,'models.project');
-				if($related->relation)
+				if($related->relation !== false)
 					$related->save();
             	
             	if (Yii::app()->request->isAjaxRequest)
@@ -649,5 +664,43 @@ class ProjectController extends Controller
 	{
 		$filterChain->run();
 	}
+	
+	protected function setDateRangeSearch()
+	{
+		$dateRange = array('from' => null, 'to' => null);
+		
+		$search = new DateRangeForm;
+		$search->from = $dateRange['from'] = date('Y-m-d', strtotime('monday this week'));
+		
+		
+		if($_POST['DateRangeForm']){
+			if($_POST['DateRangeForm']['from']){
+				$search->from = $dateRange['from'] = $_POST['DateRangeForm']['from'];
+			}
+		
+			if($_POST['DateRangeForm']['to']){
+				$search->to = $dateRange['to'] = $_POST['DateRangeForm']['to'];
+			}
+		
+			if($_POST['DateRangeForm']['name']){
+				$search->name = $_POST['DateRangeForm']['name'];
+		
+				$criteria = new CDbCriteria;
+				$criteria->compare('username', $search->name, true, 'OR');
+				$criteria->compare('firstname', $search->name, true, 'OR');
+				$criteria->compare('lastname', $search->name, true, 'OR');
+			}
+		}
+		
+		$this->search = $search;
+	}
+	/* (non-PHPdoc)
+	 * @see RController::accessDenied()
+	 */
+	public function accessDenied($message = null) {
+		// TODO: Auto-generated method stub
+
+	}
+
 	
 }

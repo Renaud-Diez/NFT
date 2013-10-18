@@ -12,7 +12,7 @@
 	<div class="row-fluid">
 		<div class="span6">
 		<?php
-			$arrdata = $data->getActivities();
+			$arrdata = $data->getActivities($this->search);
 			if($arrdata)
 				$this->renderPartial('_HCactivities', array('data'=>$arrdata));
 		?>
@@ -20,7 +20,7 @@
 		
 		<div class="span6">
 		<?php 
-			$dataProvider = $data->getActivityDetail();
+			$dataProvider = $data->getActivityDetail($this->search);
 
 			if($dataProvider)
 			{	

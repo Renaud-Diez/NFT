@@ -47,6 +47,9 @@ class Issue extends CActiveRecord
 	CONST RELATED_BLOCKEDBY		= 4;
 	CONST RELATED_PRECEDES		= 5;
 	CONST RELATED_FOLLOWS		= 6;
+	const RELATED_PARENT		= 7;
+	const RELATED_CHILD			= 8;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -104,6 +107,7 @@ class Issue extends CActiveRecord
 			'issueLogs' => array(self::HAS_MANY, 'IssueLogs', 'issue_id'),
 			'issueRelations' => array(self::HAS_MANY, 'IssueRelation', 'issue_id'),
 			'issueRelations1' => array(self::HAS_MANY, 'IssueRelation', 'related_id'),
+			'issueUsers' => array(self::HAS_MANY, 'IssueUser', 'user_id'),
 			'projectIssues' => array(self::HAS_MANY, 'ProjectIssues', 'issue_id'),
 			'timetrackers' => array(self::HAS_MANY, 'Timetracker', 'issue_id'),
 			'parent' => array(self::BELONGS_TO, 'Issue', 'parent_id'),
@@ -160,7 +164,7 @@ class Issue extends CActiveRecord
 		$criteria->compare('priority',$this->priority);
 		$criteria->compare('estimated_time',$this->estimated_time,true);
 		$criteria->compare('private',$this->private);
-		$criteria->compare('description',$this->description);
+		$criteria->compare('description',$this->description, true);
 		$criteria->compare('completion',$this->completion);
 
 		return new CActiveDataProvider($this, array(

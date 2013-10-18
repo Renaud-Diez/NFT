@@ -26,21 +26,15 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Issues</h1>
+<h1>Issues Overview</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
+<?php $this->issue=$model;?>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'issue-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -51,15 +45,59 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'user_id',
 		'assignee_id',
 		'status_id',
-		/*
-		'type_id',
-		'milestone_id',
-		'priority',
-		'estimated_time',
-		'private',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
 	),
-)); ?>
+));*/
+
+$this->widget('bootstrap.widgets.TbExtendedGridView', array(
+    //'dataProvider' => $issues->search(),
+    'id' => 'issue-grid',
+    'dataProvider' => $model->search(),//$dataProvider,
+    'filter' => $model,//$issue,
+    'type' => 'striped bordered condensed',
+    'summaryText' => false,
+    //'cacheTTL' => 10, // cache will be stored 10 seconds (see cacheTTLType)
+    //'cacheTTLType' => 's', // type can be of seconds, minutes or hours
+    'columns' => array(
+    'id',
+    'label',
+    //array('name' => 'label', 'value' => $data->label,'header' => 'Label', 'filter' => CHtml::activeTextField($issue, 'label'),
+    array('name' => 'assignee.username', 'value' => $data->assignee->username,'header' => 'Assignee', 'filter' => CHtml::activeDropDownList( $model, 'assignee_id', 
+                    CHtml::listData(User::model()->findAll(array('order'=>'id')),'id', 'username'),
+					array('prompt'=>'Select an Assignee'))),
+    array('name' => 'type.label', 'value' => $data->type->label,'header' => 'Type', 'filter' => CHtml::activeDropDownList( $model, 'type_id', 
+                    CHtml::listData(IssueType::model()->findAll(array('order'=>'id')),'id', 'label'), 
+					array('empty'=>'Select a Type'))),
+	array('name' => 'status.label', 'value' => $data->status->label,'header' => 'Status', 'filter' => CHtml::activeDropDownList( $model, 'status_id', 
+                    CHtml::listData(IssueStatus::model()->findAll(array('order'=>'id')),'id', 'label'), 
+					array('empty'=>'Select a Status'))),
+	array('name' => 'priority', 'value' => 'Issue::model()->getPriorities($data->priority)', 'filter' => CHtml::activeDropDownList( $model, 'priority', 
+                    $model->getPriorities(), 
+					array('empty'=>'Select a Priority'))),
+    array(
+    'header' => Yii::t('ses', 'Edit'),
+    'class' => 'bootstrap.widgets.TbButtonColumn',
+    'template' => '{view} {delete}',
+    'buttons'=>array
+    (
+      'view' => array
+        (
+        'url'=>'CController::createUrl("/issue/view", array("id"=>$data->primaryKey))',
+        //'url'=>'"index.php?r=leads/update&id="',
+        ),
+       'delete' => array
+        (
+        'url'=>'CController::createUrl("/issue/delete", array("id"=>$data->primaryKey))',
+        //'url'=>'"index.php?r=leads/update&id="',
+        ),
+     ),
+    
+    ),
+    ),
+    ));
+
+
+
+?>
