@@ -1,8 +1,11 @@
 <?php /* @var $this Controller */ 
+$projectModel = Project::model();
 $project = false;
 if($_POST['Project'] && !empty($_POST['Project']['label'])){
 	$project = $_POST['Project']['label'];
+	$projectModel->label = $project;
 }
+
 
 $uname = $this->user->uname . ' is';
 if($this->user->id == Yii::app()->user->id)
@@ -84,7 +87,7 @@ function reloadGrid(data) {
 				)
 				);
 				echo $form->textFieldRow(
-				Project::model(),
+				$projectModel,
 				'label',
 				array(
 				'class' => 'input-medium',

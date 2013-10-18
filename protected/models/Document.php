@@ -48,7 +48,7 @@ class Document extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('file', 'file', 'types'=>'jpg, gif, png'),
+			array('file', 'file', 'types'=>'jpg, gif, png, doc, docx, xls, xlsx, pdf, txt'),
 			array('user_id', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('label, path', 'length', 'max'=>45),

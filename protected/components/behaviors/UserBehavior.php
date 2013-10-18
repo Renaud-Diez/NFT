@@ -1,11 +1,16 @@
 <?php
 class UserBehavior extends CActiveRecordBehavior
 {
-	public function openedQuestion()
+	public function openedQuestion($project = false)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->with = 'type';
-		$criteria->together = true;
+		$criteria->with['type'] = array('together' => true);
+		
+		if($project){
+			$criteria->with['project'] = array('together' => true);
+			$criteria->compare('project.label', $project, true);
+		}
+		
 		$criteria->compare('assignee_id', $this->owner->id);
 		$criteria->compare('type.label', 'Question');
 		$criteria->order = 'due_date DESC';
@@ -17,12 +22,16 @@ class UserBehavior extends CActiveRecordBehavior
 		));
 	}
 	
-	public function assignedIssues($typeId = false, $projectId = false)
+	public function assignedIssues($typeId = false, $project = false)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->with = array('type' => array('together' => true), 'status' => array('together' => true));
-		//$criteria->with = 'status';
-		//$criteria->together = true;
+		
+		if($project){
+			$criteria->with['project'] = array('together' => true);
+			$criteria->compare('project.label', $project, true);
+		}
+		
 		$criteria->compare('assignee_id', $this->owner->id);
 		$criteria->addCondition('type.label != :type');//'Question'
 		$criteria->params['type'] = 'Question';

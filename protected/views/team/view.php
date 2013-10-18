@@ -16,7 +16,10 @@ $this->menu=array(
 );
 ?>
 
+<div>
 <h1>Team <?php echo $model->label;?></h1>
+<?php $this->renderPartial('titleMenu', array('model'=>$model)); ?>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

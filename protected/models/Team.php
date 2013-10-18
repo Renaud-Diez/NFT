@@ -64,7 +64,8 @@ class Team extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'label' => 'Label',
+			'label' => 'Team Name',
+			'parent_id' => 'Parent',
 		);
 	}
 
@@ -85,5 +86,14 @@ class Team extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function behaviors()
+	{
+		return array(
+				'TeamBehavior'=>array(
+						'class'=>'application.components.behaviors.TeamBehavior'
+				),
+		);
 	}
 }
