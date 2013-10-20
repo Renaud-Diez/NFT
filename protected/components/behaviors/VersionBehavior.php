@@ -139,11 +139,11 @@ class VersionBehavior extends CActiveRecordBehavior
     	return $value;
 	}
 	
-	public function beforeValidate()
+	public function beforeValidate($event)
 	{
 		$this->checkDate();
 		
-		return parent::beforeValidate();
+		return parent::beforeValidate($event);
 	}
 	
 	public function afterSave($event)

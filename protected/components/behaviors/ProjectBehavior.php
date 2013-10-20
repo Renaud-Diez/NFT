@@ -56,13 +56,13 @@ class ProjectBehavior extends CActiveRecordBehavior
 	
 		$projectLog->save();
 	
-		return parent::beforeSave();
+		return parent::beforeSave($event);
 	}
 	
 	public function afterFind($event)
 	{
 		$this->owner->oldRecord = clone $this->owner;
-		return parent::afterFind();
+		return parent::afterFind($event);
 	}
 	
 	public function afterSave($event)

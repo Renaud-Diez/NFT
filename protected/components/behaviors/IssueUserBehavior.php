@@ -32,7 +32,7 @@ class IssueUserBehavior extends CActiveRecordBehavior
 			ProjectUser::model()->setMembership($this->owner->issue->project_id, $this->owner->user_id);
 		}
 		
-		return parent::beforeSave();
+		return parent::beforeSave($event);
 	}
 
 }

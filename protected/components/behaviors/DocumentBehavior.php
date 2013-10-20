@@ -17,7 +17,7 @@ class DocumentBehavior extends CActiveRecordBehavior
 		$this->owner->creation_date = date('Y-m-d');
 		$this->owner->user_id = Yii::app()->user->id;
 		
-		return parent::beforeValidate();
+		return parent::beforeValidate($event);
 	}
  
     public function beforeSave($event) 

@@ -23,11 +23,11 @@ class IssueRelationBehavior extends CActiveRecordBehavior
 			return 7;
 	}
 	
-	public function beforeValidate()
+	public function beforeValidate($event)
 	{
 		$this->checkRelatedIssue();
 		
-		return parent::beforeValidate();
+		return parent::beforeValidate($event);
 	}
 	
 	public function beforeSave($event)
