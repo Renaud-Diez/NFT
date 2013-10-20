@@ -32,7 +32,7 @@ class DocumentBehavior extends CActiveRecordBehavior
                 $delete = Yii::app()->params['uploadPath'].'/'.$this->oldfile;
                 if(file_exists($delete)) unlink($delete);
             }*/
-            return parent::beforeSave();
+            return parent::beforeSave($event);
         }
         //if(empty($this->file) && !empty($this->oldfile)) $this->file = $this->oldfile;
         //return parent::beforeSave();
