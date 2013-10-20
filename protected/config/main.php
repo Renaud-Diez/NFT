@@ -83,7 +83,7 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
-		'log'=>array(
+		/*'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
@@ -97,7 +97,7 @@ return array(
 				),
 				
 			),
-		),
+		),*/
 		'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',
         ),
@@ -110,6 +110,6 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'renaud.diez@sodexo.com',
 	),
 );
