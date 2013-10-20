@@ -20,7 +20,7 @@ class DocumentBehavior extends CActiveRecordBehavior
 		return parent::beforeValidate();
 	}
  
-    public function beforeSave() 
+    public function beforeSave($event) 
     {
     	$this->owner->path = "/../assets/media/".$this->owner->file;
     	$uploadPath = Yii::app()->getBasePath() . $this->owner->path;
