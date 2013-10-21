@@ -69,7 +69,7 @@
 			                    array('label'=>'Project Status by Topic', 'url'=>array('/ProjectStatus/statustopic')),
 			                )),
 			                array('label'=>'Users', 'url'=> array('/admin/user'), 'authItemName' => 'User.View', 'visible' => Yii::app()->user->checkAccess('User.view')? true: false, 'active'=>$activeUser,  'items'=>array(
-			                	array('label'=>'New User', 'url'=>array('/user/create')),
+			                	array('label'=>'New User', 'url'=>array('/admin/user/create')),
 			                	'---',
 			                	array('label'=>'VIEWS'),
 			                	array('label'=>'User List', 'url'=>array('/admin/user')),
