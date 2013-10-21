@@ -410,7 +410,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$criteria=new CDbCriteria;
 		$criteria->compare('project_id', $id);
 		
-		$this->setDateRangeCriteria($criteria, 'creation_date', $search->from, $search->to);
+		//$this->setDateRangeCriteria($criteria, 'creation_date', $search->from, $search->to);
 		
 		$criteria->order = 'creation_date ASC';
 			

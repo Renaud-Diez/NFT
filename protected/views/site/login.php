@@ -64,6 +64,6 @@ Need for Team
 
 <div style="text-align:center">
 <?php
-echo CHtml::image(Yii::app()->baseUrl.'/assets/media/backgroundtablelogin.png', 'Need for Team');
+echo CHtml::image(Yii::app()->baseUrl.'/assets/media/backgroundtableloginMedium.png', 'Need for Team');
 ?>
 </div>
