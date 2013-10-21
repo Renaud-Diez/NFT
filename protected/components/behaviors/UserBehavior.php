@@ -5,6 +5,7 @@ class UserBehavior extends CActiveRecordBehavior
 	{
 		$criteria=new CDbCriteria;
 		$criteria->with['type'] = array('together' => true);
+		$criteria->with['status'] = array('together' => true);
 		
 		if($project){
 			$criteria->with['project'] = array('together' => true);
@@ -13,6 +14,7 @@ class UserBehavior extends CActiveRecordBehavior
 		
 		$criteria->compare('assignee_id', $this->owner->id);
 		$criteria->compare('type.label', 'Question');
+		$criteria->addCondition('status.closed_alias != 1');
 		$criteria->order = 'due_date DESC';
 		
 		return new CActiveDataProvider(
