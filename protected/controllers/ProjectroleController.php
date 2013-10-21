@@ -1,6 +1,6 @@
 <?php
 
-class ProjectStatusController extends Controller
+class ProjectroleController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,19 +26,23 @@ class ProjectStatusController extends Controller
 	 */
 	public function accessRules()
 	{
-		/*return array(
+		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'admin', 'delete'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
-		);*/
+		);
 	}
 
 	/**
@@ -52,27 +56,46 @@ class ProjectStatusController extends Controller
 		));
 	}
 
+	
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model=new ProjectStatus;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['ProjectStatus']))
+		$model = new ProjectRole;
+		$model->project_id = $_GET['pid'];
+		$model->creation_date = date('Y-m-d');
+	
+		if(isset($_POST['Role']))
 		{
-			$model->attributes=$_POST['ProjectStatus'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->setRoles($_POST))
+			{
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					echo CJSON::encode(array(
+							'status'=>'success',
+							'div'=>'houra!'//$this->renderPartial('_success', array('model'=>$model), true, true)
+					));
+					exit;
+				}
+				else
+					$this->redirect(array('view','id'=>$model->id));
+			}
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+	
+	
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
+			echo CJSON::encode(array(
+					'status'=>'failure',
+					'div'=>$this->renderPartial('_form', array('model'=>$model), true, true)));
+			exit;
+		}
+		else
+			$this->render('create',array('model'=>$model,));
 	}
 
 	/**
@@ -83,20 +106,38 @@ class ProjectStatusController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['ProjectStatus']))
+	
+		if(isset($_POST['ProjectRole']))
 		{
-			$model->attributes=$_POST['ProjectStatus'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->attributes=$_POST['ProjectRole'];
+	
+			if($model->validate() && $model->save())
+			{
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					echo CJSON::encode(array(
+							'status'=>'success',
+							'div'=>'houra!'//$this->renderPartial('_success', array('model'=>$model), true, true)
+					));
+					exit;
+				}
+				else
+					$this->redirect(array('view','id'=>$model->id));
+			}
 		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+	
+	
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
+			echo CJSON::encode(array(
+					'status'=>'failure',
+					'div'=>$this->renderPartial('_form', array('model'=>$model), true, true)));
+			exit;
+		}
+		else
+			$this->render('create',array('model'=>$model,));
 	}
 
 	/**
@@ -118,7 +159,7 @@ class ProjectStatusController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('ProjectStatus');
+		$dataProvider=new CActiveDataProvider('ProjectRole');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -129,10 +170,10 @@ class ProjectStatusController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new ProjectStatus('search');
+		$model=new ProjectRole('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['ProjectStatus']))
-			$model->attributes=$_GET['ProjectStatus'];
+		if(isset($_GET['ProjectRole']))
+			$model->attributes=$_GET['ProjectRole'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -143,43 +184,24 @@ class ProjectStatusController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return ProjectStatus the loaded model
+	 * @return ProjectRole the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=ProjectStatus::model()->findByPk($id);
+		$model=ProjectRole::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
-	
-	public function actionStatusTopic()
-	{
-		$arrStatus = CHtml::listData(ProjectStatus::model()->findAll(), 'id', 'label');
-		$arrTopic = CHtml::listData(Topic::model()->findAll(), 'id', 'label');
-						
-		if(isset($_POST['Matrix']))
-		{
-			ProjectStatus::model()->saveTopicRelation($_POST['Matrix']);
-		}
-		
-		$objStatusTopic = ProjectStatusTopic::model()->findAll();
-		foreach($objStatusTopic as $obj)
-        	$arrStatusTopic[] = $obj->status_id.':'.$obj->topic_id;
-
-		$this->render('statusTopic',array(
-			'arrStatus'=>$arrStatus, 'arrRelation'=>$arrTopic, 'arrTopicRelation' => $arrStatusTopic
-		));
-	}
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param ProjectStatus $model the model to be validated
+	 * @param ProjectRole $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='project-status-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='project-role-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

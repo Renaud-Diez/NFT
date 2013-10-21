@@ -1,6 +1,6 @@
 <?php
 
-class IssueDocumentController extends Controller
+class UseravailabilityController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,21 +62,16 @@ class IssueDocumentController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new IssueDocument;
+		$model=new UserAvailability;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['IssueDocument']))
+		if(isset($_POST['UserAvailability']))
 		{
-			$model->attributes=$_POST['IssueDocument'];
-			
-			$model->document = CUploadedFile::getInstance($model,'document');
-			if($model->save()){
-				$model->document->saveAs('assets/media');
-				//$this->redirect(array('view','id'=>$model->id));
-			}
-				
+			$model->attributes=$_POST['UserAvailability'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -96,9 +91,9 @@ class IssueDocumentController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['IssueDocument']))
+		if(isset($_POST['UserAvailability']))
 		{
-			$model->attributes=$_POST['IssueDocument'];
+			$model->attributes=$_POST['UserAvailability'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -127,7 +122,7 @@ class IssueDocumentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('IssueDocument');
+		$dataProvider=new CActiveDataProvider('UserAvailability');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +133,10 @@ class IssueDocumentController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new IssueDocument('search');
+		$model=new UserAvailability('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['IssueDocument']))
-			$model->attributes=$_GET['IssueDocument'];
+		if(isset($_GET['UserAvailability']))
+			$model->attributes=$_GET['UserAvailability'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -152,12 +147,12 @@ class IssueDocumentController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return IssueDocument the loaded model
+	 * @return UserAvailability the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=IssueDocument::model()->findByPk($id);
+		$model=UserAvailability::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -165,11 +160,11 @@ class IssueDocumentController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param IssueDocument $model the model to be validated
+	 * @param UserAvailability $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='issue-document-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='user-availability-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

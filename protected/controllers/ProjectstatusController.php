@@ -1,6 +1,6 @@
 <?php
 
-class IssueStatusController extends Controller
+class ProjectstatusController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,23 +26,19 @@ class IssueStatusController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(
+		/*return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'admin', 'delete'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('run'),
-			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
-		);
+		);*/
 	}
 
 	/**
@@ -62,14 +58,14 @@ class IssueStatusController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new IssueStatus;
+		$model=new ProjectStatus;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['IssueStatus']))
+		if(isset($_POST['ProjectStatus']))
 		{
-			$model->attributes=$_POST['IssueStatus'];
+			$model->attributes=$_POST['ProjectStatus'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +87,9 @@ class IssueStatusController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['IssueStatus']))
+		if(isset($_POST['ProjectStatus']))
 		{
-			$model->attributes=$_POST['IssueStatus'];
+			$model->attributes=$_POST['ProjectStatus'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,7 +118,7 @@ class IssueStatusController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('IssueStatus');
+		$dataProvider=new CActiveDataProvider('ProjectStatus');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +129,10 @@ class IssueStatusController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new IssueStatus('search');
+		$model=new ProjectStatus('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['IssueStatus']))
-			$model->attributes=$_GET['IssueStatus'];
+		if(isset($_GET['ProjectStatus']))
+			$model->attributes=$_GET['ProjectStatus'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,24 +143,43 @@ class IssueStatusController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return IssueStatus the loaded model
+	 * @return ProjectStatus the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=IssueStatus::model()->findByPk($id);
+		$model=ProjectStatus::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+	
+	public function actionStatusTopic()
+	{
+		$arrStatus = CHtml::listData(ProjectStatus::model()->findAll(), 'id', 'label');
+		$arrTopic = CHtml::listData(Topic::model()->findAll(), 'id', 'label');
+						
+		if(isset($_POST['Matrix']))
+		{
+			ProjectStatus::model()->saveTopicRelation($_POST['Matrix']);
+		}
+		
+		$objStatusTopic = ProjectStatusTopic::model()->findAll();
+		foreach($objStatusTopic as $obj)
+        	$arrStatusTopic[] = $obj->status_id.':'.$obj->topic_id;
+
+		$this->render('statusTopic',array(
+			'arrStatus'=>$arrStatus, 'arrRelation'=>$arrTopic, 'arrTopicRelation' => $arrStatusTopic
+		));
+	}
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param IssueStatus $model the model to be validated
+	 * @param ProjectStatus $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='issue-status-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='project-status-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

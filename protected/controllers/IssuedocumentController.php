@@ -1,6 +1,6 @@
 <?php
 
-class ProjectRoleController extends Controller
+class IssuedocumentController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -56,46 +56,32 @@ class ProjectRoleController extends Controller
 		));
 	}
 
-	
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model = new ProjectRole;
-		$model->project_id = $_GET['pid'];
-		$model->creation_date = date('Y-m-d');
-	
-		if(isset($_POST['Role']))
+		$model=new IssueDocument;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['IssueDocument']))
 		{
-			if($model->setRoles($_POST))
-			{
-				if (Yii::app()->request->isAjaxRequest)
-				{
-					echo CJSON::encode(array(
-							'status'=>'success',
-							'div'=>'houra!'//$this->renderPartial('_success', array('model'=>$model), true, true)
-					));
-					exit;
-				}
-				else
-					$this->redirect(array('view','id'=>$model->id));
+			$model->attributes=$_POST['IssueDocument'];
+			
+			$model->document = CUploadedFile::getInstance($model,'document');
+			if($model->save()){
+				$model->document->saveAs('assets/media');
+				//$this->redirect(array('view','id'=>$model->id));
 			}
+				
 		}
-	
-	
-		if (Yii::app()->request->isAjaxRequest)
-		{
-			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
-			echo CJSON::encode(array(
-					'status'=>'failure',
-					'div'=>$this->renderPartial('_form', array('model'=>$model), true, true)));
-			exit;
-		}
-		else
-			$this->render('create',array('model'=>$model,));
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
 	}
 
 	/**
@@ -106,38 +92,20 @@ class ProjectRoleController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-	
-		if(isset($_POST['ProjectRole']))
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['IssueDocument']))
 		{
-			$model->attributes=$_POST['ProjectRole'];
-	
-			if($model->validate() && $model->save())
-			{
-				if (Yii::app()->request->isAjaxRequest)
-				{
-					echo CJSON::encode(array(
-							'status'=>'success',
-							'div'=>'houra!'//$this->renderPartial('_success', array('model'=>$model), true, true)
-					));
-					exit;
-				}
-				else
-					$this->redirect(array('view','id'=>$model->id));
-			}
+			$model->attributes=$_POST['IssueDocument'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
-	
-	
-		if (Yii::app()->request->isAjaxRequest)
-		{
-			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
-			echo CJSON::encode(array(
-					'status'=>'failure',
-					'div'=>$this->renderPartial('_form', array('model'=>$model), true, true)));
-			exit;
-		}
-		else
-			$this->render('create',array('model'=>$model,));
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
 	}
 
 	/**
@@ -159,7 +127,7 @@ class ProjectRoleController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('ProjectRole');
+		$dataProvider=new CActiveDataProvider('IssueDocument');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -170,10 +138,10 @@ class ProjectRoleController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new ProjectRole('search');
+		$model=new IssueDocument('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['ProjectRole']))
-			$model->attributes=$_GET['ProjectRole'];
+		if(isset($_GET['IssueDocument']))
+			$model->attributes=$_GET['IssueDocument'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -184,12 +152,12 @@ class ProjectRoleController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return ProjectRole the loaded model
+	 * @return IssueDocument the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=ProjectRole::model()->findByPk($id);
+		$model=IssueDocument::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -197,11 +165,11 @@ class ProjectRoleController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param ProjectRole $model the model to be validated
+	 * @param IssueDocument $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='project-role-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='issue-document-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

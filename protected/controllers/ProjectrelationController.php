@@ -1,13 +1,13 @@
 <?php
 
-class IssueRelationController extends Controller
+class ProjectrelationController extends Controller
 {
 	public function actionDelete($id)
 	{
 		$this->layout='modal';
 		$model = $this->loadModel($id);
 		
-		if(isset($_POST['IssueRelation'])){
+		if(isset($_POST['ProjectRelation'])){
 			$model->delete();
 		}
 		else
@@ -26,7 +26,7 @@ class IssueRelationController extends Controller
 	
 	public function loadModel($id)
 	{
-		$model=IssueRelation::model()->findByPk($id);
+		$model=ProjectRelation::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
