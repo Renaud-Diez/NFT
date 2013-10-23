@@ -20,6 +20,8 @@
 class User extends CActiveRecord
 {
 	public $password_repeat;
+	public $old_password;
+	public $oldRecord;
 	public $uname;
 	public $from;
 	public $to;
@@ -51,13 +53,15 @@ class User extends CActiveRecord
 		// will receive user inputs.		
 		return array(
 			array('username, password, password_repeat', 'required', 'on' => 'create'),
-			array('username', 'required', 'on' => 'update'),
+			//array('username', 'required', 'on' => 'update'),
 			array('password, password_repeat', 'required', 'on' => 'recover'),
-			array('password', 'compare', 'on' => 'create, recover'),
-			array('password_repeat', 'safe'),
+			array('password, password_repeat, old_password', 'required', 'on' => 'password'),
+			array('password', 'compare', 'on' => 'create, recover, password'),
+			array('password_repeat, old_password', 'safe'),
 			array('username, password', 'length', 'max'=>45),
 			array('email', 'length', 'max'=>100),
 			array('username', 'unique'),
+			array('old_password', 'validateOldPassword', 'on' => 'password'),
 			array('email', 'email'),
 			array('last_login, firstname, lastname, homepage, hoursbyday, daysbyweek', 'safe'),
 			// The following rule is used by search().
@@ -93,6 +97,8 @@ class User extends CActiveRecord
 			'id' => 'ID',
 			'username' => 'Username',
 			'password' => 'Password',
+			'old_password' => 'Old Password',
+			'password_repeat' => 'repeat Password',
 			'email' => 'Email',
 			'last_login' => 'Last Login',
 			'firstname' => 'Firstname',
@@ -189,15 +195,27 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
-	protected function afterValidate()
+	//FUBoQeju
+	public function validateOldPassword($attribute, $params)
 	{
-		return parent::afterValidate();
-		
+		if($this->hashPassword($this->$attribute) != $this->oldRecord->password)
+			$this->addError($attribute, 'Current password is not the one provided!');
+	}
+	
+	public function afterFind()
+	{
+		$this->oldRecord = clone $this;
+		return parent::afterFind();
+	}
+	
+	public function beforeSave()
+	{
 		if(!$this->hasErrors())
 		{
 			$this->password = $this->hashPassword($this->password);
 		}
+		
+		return parent::beforeSave();
 	}
 	
 	public function hashPassword($password)

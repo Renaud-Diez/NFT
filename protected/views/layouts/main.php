@@ -100,8 +100,8 @@
 			                array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 			                array('label'=>'My Account', 'url'=>'#', 'visible'=> !Yii::app()->user->isGuest? true: false, 'items'=>array(
 			                    array('label'=>'Weekly Report', 'url'=>array('/user/weeklyReport')),
-			                    array('label'=>'Personal Information', 'url'=>'#'),
-			                    array('label'=>'Change Password', 'url'=>'#'),
+			                    array('label'=>'Personal Information', 'url'=>'#', 'linkOptions'=>array('onclick'=>';personalDataJS();$("#dialogPersonalData").dialog("open"); return false;')),
+			                    array('label'=>'Change Password', 'url'=>'#', 'linkOptions'=>array('onclick'=>';passwordJS();$("#dialogPassword").dialog("open"); return false;')),
 			                )),
 			            ),
 			        ),
@@ -209,6 +209,102 @@
 	</div><!-- footer -->
 
 </div><!-- page -->
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', 
+					array( // the dialog
+			    			'id'=>'dialogPassword',
+			    			'options'=>array(
+			        		'title'=>'Change Password',
+			       			'autoOpen'=>false,
+			        		'modal'=>true,
+			        		'width'=>'320',
+                    		'height'=>'auto',
+							'minHeight'=>'160',
+							'close' => 'js:function(){location.reload();}',
+			    		),
+			));
+			
+?>
+<div class="passwordForm"></div>		 
+<?php $this->endWidget();?>
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', 
+					array( // the dialog
+			    			'id'=>'dialogPersonalData',
+			    			'options'=>array(
+			        		'title'=>'Personal Information',
+			       			'autoOpen'=>false,
+			        		'modal'=>true,
+			        		'width'=>'440',
+                    		'height'=>'auto',
+							'minHeight'=>'180',
+							'close' => 'js:function(){location.reload();}',
+			    		),
+			));
+			
+?>
+<div class="personalDataForm"></div>		 
+<?php $this->endWidget();?>
+
+<script type="text/javascript">
+function passwordJS()
+{
+	<?php echo CHtml::ajax(array(
+            'url'=>array('user/password/id/'.Yii::app()->user->id),
+            'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#dialogPassword div.passwordForm').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#dialogPassword div.passwordForm form').submit(passwordJS);
+                }
+                else
+                {
+                    $('#dialogPassword div.passwordForm').html(data.div);
+                    setTimeout(\"$('#dialogPassword').dialog('close') \",3000);
+                }
+ 
+            } ",
+            ))
+    ?>;
+    return false; 
+ 
+}
+
+function personalDataJS()
+{
+	<?php echo CHtml::ajax(array(
+            'url'=>array('user/update/id/'.Yii::app()->user->id),
+            'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#dialogPersonalData div.personalDataForm').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#dialogPersonalData div.personalDataForm form').submit(personalDataJS);
+                }
+                else
+                {
+                    $('#dialogPersonalData div.personalDataForm').html(data.div);
+                    setTimeout(\"$('#dialogPersonalData').dialog('close') \",3000);
+                }
+ 
+            } ",
+            ))
+    ?>;
+    return false; 
+ 
+}
+</script>
 
 </body>
 </html>

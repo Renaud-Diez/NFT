@@ -13,8 +13,7 @@
 
  if($model->isNewRecord)
  	$model->setScenario('update');
- 
-	echo $model->isNewRecord;
+
 ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>

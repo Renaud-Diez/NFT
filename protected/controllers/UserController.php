@@ -11,6 +11,91 @@ class UserController extends Controller
 	 */
 	public $layout='//user/column2';
 	
+	
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionPassword($id)
+	{
+		$model=$this->loadModel($id);
+	
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			$model->setScenario('password');
+	
+			if($model->validate() && $model->save())
+			{
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					echo CJSON::encode(array(
+							'status'=>'success',
+							'div'=>'Password successfully modified'//$this->renderPartial('_success', array('model'=>$model), true, true)
+					));
+					exit;
+				}
+				/*else
+					$this->redirect(array('view','id'=>$model->id));*/
+			}
+		}
+	
+	
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
+			echo CJSON::encode(array(
+					'status'=>'failure',
+					'div'=>$this->renderPartial('password', array('model'=>$model), true, true)));
+			exit;
+		}
+		else
+			$this->render('password',array('model'=>$model,));
+	}
+	
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+	
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			//$model->setScenario('password');
+	
+			if($model->validate() && $model->save())
+			{
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					echo CJSON::encode(array(
+							'status'=>'success',
+							'div'=>'Information successfully updated'//$this->renderPartial('_success', array('model'=>$model), true, true)
+					));
+					exit;
+				}
+			}
+		}
+	
+	
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			Yii::app()->clientScript->scriptMap['jquery.min.js'] = false;
+			echo CJSON::encode(array(
+					'status'=>'failure',
+					'div'=>$this->renderPartial('update', array('model'=>$model), true, true)));
+			exit;
+		}
+		else
+			$this->render('update',array('model'=>$model,));
+	}
+	
 	public function actionWhosOnWhat()
 	{
 		$criteria = $this->setDateRangeSearch();
