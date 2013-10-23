@@ -79,6 +79,7 @@ class User extends CActiveRecord
 			'projects' => array(self::HAS_MANY, 'Project', 'user_id'),
 			'projectUsers' => array(self::HAS_MANY, 'ProjectUser', 'user_id'),
 			'issueUsers' => array(self::HAS_MANY, 'IssueUser', 'user_id'),
+			'teamUsers' => array(self::HAS_MANY, 'UserTeam', 'user_id'),
 			'timetrackers' => array(self::HAS_MANY, 'Timetracker', 'user_id'),
 		);
 	}

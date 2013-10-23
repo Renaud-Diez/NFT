@@ -426,12 +426,12 @@ class ProjectBehavior extends CActiveRecordBehavior
 			if($ere < 0)
 				$ere = 0;
 			
-			$arr[1][] = array($date, (float) $tre);
-			$arr[0][] = array($date, (float) $ere);
-			$arr[2][] = array($date, (float) $this->greaterThanZero($record->overrun/$hoursbyday));
-			$arr[3][] = array($date, (float) $this->greaterThanZero($record->theorical_effort/$hoursbyday));
-			$arr[4][] = array($date, (float) $this->greaterThanZero($record->spent_time/$hoursbyday));
-			$arr[5][] = array($date, (float) $this->greaterThanZero($record->budget/$hoursbyday));
+			$arr[1][] = array($date, (float) round($tre, 2));
+			$arr[0][] = array($date, (float) round($ere, 2));
+			$arr[2][] = array($date, (float) round($this->greaterThanZero($record->overrun/$hoursbyday), 2));
+			$arr[3][] = array($date, (float) round($this->greaterThanZero($record->theorical_effort/$hoursbyday), 2));
+			$arr[4][] = array($date, (float) round($this->greaterThanZero($record->spent_time/$hoursbyday), 2));
+			$arr[5][] = array($date, (float) round($this->greaterThanZero($record->budget/$hoursbyday), 2));
 		}
 		
 		$arrData = array(
@@ -581,6 +581,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 					$end = $this->formatJSDate($version->due_date);
 				
 					$arr[$p][] = array($start, $end);
+					$i++;
 				}
 			}
 			

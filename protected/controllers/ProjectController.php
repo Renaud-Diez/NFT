@@ -485,7 +485,7 @@ class ProjectController extends Controller
 																'pagination' => array('pageSize' => 10,)
 															)
 											);
-		$arrV = $versions->getData();	
+		$arrV = $versions->getData();
 					
 		if(empty($arrV)){
 			$this->render('roadmap',array(

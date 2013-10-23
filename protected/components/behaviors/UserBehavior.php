@@ -97,6 +97,21 @@ class UserBehavior extends CActiveRecordBehavior
 	}
 	
 	
+	public function getUserNotInTeam($teamId)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->addCondition('id NOT IN (SELECT user_id FROM user_team WHERE team_id = :teamId)');
+		$criteria->params['teamId'] = $teamId;
+		
+		$criteria->compare('username',$this->owner->username,true);
+		$criteria->compare('email',$this->owner->email,true);
+		
+		return new CActiveDataProvider('User', array(
+				'criteria'=>$criteria,
+		));
+	}
+	
+	
 	public function registeredInProject($owned = false, $highlight = false, $label = false)
 	{
 		$criteria=new CDbCriteria;

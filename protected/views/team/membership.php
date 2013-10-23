@@ -1,12 +1,14 @@
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
-)); ?>
+)); 
+
+?>
 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'non-user-grid',
-	'dataProvider'=>User::model()->getUserNotInTeam($model->id),
+	'id'=>'non-member-grid',
+	'dataProvider'=>$userModel->getUserNotInTeam($model->id),
 	'filter'=>$userModel,
 	'columns'=>array(
 		array(
@@ -14,7 +16,7 @@
             'class'=>'CCheckBoxColumn',
             'selectableRows' => '50',   
         ),
-		'id',
+		//'id',
 		'username',
 		'email',
 	),

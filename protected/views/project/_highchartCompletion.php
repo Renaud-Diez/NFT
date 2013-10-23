@@ -24,7 +24,7 @@ $this->Widget('ext.highcharts.HighchartsWidget', array(
       	//'min' => 0,
       ),
       'tooltip' => array('formatter' => "js:function(){return '<b>'+ this.series.name +'</b><br/>'+
-                        Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' md';}"),
+                        Highcharts.dateFormat('%e. %b', this.x) +': '+ Math.round(this.y) +' md';}"),
       'plotOptions' => array('areaspline' => array('fillOpacity' => 0.3, 'dataLabels' => array('enabled' => true), 'enableMouseTracking' => true)),
       'series' => $series
    )

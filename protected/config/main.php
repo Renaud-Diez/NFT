@@ -45,6 +45,13 @@ return array(
 
 	// application components
 	'components'=>array(
+		'widgetFactory' => array(
+			'widgets' => array(
+				'CGridView' => array(
+					'cssFile' => '/css/gridview/style.css'
+				)
+			)
+		),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
