@@ -139,8 +139,11 @@ class UserController extends Controller
 		));
 	}
 	
-	public function actionView($id)
+	public function actionView($id = null)
 	{
+		if(is_null($id))
+			$id = Yii::app()->user->id;
+		
 		$model = $this->loadModel($id);
 		
 		$dataProvider = $model->issueList($issue);
@@ -169,8 +172,11 @@ class UserController extends Controller
 		));
 	}
 	
-	public function actionGtd($id)
+	public function actionGtd($id = null)
 	{
+		if(is_null($id))
+			$id = Yii::app()->user->id;
+		
 		$this->loadModel($id);
 		
 		$model = Project::model();
@@ -234,6 +240,24 @@ class UserController extends Controller
 				$criteria->compare('username', $search->name, true, 'OR');
 				$criteria->compare('firstname', $search->name, true, 'OR');
 				$criteria->compare('lastname', $search->name, true, 'OR');
+			}
+			
+			if($_POST['DateRangeForm']['team']){
+				$search->team = $_POST['DateRangeForm']['team'];
+				
+				if($search->team > 0){
+					$team = Team::model()->findByPk($search->team);
+					Yii::trace('TEAM: ' . $team->id,'models.team');
+					$arr = $team->getAllMembers();
+					if(is_array($arr)){
+						$arrIds = $arr['id'];
+				
+						if(is_null($criteria))
+							$criteria = new CDbCriteria;
+						
+						$criteria->addInCondition('id', $arrIds);
+					}
+				}
 			}
 		}
 	
