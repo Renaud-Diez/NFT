@@ -172,8 +172,8 @@ class Issue extends CActiveRecord
 			$this->delayedIssues($criteria);
 		}
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('label',$this->label,true);
+		$criteria->compare('t.id',$this->id);
+		$criteria->compare('t.label',$this->label,true);
 		$criteria->compare('project_id',$this->project_id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('assignee_id',$this->assignee_id);
