@@ -54,9 +54,17 @@ class UserBehavior extends CActiveRecordBehavior
 	{
 		$criteria=new CDbCriteria;
 		$criteria->with = array('status' => array('together' => true), 'issueUsers' => array('together' => true));
+		
 		$criteria->compare('t.user_id', $this->owner->id, false, 'OR');
 		$criteria->compare('assignee_id', $this->owner->id, false, 'OR');
 		$criteria->compare('issueUsers.user_id', $this->owner->id, false, 'OR');
+		
+		if(Yii::app()->session['criticalIssues'] == true){
+			$this->delayedIssues($criteria, $issue);
+			$this->overrunIssues($criteria);
+		}elseif($issue->overdue){
+			$this->delayedIssues($criteria, $issue);
+		}
 		
 		if($statusAlias == 'todo'){
 			$criteria->addCondition('status.alias = :alias');
@@ -67,11 +75,11 @@ class UserBehavior extends CActiveRecordBehavior
 		}elseif($statusAlias == 'done'){
 			$criteria->addCondition('status.alias = :alias');
 			$criteria->params['alias'] = 3;
+		}elseif(Yii::app()->session['openIssues'] == true){
+			$criteria->compare('status.closed_alias', 0);
 		}
-		/*else{
-			$criteria->addCondition('status.alias != 3');
-		}*/
 		
+		$criteria->compare('overrun',$issue->overrun);
 		$criteria->compare('project_id',$issue->project_id);
 		$criteria->compare('t.user_id',$issue->user_id);
 		$criteria->compare('assignee_id',$issue->assignee_id);
@@ -97,6 +105,33 @@ class UserBehavior extends CActiveRecordBehavior
 						'criteria' => $criteria,
 						'pagination' => array('pageSize' => $length),
 				));
+	}
+	
+	public function delayedIssues($criteria, $issue)
+	{
+		if($issue->overdue){
+			if(is_numeric($issue->overdue))
+				$operator = '>= ' . $issue->overdue;
+			else
+				$operator = $issue->overdue;
+				
+			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) ' . $operator);
+		}
+		else{
+			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) > 0');
+		}
+	
+		return $criteria;
+	}
+	
+	public function overrunIssues($criteria, $issue)
+	{
+		if($issue->overrun)
+			$criteria->compare('overrun', $issue->overrun, false, 'AND');
+		elseif(!$issue->overdue)
+		$criteria->compare('overrun', '> 0', false, 'OR');
+	
+		return $criteria;
 	}
 	
 	

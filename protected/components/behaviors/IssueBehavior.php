@@ -12,36 +12,6 @@ class IssueBehavior extends CActiveRecordBehavior
 
 	}
 	
-	public function criticalIssues($scope = 'all')
-	{
-		$criteria = new CDbCriteria;
-		$criteria->with['status'] = array('together' => true);
-		$criteria->compare('status.closed_alias', 0);
-		
-		Yii::trace('ASSIGNEE ID: ' . $this->owner->assignee_id,'models.issue');
-
-		
-		if(in_array($scope, array('all', 'delay')))
-			$this->delayedIssues($criteria);
-		
-		if(in_array($scope, array('all', 'overrun')))
-			$this->overrunIssues($criteria);
-		
-		$criteria->compare('id', $this->owner->id);
-		$criteria->compare('type_id', $this->owner->type_id);
-		$criteria->compare('assignee_id', $this->owner->assignee_id);
-		$criteria->compare('status_id', $this->owner->status_id);
-		$criteria->compare('priority', $this->owner->priority);
-		$criteria->compare('label', $this->owner->label, true);
-		$criteria->compare('project_id', $this->owner->project_id);
-		
-		return new CActiveDataProvider(
-				'Issue', array(
-						'criteria' => $criteria,
-						'pagination' => array('pageSize' => 20),
-				));
-	}
-	
 	public function delayedIssues($criteria)
 	{
 		if($this->owner->overdue){

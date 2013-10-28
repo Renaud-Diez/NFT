@@ -58,19 +58,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	array('name' => 'priority', 'value' => 'Issue::model()->getPriorities($data->priority)', 'filter' => CHtml::activeDropDownList( $issue, 'priority', 
                     $issue->getPriorities(), 
 					array('empty'=>'Select a Priority'))),
+	'overrun',
+	array('name' => 'overdue', 'value' => 'DateTimeHelper::timeElapse($data->due_date)'),
     array(
     'header' => Yii::t('ses', 'Edit'),
     'class' => 'bootstrap.widgets.TbButtonColumn',
-    'template' => '{view} {delete}',
+    'template' => '{view}',
     'buttons'=>array
     (
       'view' => array
         (
         'url'=>'CController::createUrl("/issue/view", array("id"=>$data->primaryKey))',
-        ),
-       'delete' => array
-        (
-        'url'=>'CController::createUrl("/issue/delete", array("id"=>$data->primaryKey))',
         ),
      ),
     
