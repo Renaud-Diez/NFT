@@ -62,7 +62,8 @@ class IssueLogs extends CActiveRecord
 			array('issue_id, user_id, creation_date', 'required'),
 			array('issue_id, user_id, status_id, type_id, version_id, milestone_id, assignee_id, priority, private, completion', 'numerical', 'integerOnly'=>true),
 			array('label', 'length', 'max'=>150),
-			array('estimated_time', 'length', 'max'=>2),
+			array('estimated_time', 'length', 'max'=>6),
+			array('overrun, logged_effort, theorical_remaining_effort, pessimistic_remaining_effort, optimistic_remaining_effort', 'numerical'),
 			array('comment, description, due_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

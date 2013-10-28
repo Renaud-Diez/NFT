@@ -12,6 +12,64 @@ class IssueBehavior extends CActiveRecordBehavior
 
 	}
 	
+	public function criticalIssues($scope = 'all')
+	{
+		$criteria = new CDbCriteria;
+		$criteria->with['status'] = array('together' => true);
+		$criteria->compare('status.closed_alias', 0);
+		
+		Yii::trace('ASSIGNEE ID: ' . $this->owner->assignee_id,'models.issue');
+
+		
+		if(in_array($scope, array('all', 'delay')))
+			$this->delayedIssues($criteria);
+		
+		if(in_array($scope, array('all', 'overrun')))
+			$this->overrunIssues($criteria);
+		
+		$criteria->compare('id', $this->owner->id);
+		$criteria->compare('type_id', $this->owner->type_id);
+		$criteria->compare('assignee_id', $this->owner->assignee_id);
+		$criteria->compare('status_id', $this->owner->status_id);
+		$criteria->compare('priority', $this->owner->priority);
+		$criteria->compare('label', $this->owner->label, true);
+		$criteria->compare('project_id', $this->owner->project_id);
+		
+		return new CActiveDataProvider(
+				'Issue', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => 20),
+				));
+	}
+	
+	public function delayedIssues($criteria)
+	{
+		$today = date('Y-m-d') . '23:59:59';
+		
+		if($this->owner->due_date){
+			if(is_numeric($this->owner->due_date))
+				$operator = '>= ' . $this->owner->due_date;
+			else
+				$operator = $this->owner->due_date;
+			
+			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) ' . $operator);
+		}
+		else{
+			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) > 0');
+		}
+	
+		return $criteria;
+	}
+	
+	public function overrunIssues($criteria)
+	{
+		if($this->owner->overrun)
+			$criteria->compare('overrun', $this->owner->overrun, false, 'AND');
+		elseif(!$this->owner->due_date)
+			$criteria->compare('overrun', '> 0', false, 'OR');
+		
+		return $criteria;
+	}
 	
 	
 	public function getSubissues($parent_id = null)
@@ -116,11 +174,11 @@ class IssueBehavior extends CActiveRecordBehavior
 	
 	public function estimatedRemainingEffort()
 	{
-		$loggedEffort = $this->getLoggedEffort();
+		$loggedEffort = round($this->getLoggedEffort());
 		if(empty($loggedEffort))
 			$loggedEffort = 0;
 		
-		$estimatedEffort = $this->owner->estimated_time;
+		$estimatedEffort = round($this->owner->estimated_time);
 		if(empty($estimatedEffort))
 			$estimatedEffort = 0;
 			
@@ -128,15 +186,48 @@ class IssueBehavior extends CActiveRecordBehavior
 		if(empty($completion))
 			$completion = 0;
 			
-		$theoricalEfforForCompletion = $estimatedEffort*$completion/100;
+		$theoricalEfforForCompletion = round($estimatedEffort*$completion/100);
+		$theoricalRemainingEffort = $estimatedEffort-$theoricalEfforForCompletion;
 		
-		$estimatedRemainingEffort = $loggedEffort*$estimatedEffort*(100-$completion)/100;
+		//$estimatedRemainingEffort = $loggedEffort*$estimatedEffort*(100-$completion)/100;//19*39*(100-49)
+		if($completion > 0)
+			$estimatedRemainingEffort = round($loggedEffort*100/$completion)-$loggedEffort;
+		else
+			$estimatedRemainingEffort = 0;
 
 		return array(	'estimatedRemainingEffort' => $estimatedRemainingEffort, 
 						'estimatedEffort' => $estimatedEffort, 
-						'loggedEffort' => $loggedEffort, 
+						'loggedEffort' => $loggedEffort,
+						'theoricalRemainingEffort' => $theoricalRemainingEffort,
 						'theoricalEfforForCompletion' => $theoricalEfforForCompletion);
 	}
+	
+	public function beforeSave($event)
+	{
+		$this->owner->user_id = Yii::app()->user->id;
+		if($this->owner->isNewRecord)
+			$this->owner->creation_date = date('Y-m-d H:i:s');
+			
+		if(is_null($this->owner->completion))
+			$this->owner->completion = 0;
+		
+		$arrEffort = $this->estimatedRemainingEffort();
+		
+		$this->owner->logged_effort = $arrEffort['loggedEffort'];
+		$this->owner->overrun = $arrEffort['loggedEffort']-$arrEffort['theoricalEfforForCompletion'];
+		$this->owner->theorical_remaining_effort = $arrEffort['theoricalRemainingEffort'];
+		$this->owner->optimistic_remaining_effort = $arrEffort['estimatedRemainingEffort'];
+		
+		if($arrEffort['theoricalEfforForCompletion'] > 0)
+			$this->owner->pessimistic_remaining_effort = $arrEffort['estimatedRemainingEffort']*$arrEffort['estimatedRemainingEffort']/$arrEffort['theoricalEfforForCompletion'];
+		else
+			$this->owner->pessimistic_remaining_effort = 0;
+		
+	
+		return parent::beforeSave($event);
+	}
+	
+	
 	
 	public function getParticipants()
 	{

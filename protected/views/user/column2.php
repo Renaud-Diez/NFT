@@ -57,6 +57,10 @@ function reloadGrid(data) {
 					echo '<div class="input-prepend"><span class="add-on"><i class="icon-search"></i></span>';
 					echo $form->textField($this->search,'name',array('style'=>45,'maxlength'=>45));
 					echo '</div>';
+					
+					//echo '<div class="input-prepend"><span class="add-on"><i class="icon-search"></i></span>';
+					echo $form->dropDownListRow($this->search,'team', CHtml::listData(Team::model()->findAll(array('order' => 'label ASC')), 'id', 'label'), array('prompt'=>'- Team -', 'style' => 'width: 248px;'));
+					//echo '</div>';
 				}
 				
 				echo '<br /><br />';

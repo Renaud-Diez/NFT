@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Projects'=>array('index', 'v' => 'highlighted'),
-	$model->id,
+	$model->label,
 );
 
 

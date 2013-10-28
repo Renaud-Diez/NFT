@@ -32,5 +32,14 @@ if($data->priority >= 2)
 	<b><?php echo CHtml::encode($data->label); ?></b>
 	<br />
 	<?php echo $data->description; ?>
+	
+	<?php foreach($data->issueLogs as $log):?>
+			<?php if(!empty($log->comment)):?>
+			<div style="border-top: 1px dotted grey; margin-top: 10px;"> 
+			<strong><?php echo $log->user->uname . ' @ ' . $log->creation_date;?></strong>
+			<?php echo $log->comment;?>
+			</div>
+			<?php endif;?>
+	<?php endforeach;?>
 
 </div>

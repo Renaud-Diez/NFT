@@ -166,7 +166,7 @@ class TeamBehavior extends CActiveRecordBehavior
 			if(!is_null($project)){
 				$criteria->with['project'] = array('together' => true);
 				$criteria->addCondition('project.label LIKE :project  OR project.code LIKE :project');
-				$criteria->params['project'] = $project;
+				$criteria->params['project'] = '%'.$project.'%';
 			}
 			
 

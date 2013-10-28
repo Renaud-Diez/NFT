@@ -154,6 +154,8 @@ class TeamController extends Controller
 	
 	public function actionWorkload($id)
 	{	
+		$this->setDateRangeSearch();
+		
 		$this->render('workload',array(
 				'model'=>$this->loadModel($id),
 		));
@@ -163,7 +165,7 @@ class TeamController extends Controller
 	{
 		$model = $this->loadModel($id);
 	
-		$criteria = $this->setDateRangeSearch();
+		$this->setDateRangeSearch();
 	
 		$dataProvider = $model->getTeamWeekly($this->search);
 	

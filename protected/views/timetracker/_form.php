@@ -20,8 +20,18 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->textFieldRow($model,'time_spent',array('style'=>'width: 40px;','maxlength'=>6)); ?>
+	<p class="note">Time spent & Remaining time are expressed in hours</p>
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'time_spent',array('style'=>'width: 40px;','maxlength'=>6)); ?>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="row">
+				<?php echo $form->textFieldRow($model,'remaining_time',array('style'=>'width: 40px;','maxlength'=>6)); ?>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">

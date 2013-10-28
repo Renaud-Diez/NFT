@@ -84,14 +84,15 @@ $this->menuDocuments=array(
 <h3><?php echo $model->label;?> <small>Created by <?php echo $model->user->username;?></small></h3>
 
 <?php 
-	$arrEffort = $model->estimatedRemainingEffort();
-	
-	if($arrEffort['estimatedRemainingEffort'] > $arrEffort['theoricalEfforForCompletion']){
+	//$arrEffort = $model->estimatedRemainingEffort();
+	//echo DateTimeHelper::timeElapse($model->due_date);
+
+	if( $model->overrun > 0 ){
 		$class = 'alert in alert-block fade alert-error';
-		$title = 'Alert! Overrun of ' . ($arrEffort['loggedEffort']-$arrEffort['theoricalEfforForCompletion']) . ' hours';
-		$message .= $model->type->label . ' completed at <i>' . $model->completion . '%</i> in <i>' . $arrEffort['loggedEffort'] . ' hours</i> instead of the <i>' . $arrEffort['theoricalEfforForCompletion'] . ' hours</i> originaly scheduled.';
-		$message .= '<br />According to current logged effort, the remaining effort for the resting <i>'.(100-$model->completion).'%</i> has to be increased to <i>' . $arrEffort['estimatedRemainingEffort'] . ' hours</i>';
-		
+		$title = 'Alert! Overrun of ' . $model->overrun . ' hours';
+		$message .= $model->type->label . ' completed at <i>' . $model->completion . '%</i> in <i>' . $model->logged_effort . ' hours</i> instead of the <i>' . ($model->logged_effort-$model->overrun) . ' hours</i> originaly scheduled.';
+		$message .= '<br />According to current logged effort, the remaining effort for the resting <i>'.(100-$model->completion).'%</i> has to be approximately <i>' . $model->optimistic_remaining_effort . ' hours</i>';
+	
 		$this->renderPartial('partials/_message', array('message'=>$message, 'title' => $title, 'class' => $class));
 	}
 	else{

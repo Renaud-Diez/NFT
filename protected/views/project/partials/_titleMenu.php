@@ -51,7 +51,7 @@
 											array('label' => 'VIEWS'),
 											array('label' => 'Detail', 'url' => array('view', 'id' => $model->id)),
 											array('label' => 'Event History', 'url' => '#'),
-											array('label' => 'Time Logs', 'url' => array('timelog', 'id' => $model->id)),
+											array('label' => 'Time Logs', 'url' => '#'),
 											'---',
 											array('label' => 'Delete', 'url' => '#', 'icon' => 'icon-trash'),
 										)

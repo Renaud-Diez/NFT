@@ -79,8 +79,9 @@ class Issue extends CActiveRecord
 			array('project_id, user_id, status_id, type_id', 'required'),
 			array('project_id, user_id, assignee_id, status_id, type_id, version_id, milestone_id, private, completion, parent_id', 'numerical', 'integerOnly'=>true),
 			array('label', 'length', 'max'=>150),
-			array('estimated_time', 'length', 'max'=>4),
+			array('estimated_time', 'length', 'max'=>6),
 			array('completion', 'length', 'max'=>4),
+			array('overrun, logged_effort, theorical_remaining_effort, pessimistic_remaining_effort, optimistic_remaining_effort', 'numerical'),
 			array('description, comment, due_date, priority', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -137,7 +138,11 @@ class Issue extends CActiveRecord
 			'description' => 'Description',
 			'completion' => 'Completion',
 			'comment' => 'Comment',
-			'parent_id' => 'Parent',	
+			'parent_id' => 'Parent',
+			'overrun' => 'Overrun',
+			'logged_effort' => 'Logged Effort',
+			'theorical_remaining_effort' => 'Theorical Remaining Effort',
+			'optimistic_remaining_effort' => 'Estimated Remaining Effort',
 		);
 	}
 
@@ -166,6 +171,10 @@ class Issue extends CActiveRecord
 		$criteria->compare('private',$this->private);
 		$criteria->compare('description',$this->description, true);
 		$criteria->compare('completion',$this->completion);
+		$criteria->compare('overrun',$this->overrun);
+		$criteria->compare('logged_effort',$this->logged_effort);
+		$criteria->compare('theorical_remaining_effort',$this->theorical_remaining_effort);
+		$criteria->compare('optimistic_remaining_effort',$this->optimistic_remaining_effort);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -192,7 +201,7 @@ class Issue extends CActiveRecord
 	}
 
 
-	protected function beforeSave()
+	/*protected function beforeSave()
 	{
 		$this->user_id = Yii::app()->user->id;
 		if(!isset($this->id))
@@ -202,5 +211,5 @@ class Issue extends CActiveRecord
 			$this->completion = 0;
 		
 		return parent::beforeSave();
-	}
+	}*/
 }

@@ -49,6 +49,9 @@
 			                	'---',
 			                	array('label' => 'VIEW'),
 			                	array('label'=>'All Issues', 'url'=> array('/Issue/admin')),
+			                	array('label'=>'Critical Issues', 'url'=> array('/Issue/critical')),
+			                	array('label'=>'My Issues', 'url'=>array('/user/view')),
+			                	array('label'=>'My GTD', 'url'=>array('/user/gtd')),
 			                	'---',
 			                	array('label'=>'CONFIGURATION'),
 			                	array('label'=>'Issue Type by Topic', 'url'=> array('/IssueType/typetopic')),
@@ -100,6 +103,9 @@
 			                array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest),
 			                array('label'=>'My Account', 'url'=>'#', 'visible'=> !Yii::app()->user->isGuest? true: false, 'items'=>array(
 			                    array('label'=>'Weekly Report', 'url'=>array('/user/weeklyReport')),
+								array('label'=>'Issues', 'url'=>array('/user/view')),
+								array('label'=>'GTD', 'url'=>array('/user/gtd')),
+								'---',
 			                    array('label'=>'Personal Information', 'url'=>'#', 'linkOptions'=>array('onclick'=>';personalDataJS();$("#dialogPersonalData").dialog("open"); return false;')),
 			                    array('label'=>'Change Password', 'url'=>'#', 'linkOptions'=>array('onclick'=>';passwordJS();$("#dialogPassword").dialog("open"); return false;')),
 			                )),
@@ -169,13 +175,12 @@
 			                )),
 			            ),
 			        ),
-			        array(
+			        /*array(
 			            'class'=>'bootstrap.widgets.TbMenu',
 			            'htmlOptions'=>array('class'=>'pull-right'),
 			            'items'=>array(
 			                array('label'=>'Operations', 'url'=>'#', 'items'=>array(
 			                    array('label'=>'View', 'url'=>'/project/'.$this->project->id),
-			                	array('label'=>'Update', 'url'=>'/project/update/'.$this->project->id),
 			                    array('label'=>'History', 'url'=>'/project/history/'.$this->project->id),
 			                    '---',
 			                    array('label'=>'New Subproject', 'url'=>array('/project/create', 'parent_id' => $this->project->id)),
@@ -183,7 +188,7 @@
 			                    array('label'=>'Delete', 'url'=>'#'),
 			                )),
 			            ),
-			        ),
+			        ),*/
 			    ),
 			));
 		}
@@ -191,7 +196,7 @@
 		?>
 	</div><!-- mainmenu -->
 	
-	<div id="maincontent" style="margin-top: <?php echo $bodyMargin;?>px;">
+	<div id="maincontent" style="margin-top: <?php echo $bodyMargin;?>px;" class="container">
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,

@@ -11,20 +11,27 @@ if(Yii::app()->session['myIssues'] == true){
 	$class .= ' active';
 	$type = 'primary';
 }
-$this->widget(
-		'bootstrap.widgets.TbButtonGroup',
-		array(
-				//'type' => 'info',
-				'buttons' => array(
-						array(	'buttonType' => 'button',
+
+$arrMenu[] = array(	'buttonType' => 'button',
 								'type' => $type,
 								'label' => 'Only assigned issues',
 								'toggle' => true,
 								'htmlOptions' => array(
 										'class' => $class,
 										'onClick' => 'document.location.href = "' . $url . '" + "/me/" + '.$value.';'),
-						),
-				),
+						);
+
+if($this->action->id != 'gtd')
+	$arrMenu[] = array('label' => 'GTD', 'url' => CController::createUrl('gtd', array('id'=>$this->user->id)), 'icon' => 'icon-tasks');
+
+if($this->action->id != 'view')
+	$arrMenu[] = array('label' => 'Issues', 'url' => CController::createUrl('view', array('id'=>$this->user->id)), 'icon' => 'icon-tasks');
+
+$this->widget(
+		'bootstrap.widgets.TbButtonGroup',
+		array(
+				//'type' => 'info',
+				'buttons' => $arrMenu,
 		)
 );
 ?>

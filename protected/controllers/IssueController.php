@@ -247,6 +247,26 @@ class IssueController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+	
+	
+	/**
+	 * Lists all models.
+	 */
+	public function actionCritical()
+	{
+		$model=new Issue('search');
+		$model->unsetAttributes();
+		
+		if(isset($_GET['Issue']))
+			$model->attributes=$_GET['Issue'];
+		
+		$dataProvider= $model->criticalIssues();
+		
+		$this->render('critical',array(
+				'model' => $model,
+				//'dataProvider'=>$dataProvider,
+		));
+	}
 
 	/**
 	 * Manages all models.

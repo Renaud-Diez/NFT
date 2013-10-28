@@ -195,7 +195,7 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	//FUBoQeju
+
 	public function validateOldPassword($attribute, $params)
 	{
 		if($this->hashPassword($this->$attribute) != $this->oldRecord->password)

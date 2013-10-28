@@ -108,6 +108,7 @@ return array(
 		),*/
 		'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',
+            //'responsiveCss' => true,
         ),
         'yexcel' => array(
         		'class' => 'ext.yexcel.Yexcel'

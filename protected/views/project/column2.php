@@ -19,7 +19,7 @@ function reloadGrid(data) {
 }
 </script>
 
-<div class="span-5 last">
+<div class="span-5">
 	<div id="hidden" style="display:none;">
 	<?php 
 		$this->widget('zii.widgets.CMenu', array(
@@ -272,6 +272,5 @@ function reloadGrid(data) {
 		<?php echo $content; ?>
 	</div><!-- content -->
 </div>
-
 
 <?php $this->endContent(); ?>

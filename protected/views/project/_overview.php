@@ -8,7 +8,10 @@
 <h3><?php echo $model->topic->label?> project <small>owned by <?php echo $model->owner->username;?></small></h3>
 </div>
 
-<?php echo $this->renderPartial('partials/ProjectAlerts', array('model'=> $model), true);?>
+<?php 
+$arrCompletion = $model->estimatedRemainingEffort();
+echo $this->renderPartial('partials/ProjectAlerts', array('model'=> $model), true);
+?>
 
 <?php 
 		/*$issue=new Issue('search');
@@ -30,7 +33,7 @@
 ?>
 
 <?php 
-	$arrCompletion = $model->estimatedRemainingEffort();
+	
 	//print_r($arrCompletion);
 
 		$this->widget('zii.widgets.jui.CJuiAccordion', array(

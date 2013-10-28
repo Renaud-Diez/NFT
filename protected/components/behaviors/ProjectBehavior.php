@@ -18,6 +18,16 @@ class ProjectBehavior extends CActiveRecordBehavior
 		//evaluate if there is enough resources in regards of number of tasks and related efforts set for each of them 
 	}
 	
+	public function getStartDate()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('project_id', $this->owner->id);
+		//$criteria->order = 'id ASC';
+		
+		$model = ProjectLogs::model()->find($criteria);
+		return Yii::app()->dateFormatter->format('y-MM-d', $model->creation_date);
+	}
+	
 	/**
 	 *
 	 * Save the current data into the Project Logs object before saving the new data ...
@@ -419,10 +429,12 @@ class ProjectBehavior extends CActiveRecordBehavior
 		foreach($arrCompletion as $record){
 			$date = $this->formatJSDate($record->creation_date);
 			
-			$tre = ($record->theorical_remaining_effort-$record->theorical_effort)/$hoursbyday;
+			//$tre = ($record->theorical_remaining_effort-$record->theorical_effort)/$hoursbyday;
+			$tre = $record->theorical_remaining_effort/$hoursbyday;
 			if($tre < 0)
 				$tre = 0;
-			$ere = ($record->estimated_remaining_effort-$record->spent_time)/$hoursbyday;
+			//$ere = ($record->estimated_remaining_effort-$record->spent_time)/$hoursbyday;
+			$ere = $record->estimated_remaining_effort/$hoursbyday;
 			if($ere < 0)
 				$ere = 0;
 			
@@ -475,12 +487,15 @@ class ProjectBehavior extends CActiveRecordBehavior
 				SUM(estimated_time*completion/100) as theorical_effort,
 				SUM(time_spent-(estimated_time*completion/100)) as overrun,
 				SUM(estimated_time*(100-completion)/100) as theorical_remaining_effort,
-				IFNULL(SUM((time_spent*(100/completion))-time_spent), 0) as estimated_remaining_effort')
+				IFNULL(SUM(estimated_time*(100-completion)/100)*SUM(time_spent)/SUM(estimated_time*completion/100), 0) as estimated_remaining_effort')
+				
 		->from('remaining_completion')
 		->where($where, $params)
 		->group('project_id')
 		->queryRow();
-		
+		//IFNULL(SUM(time_spent*(100/completion)), 0) as estimated_remaining_effort')
+		//SUM(estimated_time*(100-completion)/100)*SUM(time_spent)/SUM(estimated_time*completion/100)
+		//IFNULL(SUM((time_spent*(100/completion))-time_spent), 0) as estimated_remaining_effort')
 		return $sql;
 	}
 	

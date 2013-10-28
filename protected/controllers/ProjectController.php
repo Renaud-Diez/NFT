@@ -112,7 +112,7 @@ class ProjectController extends Controller
 		$model = $this->loadModel($id);
 		$this->loadSidebar($model);
 		
-		$this->setDateRangeSearch();
+		$this->setDateRangeSearch($model->getStartDate());
 		
 		$this->render('statistic',array(
 			'model'=>$model,
@@ -665,12 +665,15 @@ class ProjectController extends Controller
 		$filterChain->run();
 	}
 	
-	protected function setDateRangeSearch()
+	protected function setDateRangeSearch($from = null)
 	{
 		$dateRange = array('from' => null, 'to' => null);
 		
 		$search = new DateRangeForm;
-		$search->from = $dateRange['from'] = date('Y-m-d', strtotime('monday this week'));
+		if(is_null($from))
+			$search->from = $dateRange['from'] = date('Y-m-d', strtotime('monday this week'));
+		else
+			$search->from = $dateRange['from'] = $from;
 		
 		
 		if($_POST['DateRangeForm']){

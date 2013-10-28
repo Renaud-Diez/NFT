@@ -8,6 +8,7 @@
 class DateRangeForm extends CFormModel
 {
 	public $name;
+	public $team;
 	public $from;
 	public $to;
 
@@ -19,7 +20,7 @@ class DateRangeForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('from, to, name', 'safe'),
+			array('from, to, name, team', 'safe'),
 		);
 	}
 
@@ -33,7 +34,8 @@ class DateRangeForm extends CFormModel
 		return array(
 			'from'	=> 'From Date',
 			'to'	=> 'To Date',
-			'name' 	=> 'Name'
+			'name' 	=> 'Name',
+			'team'	=> 'Team',
 		);
 	}
 }

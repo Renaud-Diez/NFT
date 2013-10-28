@@ -6,7 +6,8 @@
 		$class = 'alert in alert-block fade alert-error';
 		$title = 'Overrun of ' . $arrEffort->overrun . ' hours';
 		$message = 'Project completed at <i>' . $arrEffort->completion . '%</i> in <i>' . $arrEffort->spent_time . ' hours</i> instead of the <i>' . $arrEffort->theorical_effort . ' hours</i> originaly scheduled.';
-		$message .= '<br />According to current logged effort, the remaining effort for the resting <i>'.(100-$arrEffort->completion).'%</i> should be increased to <i>' . ($arrEffort->estimated_remaining_effort-$arrEffort->spent_time) . ' hours</i>';
+		//$message .= '<br />According to current logged effort, the remaining effort for the resting <i>'.(100-$arrEffort->completion).'%</i> should be increased to <i>' . ($arrEffort->estimated_remaining_effort-$arrEffort->spent_time) . ' hours</i>';
+		$message .= '<br />According to current logged effort, the remaining effort for the resting <i>'.(100-$arrEffort->completion).'%</i> should be approximately <i>' . $arrEffort->estimated_remaining_effort . ' hours</i>';
 		
 	}
 	
@@ -20,7 +21,7 @@
 	if($remainingBudget < 0){
 		$class = 'alert in alert-block fade alert-error';
 		$title = 'Budget has been entirely consumed!';
-		$message = 'Your Project Budget is now of <i>' . $remainingBudget . '</i> hours';
+		$message = 'Your Project Budget is now of <i>' . ($remainingBudget*-1) . '</i> hours';
 	}
 	else{
 		$estimatedRemainingBudget = $model->estimatedRemainingBudget();
