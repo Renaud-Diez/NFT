@@ -11,9 +11,14 @@ if(Yii::app()->session['myIssues'] == true){
 	$class .= ' active';
 	$type = 'primary';
 }
+
+$label = 'Assigned to User';
+if($this->user->id == Yii::app()->user->id)
+	$label = 'Assigned to me';
+
 $arrMenu[] = array(	'buttonType' => 'button',
 								'type' => $type,
-								'label' => 'Assigned to me',
+								'label' => $label,
 								'toggle' => true,
 								'htmlOptions' => array(
 										'class' => $class,

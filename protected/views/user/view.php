@@ -49,9 +49,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     array('name' => 'assignee.username', 'value' => $data->assignee->username,'header' => 'Assignee', 'filter' => CHtml::activeDropDownList( $issue, 'assignee_id', 
                     CHtml::listData(User::model()->findAll(array('order'=>'id')),'id', 'username'),
 					array('prompt'=>'Select an Assignee'))),
-    array('name' => 'type.label', 'value' => $data->type->label,'header' => 'Type', 'filter' => CHtml::activeDropDownList( $issue, 'type_id', 
+    /*array('name' => 'type.label', 'value' => $data->type->label,'header' => 'Type', 'filter' => CHtml::activeDropDownList( $issue, 'type_id', 
                     CHtml::listData(IssueType::model()->findAll(array('order'=>'id')),'id', 'label'), 
-					array('empty'=>'Select a Type'))),
+					array('empty'=>'Select a Type'))),*/
 	array('name' => 'status.label', 'value' => $data->status->label,'header' => 'Status', 'filter' => CHtml::activeDropDownList( $issue, 'status_id', 
                     CHtml::listData(IssueStatus::model()->findAll(array('order'=>'id')),'id', 'label'), 
 					array('empty'=>'Select a Status'))),
