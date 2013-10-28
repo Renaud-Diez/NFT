@@ -33,7 +33,24 @@ $this->widget('zii.widgets.CListView', $openedQuestions);
 </div>
 <?php endif;?>
 
+<?php 
+unset($dpQuestion);
+$dpQuestion = $model->openedQuestion($project, 'posted');
+if($dpQuestion->getItemCount() > 0):?>
+<h3>Opened questions posted by you</h3>
+<div style="margin-top: -20px; margin-bottom: 30px;">
+<?php 
+$postedQuestions = array('id' => 'user-question-grid',
+							'ajaxUpdate'=>true,
+							'dataProvider' => $dpQuestion,
+							'itemView' => 'partials/_question',
+							'enableSorting' => true,
+							'viewData' => array('model' => $model));
 
+$this->widget('zii.widgets.CListView', $postedQuestions);
+?>
+</div>
+<?php endif;?>
 
 <?php 
 $GLOBALS['project'] = 0;

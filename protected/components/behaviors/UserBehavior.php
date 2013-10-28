@@ -1,7 +1,7 @@
 <?php
 class UserBehavior extends CActiveRecordBehavior
 {
-	public function openedQuestion($project = false)
+	public function openedQuestion($project = false, $direction = 'received')
 	{
 		$criteria=new CDbCriteria;
 		$criteria->with['type'] = array('together' => true);
@@ -12,7 +12,10 @@ class UserBehavior extends CActiveRecordBehavior
 			$criteria->compare('project.label', $project, true);
 		}
 		
-		$criteria->compare('assignee_id', $this->owner->id);
+		if($direction == 'received')
+			$criteria->compare('assignee_id', $this->owner->id);
+		else
+			$criteria->compare('user_id', $this->owner->id);
 		$criteria->compare('type.label', 'Question');
 		$criteria->addCondition('status.closed_alias != 1');
 		$criteria->order = 'due_date DESC';
