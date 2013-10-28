@@ -165,7 +165,7 @@ class AssignmentController extends RController
 	/**
 	* @return string the item name or null if not set.
 	*/
-	public function getItemName()
+	public function getItemname()
 	{
 		return isset($_GET['name'])===true ? urldecode($_GET['name']) : null;
 	}

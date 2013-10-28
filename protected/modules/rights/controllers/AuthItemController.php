@@ -6,7 +6,7 @@
 * @copyright Copyright &copy; 2010 Christoffer Niska
 * @since 0.5
 */
-class AuthItemController extends RController
+class AuthitemController extends RController
 {
 	/**
 	* @property RAuthorizer
@@ -421,7 +421,7 @@ class AuthItemController extends RController
 	/**
 	* Removes a child from an authorization item.
 	*/
-	public function actionRemoveChild()
+	public function actionRemovechild()
 	{
 		// We only allow deletion via POST request
 		if( Yii::app()->request->isPostRequest===true )
@@ -516,7 +516,7 @@ class AuthItemController extends RController
 	/**
 	* @return string the item name or null if not set.
 	*/
-	public function getItemName()
+	public function getItemname()
 	{
 		return isset($_GET['name'])===true ? urldecode($_GET['name']) : null;
 	}
@@ -524,7 +524,7 @@ class AuthItemController extends RController
 	/**
 	* @return string the child name or null if not set.
 	*/
-	public function getChildName()
+	public function getChildname()
 	{
 		return isset($_GET['child'])===true ? urldecode($_GET['child']) : null;
 	}
