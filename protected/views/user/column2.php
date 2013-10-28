@@ -79,6 +79,22 @@ function reloadGrid(data) {
 <?php if($this->user && !in_array(strtolower($this->action->id), array('whosonwhat', 'weeklyreport'))):?>
 <div class="span-5 last">
 
+	<?php if(in_array($this->action->id, array('view', 'gtd'))):?>
+	<div id="sidebar">
+	<?php 
+			$this->beginWidget('zii.widgets.CPortlet', array(
+				'title'=>'Search',
+			));
+			
+			$this->renderPartial('_searchRight',array(
+			'model'=>$this->issue,
+			));
+
+			$this->endWidget();
+	?>
+	</div>
+	<?php endif;?>
+
 	<?php //if(!isset($this->project)):?>
 	 	<div id="sidebar" style="margin-bottom: -20px;">
 	 		<?php 

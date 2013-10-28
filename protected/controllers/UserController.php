@@ -202,7 +202,7 @@ class UserController extends Controller
 		$doneIssues = $this->user->issueList($issue, $statusAlias = 'done', $order, $project);
 		
 		$this->render('gtd',array(
-				'model'=>$model, 'openIssues'=>$openIssues,'todoIssues'=>$todoIssues,'doneIssues' => $doneIssues
+				'model'=>$model, 'issue' => $issue, 'openIssues'=>$openIssues,'todoIssues'=>$todoIssues,'doneIssues' => $doneIssues
 		));
 	}
 	

@@ -25,6 +25,7 @@ $('.search-form form').submit(function(){
 
 <h1>Getting Things Done for <?php echo $this->user->uname;?></h1>
 <?php $this->renderPartial('partials/titleMenu', array('model'=>$model)); ?>
+<?php $this->issue=$issue;?>
 
 <?php 
 $this->renderPartial('issue/_gtdContainer', array('issues'=>$todoIssues, 'model' => $model, 'class' => 'alert', 'group' => 'todo'));
