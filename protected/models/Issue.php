@@ -50,6 +50,8 @@ class Issue extends CActiveRecord
 	const RELATED_PARENT		= 7;
 	const RELATED_CHILD			= 8;
 	
+	public $overdue;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -82,7 +84,7 @@ class Issue extends CActiveRecord
 			array('estimated_time', 'length', 'max'=>6),
 			array('completion', 'length', 'max'=>4),
 			array('overrun, logged_effort, theorical_remaining_effort, pessimistic_remaining_effort, optimistic_remaining_effort', 'numerical'),
-			array('description, comment, due_date, priority', 'safe'),
+			array('description, comment, due_date, priority, overdue', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, label, project_id, user_id, assignee_id, status_id, type_id, version_id, milestone_id, priority, estimated_time, private, completion, priority, due_date', 'safe', 'on'=>'search'),
@@ -140,6 +142,7 @@ class Issue extends CActiveRecord
 			'comment' => 'Comment',
 			'parent_id' => 'Parent',
 			'overrun' => 'Overrun',
+			'overdue' => 'Overdue',
 			'logged_effort' => 'Logged Effort',
 			'theorical_remaining_effort' => 'Theorical Remaining Effort',
 			'optimistic_remaining_effort' => 'Estimated Remaining Effort',
@@ -156,6 +159,18 @@ class Issue extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		
+		if(Yii::app()->session['openIssues'] == true){
+			$criteria->with['status'] = array('together' => true);
+			$criteria->compare('status.closed_alias', 0);
+		}
+		
+		if(Yii::app()->session['criticalIssues'] == true){
+			$this->delayedIssues($criteria);
+			$this->overrunIssues($criteria);
+		}elseif($this->overdue){
+			$this->delayedIssues($criteria);
+		}
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('label',$this->label,true);

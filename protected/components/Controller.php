@@ -40,5 +40,17 @@ class Controller extends RController
 		}elseif($_GET['me'] == 'false'){
 			unset(Yii::app()->session['myIssues']);
 		}
+		
+		if($_GET['criticalIssues'] == 'true'){
+			Yii::app()->session['criticalIssues'] = true;
+		}elseif($_GET['criticalIssues'] == 'false'){
+			unset(Yii::app()->session['criticalIssues']);
+		}
+		
+		if($_GET['openIssues'] == 'true'){
+			Yii::app()->session['openIssues'] = true;
+		}elseif($_GET['openIssues'] == 'false'){
+			unset(Yii::app()->session['openIssues']);
+		}
 	}
 }

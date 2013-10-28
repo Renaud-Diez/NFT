@@ -49,7 +49,6 @@
 			                	'---',
 			                	array('label' => 'VIEW'),
 			                	array('label'=>'All Issues', 'url'=> array('/Issue/admin')),
-			                	array('label'=>'Critical Issues', 'url'=> array('/Issue/critical')),
 			                	array('label'=>'My Issues', 'url'=>array('/user/view')),
 			                	array('label'=>'My GTD', 'url'=>array('/user/gtd')),
 			                	'---',

@@ -28,6 +28,48 @@ $('.search-form form').submit(function(){
 
 <h1>Issues Overview</h1>
 
+<div class="text-right" style="margin-top:-50px;padding-bottom: 15px;">
+<?php 
+$url = $this->createUrl('issue/admin/');
+$toggle = $toggleOpen = false;
+$value = $valueOpen = 'true';
+$class = $classOpen = 'btn';
+$type = $typeOpen = 'standard';
+if(Yii::app()->session['criticalIssues'] == true){
+	$toggle = true;
+	$value = 'false';
+	$class .= ' active';
+	$type = 'primary';
+}
+if(Yii::app()->session['openIssues'] == true){
+	$toggleOpen = true;
+	$valueOpen = 'false';
+	$classOpen .= ' active';
+	$typeOpen = 'primary';
+}
+
+$arrMenu[] = array(	'buttonType' => 'button',
+								'type' => $type,
+								'label' => 'Only critical issues',
+								'toggle' => $toggle,
+								'htmlOptions' => array(
+										'class' => $class,
+										'onClick' => 'document.location.href = "' . $url . '" + "/criticalIssues/" + '.$value.';'),
+						);
+
+$arrMenu[] = array(	'buttonType' => 'button',
+		'type' => $typeOpen,
+		'label' => 'Only opened issues',
+		'toggle' => $toggleOpen,
+		'htmlOptions' => array(
+				'class' => $classOpen,
+				'onClick' => 'document.location.href = "' . $url . '" + "/openIssues/" + '.$valueOpen.';'),
+);
+
+$this->widget('bootstrap.widgets.TbButtonGroup',array('buttons' => $arrMenu));
+?>
+</div>
+
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
@@ -61,7 +103,7 @@ $this->widget('bootstrap.widgets.TbExtendedGridView', array(
     //'cacheTTL' => 10, // cache will be stored 10 seconds (see cacheTTLType)
     //'cacheTTLType' => 's', // type can be of seconds, minutes or hours
     'columns' => array(
-    'id',
+    //'id',
     'label',
     //array('name' => 'label', 'value' => $data->label,'header' => 'Label', 'filter' => CHtml::activeTextField($issue, 'label'),
     array('name' => 'project.label', 'value' => $data->project->label,'header' => 'Project', 'filter' => CHtml::activeDropDownList( $model, 'project_id',
@@ -70,15 +112,17 @@ $this->widget('bootstrap.widgets.TbExtendedGridView', array(
     array('name' => 'assignee.username', 'value' => $data->assignee->username,'header' => 'Assignee', 'filter' => CHtml::activeDropDownList( $model, 'assignee_id', 
                     CHtml::listData(User::model()->findAll(array('order'=>'id')),'id', 'username'),
 					array('prompt'=>'- Assignee -'))),
-    array('name' => 'type.label', 'value' => $data->type->label,'header' => 'Type', 'filter' => CHtml::activeDropDownList( $model, 'type_id', 
+    /*array('name' => 'type.label', 'value' => $data->type->label,'header' => 'Type', 'filter' => CHtml::activeDropDownList( $model, 'type_id', 
                     CHtml::listData(IssueType::model()->findAll(array('order'=>'id')),'id', 'label'), 
-					array('empty'=>'- Type -'))),
+					array('empty'=>'- Type -'))),*/
 	array('name' => 'status.label', 'value' => $data->status->label,'header' => 'Status', 'filter' => CHtml::activeDropDownList( $model, 'status_id', 
                     CHtml::listData(IssueStatus::model()->findAll(array('order'=>'id')),'id', 'label'), 
 					array('empty'=>'- Status -'))),
-	array('name' => 'priority', 'value' => 'Issue::model()->getPriorities($data->priority)', 'filter' => CHtml::activeDropDownList( $model, 'priority', 
+	/*array('name' => 'priority', 'value' => 'Issue::model()->getPriorities($data->priority)', 'filter' => CHtml::activeDropDownList( $model, 'priority', 
                     $model->getPriorities(), 
-					array('empty'=>'- Priority -'))),
+					array('empty'=>'- Priority -'))),*/
+	'overrun',
+	array('name' => 'overdue', 'value' => 'DateTimeHelper::timeElapse($data->due_date)'),
     array(
     'header' => Yii::t('ses', 'Edit'),
     'class' => 'bootstrap.widgets.TbButtonColumn',

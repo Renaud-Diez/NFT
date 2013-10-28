@@ -44,13 +44,11 @@ class IssueBehavior extends CActiveRecordBehavior
 	
 	public function delayedIssues($criteria)
 	{
-		$today = date('Y-m-d') . '23:59:59';
-		
-		if($this->owner->due_date){
-			if(is_numeric($this->owner->due_date))
-				$operator = '>= ' . $this->owner->due_date;
+		if($this->owner->overdue){
+			if(is_numeric($this->owner->overdue))
+				$operator = '>= ' . $this->owner->overdue;
 			else
-				$operator = $this->owner->due_date;
+				$operator = $this->owner->overdue;
 			
 			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) ' . $operator);
 		}
@@ -65,7 +63,7 @@ class IssueBehavior extends CActiveRecordBehavior
 	{
 		if($this->owner->overrun)
 			$criteria->compare('overrun', $this->owner->overrun, false, 'AND');
-		elseif(!$this->owner->due_date)
+		elseif(!$this->owner->overdue)
 			$criteria->compare('overrun', '> 0', false, 'OR');
 		
 		return $criteria;

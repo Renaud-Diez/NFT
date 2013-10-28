@@ -283,6 +283,7 @@ class IssueController extends Controller
 			$model->project_id = $pid;
 		}
 		
+		
 		if(isset($_GET['Issue']))
 			$model->attributes=$_GET['Issue'];
 
