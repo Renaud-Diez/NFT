@@ -17,42 +17,6 @@ class IssueController extends Controller
 	
 	public $addUserLink = 'Add Collaborators';
 
-	/**
-	 * @return array action filters
-	 */
-	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	/*public function accessRules()
-	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','loadmilestones','loadstatus'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('run'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}*/
 
 	/**
 	 * Displays a particular model.
@@ -130,12 +94,6 @@ class IssueController extends Controller
 					$relation->issue_id = $model->id;
 					$relation->relation = 0;
 					$relation->save();
-					
-					/*$relation = new IssueRelation;
-					$relation->related_id = $model->id;
-					$relation->issue_id = $model->parent_id;
-					$relation->relation = 0;
-					$relation->save();*/
 				}
 				
 				$this->redirect(array('view','id'=>$model->id));
