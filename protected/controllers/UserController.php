@@ -126,6 +126,18 @@ class UserController extends Controller
 		));
 	}
 	
+	public function actionWorkload($id)
+	{
+		$this->setDateRangeSearch();
+		
+		if(!$_POST['DateRangeForm']['from'])
+			$this->search->from = date('Y-m-d', strtotime('first day of last month'));;
+	
+		$this->render('workload',array(
+				'model'=>$this->loadModel($id),
+		));
+	}
+	
 	public function actionWelcom($id = null)
 	{
 		

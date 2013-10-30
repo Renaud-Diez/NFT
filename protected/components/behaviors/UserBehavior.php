@@ -15,7 +15,7 @@ class UserBehavior extends CActiveRecordBehavior
 		if($direction == 'received')
 			$criteria->compare('assignee_id', $this->owner->id);
 		else
-			$criteria->compare('user_id', $this->owner->id);
+			$criteria->compare('t.user_id', $this->owner->id);
 		$criteria->compare('type.label', 'Question');
 		$criteria->addCondition('status.closed_alias != 1');
 		$criteria->order = 'due_date DESC';
@@ -25,6 +25,72 @@ class UserBehavior extends CActiveRecordBehavior
 						'criteria' => $criteria,
 						'pagination' => array('pageSize' => 10,),
 		));
+	}
+	
+	protected function workload($search = null)
+	{
+		$usersArray[] = $this->owner->id;
+		$usersName[$this->owner->id] = $this->owner->username;
+		$arr = array('id' => $usersArray, 'data' => $usersName);
+		
+		if(is_array($arr)){
+			$arrIds = $arr['id'];
+			$arrUsers = $arr['data'];
+				
+			$criteria=new CDbCriteria;
+			$criteria->with['issueUsers'] = array('together' => true);
+			$criteria->compare('t.user_id', $this->owner->id, false,'OR');
+			$criteria->compare('i.assignee_id', $this->owner->id, false,'OR');
+				
+			if(!is_null($search))
+				$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
+				
+			$where=$criteria->condition;
+			$params=$criteria->params;
+				
+			$sql = Yii::app()->db->createCommand()
+			->select('u.id as uid, u.username as label, SUM(t.time_spent) as value, WEEK(t.log_date, 1) as week')
+			->from('issue i')
+			->join('user u', 'u.id = i.user_id')
+			->join('timetracker t', 't.issue_id = i.id')
+			->where($where, $params)
+			->group('WEEK(t.log_date, 1), t.user_id')
+			->queryAll();
+			
+			//echo $sql;
+				
+			foreach($sql as $record){
+				$categories[] = $record['week'];
+	
+				foreach($arrUsers as $id => $name){
+					if($record['uid'] == $id)
+						$value = $record['value'];
+					else
+						$value = 0;
+						
+					$array[] = array($id, (float) $value);
+				}
+	
+			}//$arrData[] = array('Coding', (float) 33.0);
+			
+			
+			foreach($array as $data){
+				$i = 0;
+				foreach($arrUsers as $id => $name){
+					if($data[0] == $id){
+						$series[$i]['name'] = $name;
+						$series[$i]['data'][] = $data[1];
+					}
+					$i++;
+				}
+			}
+				
+				
+			if(!empty($categories) && !empty($series))
+				return array('categories' => $categories, 'series' => $series);
+		}
+			
+		return false;
 	}
 	
 	public function assignedIssues($typeId = false, $project = false)
@@ -60,11 +126,18 @@ class UserBehavior extends CActiveRecordBehavior
 		$criteria->compare('issueUsers.user_id', $this->owner->id, false, 'OR');
 		
 		if(Yii::app()->session['criticalIssues'] == true){
-			$this->delayedIssues($criteria, $issue);
-			$this->overrunIssues($criteria);
+			$criteriaOver = new CDbCriteria;
+			
+			$this->delayedIssues($criteriaOver, $issue);
+			$this->overrunIssues($criteriaOver, $issue);
 		}elseif($issue->overdue){
-			$this->delayedIssues($criteria, $issue);
+			$criteriaOver = new CDbCriteria;
+			
+			$this->delayedIssues($criteriaOver, $issue);
 		}
+		
+		if($criteriaOver)
+			$criteria->mergeWith($criteriaOver, true);
 		
 		if($statusAlias == 'todo'){
 			$criteria->addCondition('status.alias = :alias');
@@ -107,7 +180,7 @@ class UserBehavior extends CActiveRecordBehavior
 				));
 	}
 	
-	public function delayedIssues($criteria, $issue)
+	public function delayedIssues($criteriaOver, $issue)
 	{
 		if($issue->overdue){
 			if(is_numeric($issue->overdue))
@@ -115,23 +188,23 @@ class UserBehavior extends CActiveRecordBehavior
 			else
 				$operator = $issue->overdue;
 				
-			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) ' . $operator);
+			$criteriaOver->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) ' . $operator);
 		}
 		else{
-			$criteria->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) > 0');
+			$criteriaOver->addCondition('TO_DAYS(NOW())-TO_DAYS(due_date) > 0');
 		}
 	
-		return $criteria;
+		return $criteriaOver;
 	}
 	
-	public function overrunIssues($criteria, $issue)
+	public function overrunIssues($criteriaOver, $issue)
 	{
 		if($issue->overrun)
-			$criteria->compare('overrun', $issue->overrun, false, 'AND');
+			$criteriaOver->compare('overrun', $issue->overrun, false, 'AND');
 		elseif(!$issue->overdue)
-		$criteria->compare('overrun', '> 0', false, 'OR');
+		$criteriaOver->compare('overrun', '> 0', false, 'OR');
 	
-		return $criteria;
+		return $criteriaOver;
 	}
 	
 	
