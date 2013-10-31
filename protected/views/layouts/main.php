@@ -166,11 +166,11 @@
 			                array('label'=> $steps . ' & Milestones', 'url'=>'#', 'items'=>array(
 			                    
 			                    array('label'=>'Create ' . $steps, 'url'=>'#', 'linkOptions'=>array('onclick'=>';versionJS();$("#dialogVersion").dialog("open"); return false;')),
-								array('label'=>'Manage ' . $steps, 'url'=>array('project/versions', 'pid'=>$this->project->id)),
+								array('label'=>'View ' . $steps, 'url'=>array('project/roadmap/', 'id'=>$this->project->id)),
 			                    '---',
 			                    array('label'=>'Milestones'),
 			                    array('label'=>'Create Milestone', 'url'=>'#', 'linkOptions'=>array('onclick'=>';milestoneJS();$("#dialogMilestone").dialog("open"); return false;')),
-			                    array('label'=>'Manage Milestones', 'url'=>array('milestone/create', 'pid'=>$this->project->id)),
+			                    //array('label'=>'Manage Milestones', 'url'=>array('milestone/create', 'pid'=>$this->project->id)),
 			                )),
 			            ),
 			        ),
