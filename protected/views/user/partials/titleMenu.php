@@ -80,5 +80,22 @@ $this->widget(
 				'buttons' => $arrMenu,
 		)
 );
+
+$this->widget(
+		'bootstrap.widgets.TbButtonGroup',
+		array(
+				//'type' => 'primary',
+				'buttons' => array(
+						array(	'label' => 'Statistics',
+								'items' => array(
+										array('label' => 'Issues', 'url' => array('view', 'id' => $model->id)),
+										'---',
+										array('label' => 'Weekly Report', 'url' => array('weeklyReport', 'id' => $model->id)),
+										array('label' => 'Workload', 'url' => array('workload', 'id' => $model->id)),
+								)
+						),
+				),
+		)
+);
 ?>
 </div>

@@ -9,10 +9,11 @@
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 	'id' =>'search-form',
 	'type'=>'vertical',
-	'action'=>Yii::app()->createUrl($this->route),
+	'action'=>Yii::app()->createUrl($this->route . '/id/' . $this->user->id),
 	'method'=>'get',
 ));
-$users = CHtml::listData(User::model()->findAll(array('order'=>'id')),'id','username');
+
+$users = CHtml::listData(User::model()->findAll(array('order'=>'username')),'id','username');
 ?>
 
 	<div>

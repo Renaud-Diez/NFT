@@ -19,7 +19,7 @@ function reloadGrid(data) {
 	$('#statusMsg').html(data).fadeIn().animate({opacity: 1.0}, 15000).fadeOut("slow");
 }
 </script>
-<?php if(in_array(strtolower($this->action->id), array('whosonwhat', 'weeklyreport'))):?>
+<?php if(in_array(strtolower($this->action->id), array('whosonwhat', 'weeklyreport', 'workload'))):?>
 <div class="span-5 last">
 	<div id="sidebar" style="margin-bottom: -20px;">
 	 		<?php 
@@ -52,7 +52,7 @@ function reloadGrid(data) {
 				));
 				echo '</div>';
 				
-				if(strtolower($this->action->id) != 'weeklyreport'){
+				/*if(strtolower($this->action->id) != 'weeklyreport'){
 					echo 'User name:';
 					echo '<div class="input-prepend"><span class="add-on"><i class="icon-search"></i></span>';
 					echo $form->textField($this->search,'name',array('style'=>45,'maxlength'=>45));
@@ -61,7 +61,7 @@ function reloadGrid(data) {
 					//echo '<div class="input-prepend"><span class="add-on"><i class="icon-search"></i></span>';
 					echo $form->dropDownListRow($this->search,'team', CHtml::listData(Team::model()->findAll(array('order' => 'label ASC')), 'id', 'label'), array('prompt'=>'- Team -', 'style' => 'width: 248px;'));
 					//echo '</div>';
-				}
+				}*/
 				
 				echo '<br /><br />';
 				$this->widget(
@@ -76,8 +76,11 @@ function reloadGrid(data) {
 </div>
 <?php endif;?>
 
-<?php if($this->user && !in_array(strtolower($this->action->id), array('whosonwhat', 'weeklyreport'))):?>
+<?php if($this->user && !in_array(strtolower($this->action->id), array('whosonwhat', 'weeklyreport', 'workload'))):?>
 <div class="span-5 last">
+
+	
+	
 
 	<?php if(in_array($this->action->id, array('view', 'gtd'))):?>
 	<div id="sidebar">

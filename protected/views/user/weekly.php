@@ -4,12 +4,14 @@
 
 $this->breadcrumbs=array(
 	'Users',
+	$model->uname,
 );
 
 $data = false;
 ?>
 
-<h1>Weekly Report</h1>
+<h1>Weekly Report <?php if($model->id != Yii::app()->user->id)echo '- ' . $model->uname;?></h1>
+<?php $this->renderPartial('partials/titleMenu', array('model'=>$model)); ?>
 
 <div class="row-fluid">
 		<?php 
