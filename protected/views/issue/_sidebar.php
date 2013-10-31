@@ -179,7 +179,7 @@ function reloadInfo(data)
 	var label = labelOn;
 	var addClass = 'btn-success';
 	var removeClass = 'btn-danger';
-	alert($('#button-Imonit').text());
+
 	if($('#button-Imonit').text() == labelOn){
 		label = labelOff;
 		addClass = 'btn-danger';
