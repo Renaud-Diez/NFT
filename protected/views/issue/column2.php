@@ -104,7 +104,7 @@ function reloadGrid(data) {
 	<div id="sidebar">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
-				'title'=>'Participants',
+				'title'=>'Contributors',
 			));
 			
 			$arrParticipants = array('id' => 'participants-grid',
@@ -122,7 +122,7 @@ function reloadGrid(data) {
 		?>
 		<div style="text-align: right;margin-top:-10x;";>
 		<?php
-			echo CHtml::ajaxLink('Add Participants',
+			echo CHtml::ajaxLink('Add Contributors',
 	        						$this->createUrl('issue/setParticipant/id/'.$this->issue->id),
 	        						array('success'=>'function(r){$("#juiDialog").html(r).dialog("open"); return false;}')
 								);
@@ -136,7 +136,7 @@ function reloadGrid(data) {
 			$this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
 			    'id'=>'juiDialog',
 			    'options'=>array(
-			        'title'=>'Add Participants',
+			        'title'=>'Add Contributors',
 			        'autoOpen'=>false,
 			        'modal'=>true,
 			        'width'=>'760',
