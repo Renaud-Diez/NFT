@@ -113,19 +113,16 @@
 				<div class="span3">
 					<div class="row">
 						<?php echo $form->textFieldRow($model,'estimated_time',array('style'=>'width: 30px;','maxlength'=>5)); ?> hours
-						<?php echo $form->error($model,'estimated_time'); ?>
 					</div>
 				</div>
 				<div class="span3">
 					<div class="row">
 						<?php echo $form->textFieldRow($model,'completion',array('style'=>'width: 30px;','maxlength'=>3)); ?> %
-						<?php echo $form->error($model,'completion'); ?>
 					</div>
 				</div>
 				<div class="span3">
 					<div class="row">
 						<?php echo $form->toggleButtonRow($model,'private', array('class'=>'.pull-left','options'=>array('enabledLabel'=>'Yes' , 'disabledLabel'=>'No'))); ?>
-						<?php echo $form->error($model,'private'); ?>
 					</div>
 				</div>
 			</div>
