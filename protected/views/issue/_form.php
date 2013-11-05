@@ -110,7 +110,7 @@
 		</div>
 		
 			<div class="row-fluid">
-				<div class="span3">
+				<div class="span4">
 					<div class="row">
 						<?php echo $form->textFieldRow($model,'estimated_time',array('style'=>'width: 30px;','maxlength'=>5)); ?> hours
 						<?php echo $form->error($model,'estimated_time'); ?>
