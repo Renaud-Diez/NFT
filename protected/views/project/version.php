@@ -28,11 +28,25 @@ $this->breadcrumbs=array(
 
 <br />
 
-<div class="text-right" style="margin-top:-60px;padding-bottom: 15px;">
-		<a href="#" onClick="<?php echo ";updateJS('/index.php/version/update/".$version->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;"?>">
-			<i class="icon-pencil"></i>
-			Update
-		</a>
+<div class="text-right" style="margin-top:-75px;padding-bottom: 15px;">
+		<?php 
+				$this->widget(
+					'bootstrap.widgets.TbButtonGroup',
+					array(
+					//'type' => 'info',
+					'buttons' => array(
+					array('label' => 'Update', 
+							'url' => '#',
+							'icon' => 'icon-pencil',
+							'linkOptions'=>array('onclick'=>";updateJS('/index.php/version/update/".$version->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;")),
+					array('label' => 'Link to', 
+							'url' => '#',
+							'htmlOptions' => array('onclick'=>';relatedVersionJS();$("#dialogRelated").dialog("open"); return false;'),
+							'icon' => 'icon-time'),
+					),
+					)
+					);
+		?>
 	</div>
 
 

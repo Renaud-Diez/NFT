@@ -144,6 +144,50 @@ class VersionController extends Controller
 			'model'=>$model,
 		));
 	}
+	
+	public function actionRelated($id)
+	{
+		$issue = $this->loadModel($id);
+
+	
+		$model = new VersionRelation;
+		$model->source_id = $id;
+	
+		if(isset($_POST['VersionRelation']))
+		{
+			$model->attributes=$_POST['VersionRelation'];
+	
+			if($model->validate() && $model->save())
+			{
+				$related = new VersionRelation;
+				$related->source_id = $model->target_id;
+				$related->target_id = $model->source_id;
+	
+				$related->relation = $model->getOppositeRelation();
+				$related->save();
+				 
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					echo CJSON::encode(array(
+							'status'=>'success',
+							'div'=>'Relation set!'//$this->renderPartial('_success', array('model'=>$model), true, true)
+					));
+					exit;
+				}
+			}
+		}
+	
+	
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			echo CJSON::encode(array(
+					'status'=>'failure',
+					'div'=>$this->renderPartial('relatedForm', array('model'=>$model, 'issue' => $issue), true, true)));
+			exit;
+		}
+		else
+			$this->render('relatedForm',array('model'=>$model, 'issue' => $issue));
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
