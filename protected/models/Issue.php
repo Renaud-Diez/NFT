@@ -134,7 +134,7 @@ class Issue extends CActiveRecord
 			'version_id' => 'Version',
 			'milestone_id' => 'Milestone',
 			'priority' => 'Priority',
-			'estimated_time' => 'Estimated Time',
+			'estimated_time' => 'Effort',
 			'due_date' => 'Due Date',
 			'private' => 'Private',
 			'description' => 'Description',
