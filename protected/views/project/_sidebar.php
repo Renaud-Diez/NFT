@@ -29,11 +29,15 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',
 
 
 <?php
+$steps = 'Phases';
+if(!empty($this->project->topic->steps))
+	$steps = ucfirst($this->project->topic->steps);
+
 $this->beginWidget('zii.widgets.jui.CJuiDialog', 
 					array( // the dialog
 			    			'id'=>'dialogVersion',
 			    			'options'=>array(
-			        		'title'=>'New Version',
+			        		'title'=>'New ' . $steps,
 			       			'autoOpen'=>false,
 			        		'modal'=>true,
 			        		'width'=>'420',

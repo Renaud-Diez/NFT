@@ -12,7 +12,7 @@
 			<a href="<?php echo CController::createUrl('roadmap', array('id'=>$data->project_id, 'version'=>$data->id))?>">
 			<i class="icon-eye-open"></i>
 			</a>
-			<a href="#" onClick="<?php echo ";updateJS('/index.php/version/update/".$data->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;"?>">
+			<a href="#" onClick="<?php echo ";updateJS('/index.php/version/update/".$data->id."', 'Update $steps');$('#dialogModal').dialog('open'); return false;"?>">
 				<i class="icon-pencil"></i>
 			</a>
 		</div>

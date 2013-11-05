@@ -63,9 +63,13 @@
 	<br />
 	<div class="row buttons">
 		<?php
-		$title = 'Create a new Version';
+		$steps = 'Phases';
+		if(!empty($model->project->topic->steps))
+			$steps = ucfirst($model->project->topic->steps);
+		
+		$title = 'Create a new ' . $steps;
 		if(!is_null($model->id))
-			$title = 'Update Version';
+			$title = 'Update '. $steps;
 		$this->widget('bootstrap.widgets.TbButton', array(
 						    'buttonType'=>'submit',
 							'label'=>$title,

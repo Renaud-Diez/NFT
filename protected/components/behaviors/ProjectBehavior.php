@@ -794,6 +794,10 @@ class ProjectBehavior extends CActiveRecordBehavior
 		));
 
 		$versionsDataProvider->sort->defaultOrder='due_date ASC';
+		
+		$steps = 'Phases';
+		if(!empty($this->owner->topic->steps))
+			$steps = $this->owner->topic->steps;
 		 
 
 		return array('id' => 'versions-grid',
@@ -801,7 +805,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 							'dataProvider' => $versionsDataProvider,
 							'itemView' => '/version/_viewInProject',
 							'enableSorting' => true,
-							'viewData' => array('model' => $model));
+							'viewData' => array('model' => $model, 'steps' => $steps));
 	}
 	
 	public function getVersionsDataProvider()

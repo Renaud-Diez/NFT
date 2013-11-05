@@ -488,6 +488,7 @@ class IssueBehavior extends CActiveRecordBehavior
 
 		$this->issueLog($newAttributes);
 		$this->eventLog($newAttributes, $oldAttributes);
+		//$this->issueStats();
 	}
 
 	public function checkDelay()
