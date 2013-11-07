@@ -5,6 +5,32 @@ class VersionBehavior extends CActiveRecordBehavior
 	private $_oldRecord;
 	public $stepLabel = 'Phase';
 	
+	
+	public function getRelatedVersion($relation = null)
+	{
+		$criteria =new CDbCriteria;
+		$criteria->with['source'] = array('together' => true);
+		$criteria->with['target'] = array('together' => true);
+		$criteria->compare('t.source_id', $this->owner->id);
+		
+		return new CActiveDataProvider(
+				'VersionRelation', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => 20,),
+				));
+	}
+	
+	public function getIssues()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('version_id', $this->owner->id);
+		
+		return $dataProvider = new CActiveDataProvider(Issue, array(
+				'criteria'=>$criteria,
+				'pagination' => array('pageSize' => 10)
+		));
+	}
+	
 	public function afterFind($event)
 	{
 		//$this->setOldAttributes($this->owner->getAttributes());
@@ -24,6 +50,19 @@ class VersionBehavior extends CActiveRecordBehavior
 	        Version::STATUS_RELEASED =>'Released',
 	        Version::STATUS_CLOSED =>'Closed',
 	    );
+	}
+	
+	
+	public function getRelatedOptions($value = null) {
+		$return = array (
+				Version::RELATION_SOURCE => 'Includes',
+				Version::RELATION_TARGET => 'Is included in',
+		);
+		
+		if (! is_null ( $value ))
+			$return = $return [$value];
+		
+		return $return;
 	}
 	
 	public function getScheduledMilestones($arrMilestone)

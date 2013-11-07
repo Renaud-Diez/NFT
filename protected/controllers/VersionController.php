@@ -147,7 +147,7 @@ class VersionController extends Controller
 	
 	public function actionRelated($id)
 	{
-		$issue = $this->loadModel($id);
+		$version = $this->loadModel($id);
 
 	
 		$model = new VersionRelation;
@@ -182,11 +182,27 @@ class VersionController extends Controller
 		{
 			echo CJSON::encode(array(
 					'status'=>'failure',
-					'div'=>$this->renderPartial('relatedForm', array('model'=>$model, 'issue' => $issue), true, true)));
+					'div'=>$this->renderPartial('relatedForm', array('model'=>$model, 'version' => $version), true, true)));
 			exit;
 		}
 		else
 			$this->render('relatedForm',array('model'=>$model, 'issue' => $issue));
+	}
+	
+	public function actionLoadversions()
+	{
+		$data = Version::model()->findAll('project_id=:project_id', array(':project_id'=>(int) $_POST['project_id']));
+	
+		$data = CHtml::listData($data,'id','label');
+	
+		echo "<option value=''>Select Version</option>";
+		foreach($data as $value=>$version){
+			if(!empty($_POST['version_id']) && $_POST['version_id'] == $value)
+				echo CHtml::tag('option', array('value'=>$value, 'selected' => 'selected'),CHtml::encode($version),true);
+			else
+				echo CHtml::tag('option', array('value'=>$value),CHtml::encode($version),true);
+		}
+			
 	}
 
 	/**

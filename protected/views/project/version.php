@@ -7,6 +7,26 @@ $this->breadcrumbs=array(
 ?>
 
 <h1>Roadmap - Version: <?php echo $version->label?></h1>
+<div class="text-right" style="margin-top:-55px;padding-bottom: 20px;">
+		<?php 
+				$this->widget(
+					'bootstrap.widgets.TbButtonGroup',
+					array(
+					//'type' => 'info',
+					'buttons' => array(
+					array('label' => 'Update', 
+							'url' => '#',
+							'icon' => 'icon-pencil',
+							'htmlOptions'=>array('onclick'=>";updateJS('/index.php/version/update/".$version->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;")),
+					array('label' => 'Link to', 
+							'url' => '#',
+							'htmlOptions' => array('onclick'=>';updateJS("/version/related/'.$version->id.'", "Link to");$("#dialogModal").dialog("open"); return false;'),
+							'icon' => 'icon-magnet'),
+					),
+					)
+					);
+		?>
+</div>
 
 <?php 
 	$hcData = Version::model()->getScheduledMilestones($version->getAvailableMilestones());
@@ -27,28 +47,6 @@ $this->breadcrumbs=array(
 ?>
 
 <br />
-
-<div class="text-right" style="margin-top:-75px;padding-bottom: 15px;">
-		<?php 
-				$this->widget(
-					'bootstrap.widgets.TbButtonGroup',
-					array(
-					//'type' => 'info',
-					'buttons' => array(
-					array('label' => 'Update', 
-							'url' => '#',
-							'icon' => 'icon-pencil',
-							'linkOptions'=>array('onclick'=>";updateJS('/index.php/version/update/".$version->id."', 'Update Version');$('#dialogModal').dialog('open'); return false;")),
-					array('label' => 'Link to', 
-							'url' => '#',
-							'htmlOptions' => array('onclick'=>';relatedVersionJS();$("#dialogRelated").dialog("open"); return false;'),
-							'icon' => 'icon-time'),
-					),
-					)
-					);
-		?>
-	</div>
-
 
 	<i><small>Progress:</small></i>
 	<?php 
@@ -85,7 +83,22 @@ $this->breadcrumbs=array(
 		));
 	}
 		
-		
+	$versions = $version->getRelatedVersion();
+	if(count($versions->getData()) > 0){
+		$this->widget('zii.widgets.jui.CJuiAccordion', array(
+		'panels'=>array(
+				//'Milestones'=>$this->renderPartial('_milestones',array('data' => $data),true),
+				'Issues on Related Versions'=>$this->renderPartial('partials/versions',array('dataProvider' => $versions, 'version' => $version),true),
+		),
+		// additional javascript options for the accordion plugin
+		'options'=>array(
+				'active'=>false,
+				'collapsible'=>true,
+				'heightStyle'=>'content',
+				'animated'=>'bounceslide',
+		)
+		));
+	}
 ?>
 <?php 
 	$milestones = $version->getMilestones($model, $version->milestones, '_viewRoadmap');//$data->getMilestones($model, $data->milestones);
