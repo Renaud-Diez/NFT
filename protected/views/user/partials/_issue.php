@@ -33,5 +33,13 @@ if($data->estimated_time < $data->remainingCompletion->time_spent)
 	<b><?php echo CHtml::encode($data->label); ?></b>
 	<br />
 	<?php echo $data->description; ?>
+	
+	<?php $log = $data->lastComment();?>
+	<?php if(!empty($log->comment)):?>
+	<div style="border-top: 1px dotted grey; margin-top: 10px;"> 
+	<strong><i>Last comment posted by</i> <?php echo $log->user->uname . ' @ ' . $log->creation_date;?></strong>
+	<?php echo $log->comment;?>
+	</div>
+	<?php endif;?>
 
 </div>

@@ -56,6 +56,11 @@
 			</div>
 			
 			<div class="row">
+				<?php echo $form->dropDownListRow($model,'owner_id', $model->getAssignableUsers(), array('prompt'=>'Select an Owner')); ?>
+				<?php echo $form->error($model,'owner_id'); ?>
+			</div>
+			
+			<div class="row">
 				<?php echo $form->dropDownListRow($model,'assignee_id', $model->getAssignableUsers(), array('prompt'=>'Select an Assignee')); ?>
 				<?php echo $form->error($model,'assignee_id'); ?>
 			</div>
@@ -110,7 +115,7 @@
 		</div>
 		
 			<div class="row-fluid">
-				<div class="span4">
+				<div class="span3">
 					<div class="row">
 						<?php echo $form->textFieldRow($model,'estimated_time',array('style'=>'width: 30px;','maxlength'=>5)); ?> hours
 						<?php echo $form->error($model,'estimated_time'); ?>

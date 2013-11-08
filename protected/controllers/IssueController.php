@@ -344,10 +344,30 @@ class IssueController extends Controller
 	
 	public function actionKanban()
 	{
-		
-		
 		$this->render('kanban',array(
 			'model'=>$model,
+		));
+	}
+	
+	public function actionGtd($id = null)
+	{
+		$model = $this->loadModel($id);
+		$this->project = $this->loadProject($model->project_id);
+	
+		$issue=new Issue('search');
+		$issue->unsetAttributes();
+	
+		/*if(isset($_GET['Issue']))
+			$issue->attributes=$_GET['Issue'];*/
+			
+		if(Yii::app()->session['myIssues'] == 'true')
+			$issue->assignee_id = Yii::App()->user->id;
+	
+		$issues = $model->subtasks($issue);
+		//$doneIssues = $model->subtasks($issue, $filter = 3);
+	
+		$this->render('gtd',array(
+				'model'=>$model, 'todoIssues'=>$issues[1],'openIssues'=>$issues[2],'doneIssues' => $issues[3]
 		));
 	}
 

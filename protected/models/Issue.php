@@ -79,7 +79,7 @@ class Issue extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('project_id, user_id, status_id, type_id', 'required'),
-			array('project_id, user_id, assignee_id, status_id, type_id, version_id, milestone_id, private, completion, parent_id', 'numerical', 'integerOnly'=>true),
+			array('project_id, user_id, assignee_id, owner_id, status_id, type_id, version_id, milestone_id, private, completion, parent_id', 'numerical', 'integerOnly'=>true),
 			array('label', 'length', 'max'=>150),
 			array('estimated_time', 'length', 'max'=>6),
 			array('completion', 'length', 'max'=>4),
@@ -104,6 +104,7 @@ class Issue extends CActiveRecord
 			'version' => array(self::BELONGS_TO, 'Version', 'version_id'),
 			'assignee' => array(self::BELONGS_TO, 'User', 'assignee_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'owner' => array(self::BELONGS_TO, 'User', 'owner_id'),
 			'milestone' => array(self::BELONGS_TO, 'Milestone', 'milestone_id'),
 			'type' => array(self::BELONGS_TO, 'IssueType', 'type_id'),
 			'issueDocuments' => array(self::HAS_MANY, 'IssueDocument', 'issue_id'),
@@ -129,6 +130,7 @@ class Issue extends CActiveRecord
 			'project_id' => 'Project',
 			'user_id' => 'User',
 			'assignee_id' => 'Assignee',
+			'owner_id' => 'Owner',
 			'status_id' => 'Status',
 			'type_id' => 'Type',
 			'version_id' => 'Version',
@@ -176,6 +178,7 @@ class Issue extends CActiveRecord
 		$criteria->compare('t.label',$this->label,true);
 		$criteria->compare('project_id',$this->project_id);
 		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('owner_id',$this->owner_id);
 		$criteria->compare('assignee_id',$this->assignee_id);
 		$criteria->compare('status_id',$this->status_id);
 		$criteria->compare('type_id',$this->type_id);

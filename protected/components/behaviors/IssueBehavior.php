@@ -3,6 +3,7 @@ class IssueBehavior extends CActiveRecordBehavior
 {
 	public $delay = null;
 	public $available_time = null;
+	public $arr = null;
 
 	private $_oldAttributes = array();
 	private $_event = null;
@@ -10,6 +11,16 @@ class IssueBehavior extends CActiveRecordBehavior
 	public function loadMetaData()
 	{
 
+	}
+	
+	public function lastComment()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->compare('issue_id', $this->owner->id);
+		$criteria->addCondition('comment <> \'\'');
+		$criteria->order = 'id DESC';
+		
+		return IssueLogs::model()->find($criteria);
 	}
 	
 	public function delayedIssues($criteria)
@@ -58,7 +69,7 @@ class IssueBehavior extends CActiveRecordBehavior
 		if(count($models) > 0)
 		{
 			foreach($models as $model){
-				
+				unset($arr);
 				$arr['text'] = '&nbsp;<i class="'.$this->treeIcon($model->type->label).'" style="margin-right:5px;"></i>'. CHtml::link($model->type->label. ': <i>' . $model->label . '</i>', array('issue/view', 'id'=>$model->id));
 				$arr['id'] = $model->id;
 				
@@ -76,6 +87,32 @@ class IssueBehavior extends CActiveRecordBehavior
 
 		return false;
 	}
+	
+	public function subtasks($issue, $filter)
+	{
+		$criteria = new CDbCriteria;
+	
+		/*$criteria->with['issueRelations'] = array('together' => true);
+		$criteria->compare('related_id', $this->owner->id);*/
+		
+		$criteria->compare('parent_id', $this->owner->id);
+		
+	
+		$models = Issue::model()->findAll($criteria);
+	
+		if(count($models) > 0)
+		{
+			foreach($models as $model){
+				$GLOBALS['ids'][] = $model->id;
+				$GLOBALS['arr'][$model->status->alias][] = $model;
+				if(is_array($GLOBALS['ids']) && !in_array($model->id, $GLOBALS['ids']));
+					$model->subtasks($issue, $filter);
+			}
+		}
+
+		return $GLOBALS['arr'];
+	}
+
 	
 	protected function treeIcon($type = null)
 	{

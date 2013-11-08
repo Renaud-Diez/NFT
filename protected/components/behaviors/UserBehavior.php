@@ -10,6 +10,7 @@ class UserBehavior extends CActiveRecordBehavior
 		if($project){
 			$criteria->with['project'] = array('together' => true);
 			$criteria->compare('project.label', $project, true);
+			$criteria->compare('project.code', $project, true, 'OR');
 		}
 		
 		if($direction == 'received')
@@ -101,6 +102,7 @@ class UserBehavior extends CActiveRecordBehavior
 		if($project){
 			$criteria->with['project'] = array('together' => true);
 			$criteria->compare('project.label', $project, true);
+			$criteria->compare('project.code', $project, true, 'OR');
 		}
 		
 		$criteria->compare('assignee_id', $this->owner->id);
@@ -238,6 +240,7 @@ class UserBehavior extends CActiveRecordBehavior
 		}
 		
 		$criteria->compare('label', $label, true);
+		$criteria->compare('code', $label, true, 'OR');
 
 		$criteria->order = 'label DESC';
 		

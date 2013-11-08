@@ -49,6 +49,9 @@ return array(
 			'widgets' => array(
 				'CGridView' => array(
 					'cssFile' => '/css/gridview/style.css'
+				),
+				'CTreeView' => array(
+						'cssFile' => '/css/treeview/jquery.treeview.css'
 				)
 			)
 		),

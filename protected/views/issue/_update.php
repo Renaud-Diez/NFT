@@ -56,6 +56,11 @@
 			</div>
 			
 			<div class="row">
+				<?php echo $form->dropDownListRow($model,'owner_id', $model->getAssignableUsers(), array('prompt'=>'Select an Owner')); ?>
+				<?php echo $form->error($model,'owner_id'); ?>
+			</div>
+			
+			<div class="row">
 				<?php echo $form->dropDownListRow($model,'assignee_id', $model->getAssignableUsers(), array('prompt'=>'Select an Assignee')); ?>
 				<?php echo $form->error($model,'assignee_id'); ?>
 			</div>

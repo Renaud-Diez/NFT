@@ -63,7 +63,7 @@ $this->menuDocuments=array(
 											array('label' => 'Update', 'url' => array('update', 'id' => $model->id), 'icon' => 'icon-pencil'),
 											'---',
 											array('label' => 'VIEWS'),
-											array('label' => 'Detail', 'url' => array('view', 'id' => $model->id)),
+											array('label' => 'GTD', 'url' => array('gtd', 'id' => $model->id)),
 											array('label' => 'Event History', 'url' => '#'),
 											array('label' => 'Time Logs', 'url' => array('timelog', 'id' => $model->id)),
 											'---',
@@ -81,7 +81,7 @@ $this->menuDocuments=array(
 
 
 
-<h3><?php echo $model->label;?> <small>Created by <?php echo $model->user->username;?></small></h3>
+<h3><?php echo $model->label;?> <small>Created by <?php echo $model->user->username;?> - Owned by <?php echo $model->owner->username;?></small></h3>
 
 <?php 
 	//$arrEffort = $model->estimatedRemainingEffort();
