@@ -257,7 +257,7 @@ class IssueBehavior extends CActiveRecordBehavior
 
 	public function registerParticipant($userIds)
 	{
-		Yii::trace('Participants ' . count($userIds),'models.issue');
+		//Yii::trace('Participants ' . count($userIds),'models.issue');
 		if(count($userIds)>0)
 		{
 			$member = $error = 0;

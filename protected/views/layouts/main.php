@@ -128,12 +128,18 @@
 			
 			$bodyMargin = 80;
 			//Define Issue menu array
-			if($this->uniqueid == 'project' && $this->action->id == 'roadmap' && $_GET['version'])
+			if($this->uniqueid == 'project' && $this->action->id == 'roadmap' && $_GET['version']){
 				$arrMenuIssue[] = array('label'=>'New Issue', 'url'=>array('issue/create', 'pid'=>$this->project->id, 'version' => $_GET['version']));
-			elseif($this->uniqueid == 'project' && $this->action->id == 'roadmap' && $_GET['milestone'])
+				$arrMenuIssue[] = array('label'=>'Import Issue', 'url'=>array('project/import/', 'id'=>$this->project->id, 'version' => $_GET['version']));
+			}elseif($this->uniqueid == 'project' && $this->action->id == 'roadmap' && $_GET['milestone']){
 				$arrMenuIssue[] = array('label'=>'New Issue', 'url'=>array('issue/create', 'pid'=>$this->project->id, 'milestone' => $_GET['milestone']));
-			else
+				$arrMenuIssue[] = array('label'=>'Import Issue', 'url'=>array('project/import/', 'id'=>$this->project->id, 'milestone' => $_GET['milestone']));
+			}else{
 				$arrMenuIssue[] = array('label'=>'New Issue', 'url'=>array('issue/create', 'pid'=>$this->project->id));
+				$arrMenuIssue[] = array('label'=>'Import Issue', 'url'=>array('project/import/', 'id'=>$this->project->id));
+			}
+			
+			
 				
 			if($this->uniqueid == 'issue' && $this->action->id == 'view')
 				$arrMenuIssue[] = array('label'=>'New Sub-issue', 'url'=> array('issue/create/', 'pid'=>$this->project->id, 'parent_id' =>$this->issue->id));

@@ -84,10 +84,10 @@ class Issue extends CActiveRecord
 			array('estimated_time', 'length', 'max'=>6),
 			array('completion', 'length', 'max'=>4),
 			array('overrun, logged_effort, theorical_remaining_effort, pessimistic_remaining_effort, optimistic_remaining_effort', 'numerical'),
-			array('description, comment, due_date, priority, overdue', 'safe'),
+			array('description, comment, due_date, priority, overdue, code', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, label, project_id, user_id, assignee_id, status_id, type_id, version_id, milestone_id, priority, estimated_time, private, completion, priority, due_date', 'safe', 'on'=>'search'),
+			array('id, label, project_id, user_id, assignee_id, status_id, type_id, version_id, milestone_id, priority, estimated_time, private, completion, priority, due_date, code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -138,6 +138,7 @@ class Issue extends CActiveRecord
 			'priority' => 'Priority',
 			'estimated_time' => 'Effort',
 			'due_date' => 'Due Date',
+			'code' => 'Code',
 			'private' => 'Private',
 			'description' => 'Description',
 			'completion' => 'Completion',

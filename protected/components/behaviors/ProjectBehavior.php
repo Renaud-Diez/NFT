@@ -154,8 +154,6 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$criteria=new CDbCriteria;
 		$criteria->compare('user_id', Yii::app()->user->id);
 		$criteria->compare('project_id', $this->owner->id);
-		Yii::trace('OWNER ID: ' . $this->owner->id,'models.project');
-		
 		
 		$model = ProjectUser::model()->find($criteria);
 		if(!is_null($model))
@@ -648,7 +646,10 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$arrCompletion['closed'] = $arrClosedIssues['rows'];
 		$arrCompletion['open'] = floor($arrOpenIssues['done']);
 
-		$arrCompletion['success'] = floor(($arrClosedIssues['rows']/($arrOpenIssues['rows']+$arrClosedIssues['rows']))*100);
+		$c = $arrOpenIssues['rows']+$arrClosedIssues['rows'];
+		if($c == 0)
+			$c = 1;
+		$arrCompletion['success'] = floor(($arrClosedIssues['rows']/($c))*100);
 		$arrCompletion['warning'] = floor((100-$arrCompletion['success'])*($arrCompletion['open']/100));
 
 		return $arrCompletion;
@@ -931,7 +932,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 		if(!is_null($project)){
 			$criteria->with['project'] = array('together' => true);
 			$criteria->addCondition('project.label LIKE :project  OR project.code LIKE :project');
-			$criteria->params['project'] = $project;
+			$criteria->params['project'] = '%'.$project.'%';
 		}
 	
 		
@@ -990,7 +991,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 		));
 	}
 	
-	public function getSubprojects($parent_id = null)
+	public function getSubprojects($parent_id = null, $project = null)
 	{
 		$array = array();
 		$criteria = new CDbCriteria;
@@ -999,7 +1000,15 @@ class ProjectBehavior extends CActiveRecordBehavior
 			$criteria->condition = 'parent_id=:parent_id';
 			$criteria->params[':parent_id'] = $parent_id;
 		}else{
-			$criteria->condition = 'parent_id IS NULL';
+			if(!is_null($project)){
+				$criteriaP = new CDbCriteria;
+				$criteriaP->compare('label', $project, true);
+				$criteriaP->compare('code', $project, true, 'OR');
+				$criteria->mergeWith($criteriaP, true);
+			}else{
+				$criteria->condition = 'parent_id IS NULL';
+			}
+			
 		}
 		
 		$criteria->order = 'label ASC';
@@ -1015,7 +1024,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 				$arr['text'] = '&nbsp;<i class="'.$this->treeIcon($model->topic->label).'" style="margin-right:5px;"></i>'. CHtml::link('<i>' . $model->label . '</i>', array('project/view', 'id'=>$model->id));
 				$arr['id'] = $model->id;
 				
-				$children = $this->getSubprojects($model->id);
+				$children = $this->getSubprojects($model->id, $project);
 				if($children){
 					$arr['hasChildren'] = true;
 					$arr['children'] = $children;

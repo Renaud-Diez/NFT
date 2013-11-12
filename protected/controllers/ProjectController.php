@@ -52,15 +52,41 @@ class ProjectController extends Controller
 	}
 	
 	
-	public function actionImport()
+	public function actionImport($id)
 	{
 		$model = $this->loadModel($id);
 		$model->attachBehavior('ProjectImportBehavior', new ProjectImportBehavior);
 		
+		$file = new FileImportForm;
+		
+		if(!isset($_POST['cancel']) && $_POST['FileImportForm']){
+			if($_POST['FileImportForm']['path']){
+				$records = $model->importIssues($_POST['FileImportForm']['path'], $_GET['version'], $_GET['milestone']);
+				Yii::app()->user->setFlash('success', $records);
+			}else{
+				$file->attributes=$_POST['FileImportForm'];
+				$file->file = CUploadedFile::getInstance($file,'file');
+				
+				if(is_object($file->file)){
+					$file->path = "assets/media/".$file->file;
+					$path = Yii::app()->getBasePath() . "/../" . $file->path;
+
+					$file->file->saveAs($path);
+					
+					$arrSheet = Yii::app()->yexcel->readActiveSheet($path);
+				}
+			}
+			
+		}
+		
 		$this->loadSidebar($model);
 		
 		$this->render('import',array(
+				'filePath' => $path,
 				'sheet'=>$arrSheet,
+				'model'=>$model,
+				'file'=>$file,
+				'message' => $records
 		));
 	}
 	
@@ -197,6 +223,11 @@ class ProjectController extends Controller
 			'pagination' => array('pageSize' => 100,),
 		));
 		$dataProvider->sort->defaultOrder='label ASC';
+		
+		//Yii::trace('PLABEL: ' . $dataProvider->data[0]->label,'models.project');
+		if(count($dataProvider->getData()) == 1){
+			$this->redirect('/project/view/'.$dataProvider->data[0]->id);
+		}
 		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -365,8 +396,18 @@ class ProjectController extends Controller
 	
 	public function actionTreeview()
 	{
+		$label = null;
+		if($_POST['Project']['label']){
+			$label = $_POST['Project']['label'];
+		}
+
 		$model = Project::model();
-		$treedata = $model->getSubprojects();
+		$treedata = $model->getSubprojects(null, $label);
+		
+		if(count($treedata) == 1 && !is_null($treedata[0]['id'])){
+			$this->redirect('/project/view/'.$treedata[0]['id']);
+		}
+			
 		
 		$this->render('treeview',array(
 			'model'=>$model, 'treedata'=>$treedata,

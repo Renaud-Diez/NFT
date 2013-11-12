@@ -1,34 +1,44 @@
 <?php
-class ProjectStatsBehavior extends CBehavior
+class ProjectImportBehavior extends CBehavior
 {
 	public $importSubTasks = false;
 	public $importParticipants = false;
 	public $importRelationships = false;
 	
-	public function importIssues($filePath = false)
+	public function importIssues($filePath = false, $version = null, $milestone = null)
 	{
+		$records = 0;
 		if($filePath && is_file($filePath)){
 			$arrSheet = Yii::app ()->yexcel->readActiveSheet ( $filePath );
-				
-			foreach ( $arrSheet as $row ) {
+			$first = false;
+			foreach ( $arrSheet as $rec ) {
 				$row = false;
-				foreach ( $row as $record => $value ) {
-					$field = $this->mapImportedAttributes($arrSheet[1][$record], $value);
-					if($field)
-						$row[$field['attribute']] = $field['value'];
-				}
-	
-				if($row){
-					$model = $this->importRow($row);
-					/*if(!is_null($model) && !empty($row['sub-tasks'])){
-						$relations[] = array('id' => $model->id, 'sub' => $row['sub-tasks']);
-					}*/
-					if(is_array($this->importParticipants) && count($this->importParticipants) > 0){
-						$this->importParticipants($model);
+				if($first){
+					foreach ( $rec as $record => $value ) {
+						$field = $this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
+						if($field)
+							$row[$field['attribute']] = $field['value'];
+					}
+					
+					if($row){
+						$model = $this->importRow($row, $version, $milestone);
+						if($model->id)
+							$records++;
+						//Yii::trace('Import OK:' . $model->id,'models.issue');
+						/*if(!is_null($model) && !empty($row['sub-tasks'])){
+						 $relations[] = array('id' => $model->id, 'sub' => $row['sub-tasks']);
+						}*/
+						if(is_array($this->importParticipants) && count($this->importParticipants) > 0){
+							$this->importParticipants($model);
+						}
 					}
 				}
+				$first = true;
 			}
+			return $records . ' Issues succesfully imported!';
 		}
+		
+		return 'No file provided!';
 	}
 	
 	protected function mapImportedAttributes($attribute, $value = false)
@@ -54,13 +64,13 @@ class ProjectStatsBehavior extends CBehavior
 				'issue_type',
 				'type' 
 		) ))
-			return $this->mapType ( $attribute, $value );
+			return $this->mapType ( $value );
 		elseif ($attribute == 'status')
-			return $this->mapStatus ( $attribute, $value );
+			return $this->mapStatus ( $value );
 		elseif ($attribute == 'priority')
-			return $this->mapPriority ( $attribute, $value );
+			return $this->mapPriority ( $value );
 		elseif ($attribute == 'assignee')
-			return $this->mapAssignee ( $attribute, $value );
+			return $this->mapAssignee ( $value );
 		elseif ($attribute == 'original-estimate')
 			return array (
 					'attribute' => 'estimated_time',
@@ -72,23 +82,84 @@ class ProjectStatsBehavior extends CBehavior
 					'value' => substr ( $value, - 1 ) 
 			);
 		elseif ($attribute == 'description')
-			return $this->mapStatus ( $attribute, $value );
+			return array (
+					'attribute' => 'description',
+					'value' => $value 
+			);
 		elseif ($attribute == 'participants')
-			return $this->mapParticipants ( $attribute, $value );
+			return $this->mapParticipants ( $value );
 		elseif ($attribute == 'sub-tasks')
-			return $this->mapSubTasks ( $attribute, $value );
+			return $this->mapSubTasks ( $value );
 		elseif ($attribute == 'linked-issues')
-			return $this->mapRelationships ( $attribute, $value );
+			return $this->mapRelationships ( $value );
 		else
 			return false;
 	}
 	
-	protected function mapSubTasks($attribute, $value)
+	protected function mapRelationships($value)
 	{
-	
+		return false;
 	}
 	
-	protected function mapParticipants($attribute, $value)
+	protected function mapSubTasks($value)
+	{
+		return false;
+	}
+	
+	protected function mapType($value)
+	{
+		$model = IssueType::model()->findByAttributes(array('label' => $value));
+		
+		if(is_null($model)){
+			$model = new IssueType;
+			$model->label = $value;
+			$model->save();
+		}
+		
+		return array (
+					'attribute' => 'type_id',
+					'value' => $model->id
+			);
+	}
+	
+	protected function mapStatus($value)
+	{
+		$model = IssueStatus::model()->findByAttributes(array('label' => $value));
+	
+		if(is_null($model)){
+			$model = new IssueStatus;
+			$model->label = $value;
+			$model->save();
+		}
+	
+		return array (
+				'attribute' => 'status_id',
+				'value' => $model->id
+		);
+	}
+	
+	protected function mapPriority($value)
+	{
+		$model = new Issue;
+		
+		if(strtolower($value) == $model->getPriorities(Issue::PRIORITY_LOW))
+			$value = Issue::PRIORITY_LOW;
+		elseif(strtolower($value) == $model->getPriorities(Issue::PRIORITY_HIGH))
+			$value = Issue::PRIORITY_HIGH;
+		elseif(strtolower($value) == $model->getPriorities(Issue::PRIORITY_URGENT))
+			$value = Issue::PRIORITY_URGENT;
+		elseif(strtolower($value) == $model->getPriorities(Issue::PRIORITY_IMMEDIATE))
+			$value = Issue::PRIORITY_IMMEDIATE;
+		else
+			$value = Issue::PRIORITY_NORMAL;
+	
+		return array (
+				'attribute' => 'priority',
+				'value' => $value
+		);
+	}
+	
+	protected function mapParticipants($value)
 	{
 		$participants = split(' and ', $value);
 		foreach($participants as $participant){
@@ -105,8 +176,23 @@ class ProjectStatsBehavior extends CBehavior
 		
 		if($ownerID){
 			return array (
-					'attribute' => 'user_id',
+					'attribute' => 'owner_id',
 					'value' => $ownerID
+			);
+		}
+		
+		return false;
+	}
+	
+	protected function mapAssignee($value)
+	{
+		$userID = $this->getUserId($value);
+		
+		if($userID){
+			$this->importParticipants[] = $userID;
+			return array (
+					'attribute' => 'assignee_id',
+					'value' => $userID
 			);
 		}
 		
@@ -139,10 +225,11 @@ class ProjectStatsBehavior extends CBehavior
 	}
 	
 	
-	protected function importRow($row)
+	protected function importRow($row, $version = null, $milestone = null)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->compare('code', $row['code']);
+		$criteria->compare('project_id', $this->owner->id);
 	
 		$model = Issue::model()->find($criteria);
 	
@@ -151,14 +238,46 @@ class ProjectStatsBehavior extends CBehavior
 		}
 	
 		$model->attributes = $row;
+		
+		if(is_null($model->status_id)){
+			$status = $this->mapStatus('Undefined');
+			$model->status_id = $status['value'];
+		}
+		
+		if(is_null($model->type_id)){
+			$type = $this->mapType('Undefined');
+			$model->type_id = $type['value'];
+		}
+		
 		$model->project_id = $this->owner->id;
+		
+		
+		
+		if(!is_null($milestone)){
+			$milestone = Milestone::model()->findByPk($milestone);
+			
+			if($milestone->project_id == $model->project_id){
+				$model->milestone_id = $milestone->id;
+				$model->version_id = $milestone->version_id;
+			}
+		}elseif(!is_null($version)){
+			$version = Version::model()->findByPk($version);
+			
+			if($version->project_id == $model->project_id)
+				$model->version_id = $version->id;
+		}
+			
+
+		$model->user_id = Yii::app()->user->id;
 		$model->save();
+		
+		Yii::trace('Import CODE:' . $model->id,'models.issue');
 		
 		if(!is_null($model)){
 			$model->registerParticipant(array($row['user_id']));
 		}
 	
-		return $model->id;
+		return $model;
 	}
 	
 	protected function importParticipants($model)
