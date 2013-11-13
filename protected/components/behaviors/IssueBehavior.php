@@ -6,6 +6,7 @@ class IssueBehavior extends CActiveRecordBehavior
 	public $arr = null;
 
 	private $_oldAttributes = array();
+	private $_old = null;
 	private $_event = null;
 
 	public function loadMetaData()
@@ -512,6 +513,8 @@ class IssueBehavior extends CActiveRecordBehavior
 	public function afterFind($event)
 	{
 		$this->setOldAttributes($this->owner->getAttributes());
+		$this->_old = clone $this->owner;
+		return parent::afterFind($event);
 	}
 
 	public function afterSave($event)
@@ -648,7 +651,7 @@ class IssueBehavior extends CActiveRecordBehavior
 		foreach($newAttributes as $field => $value){
 			if($field == 'id')
 			$log->issue_id = $value;
-			elseif(!in_array($field, array('project_id','user_id','creation_date', 'parent_id')))
+			elseif(!in_array($field, array('project_id', 'user_id', 'creation_date', 'parent_id', 'open_date', 'resolution_date')))
 			$log->{$field} = $value;
 		}
 
