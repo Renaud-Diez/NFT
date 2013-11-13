@@ -225,7 +225,7 @@ class ProjectController extends Controller
 		$dataProvider->sort->defaultOrder='label ASC';
 		
 		//Yii::trace('PLABEL: ' . $dataProvider->data[0]->label,'models.project');
-		if(count($dataProvider->getData()) == 1){
+		if($_POST['Project'] && count($dataProvider->getData()) == 1){
 			$this->redirect('/project/view/'.$dataProvider->data[0]->id);
 		}
 		
