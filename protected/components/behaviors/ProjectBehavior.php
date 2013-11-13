@@ -818,11 +818,16 @@ class ProjectBehavior extends CActiveRecordBehavior
 		if(!is_null($status))
 		$criteria->compare('relation',$status);
 		
-		$odate = new DateTime();
-		$odate->sub(new DateInterval('P3M'));
-		$date = $odate->format('Y-m-d');
+		$date = new DateTime();
+		$date->sub(new DateInterval('P3M'));
+		$dateFrom = $date->format('Y-m-d');
 		
-		$criteria->compare('start_date', '>= '.$date);
+		$date = new DateTime();
+		$date->add(new DateInterval('P6M'));
+		$dateTo = $date->format('Y-m-d');
+		
+		$criteria->compare('start_date', '>= '.$dateFrom);
+		$criteria->compare('due_date', '<= '.$dateTo);
 
 		$versionsDataProvider = new CActiveDataProvider(Version, array(
 			'criteria'=>$criteria,
