@@ -819,11 +819,11 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$criteria->compare('relation',$status);
 		
 		$date = new DateTime();
-		$date->sub(new DateInterval('P3M'));
+		$date->sub(new DateInterval('P2M'));
 		$dateFrom = $date->format('Y-m-d');
 		
 		$date = new DateTime();
-		$date->add(new DateInterval('P6M'));
+		$date->add(new DateInterval('P4M'));
 		$dateTo = $date->format('Y-m-d');
 		
 		$criteria->compare('start_date', '>= '.$dateFrom);
