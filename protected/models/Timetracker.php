@@ -51,10 +51,10 @@ class Timetracker extends CActiveRecord
 			array('remaining_time', 'validateRemainingTime'),
 			array('user_id, issue_id, billable, activity_id', 'numerical', 'integerOnly'=>true),
 			array('time_spent', 'length', 'max'=>5),
-			array('comment', 'safe'),
+			array('comment, creation_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_id, issue_id, time_spent, billable, comment, activity_id, log_date', 'safe', 'on'=>'search'),
+			array('id, user_id, issue_id, time_spent, billable, comment, activity_id, log_date, creation_date', 'safe', 'on'=>'search'),
 		);
 	}
 

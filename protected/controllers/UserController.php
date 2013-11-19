@@ -55,6 +55,44 @@ class UserController extends Controller
 			$this->render('password',array('model'=>$model,));
 	}
 	
+	public function actionImport()
+	{
+		$model = User::model();
+		$model->attachBehavior('UserImportBehavior', new UserImportBehavior);
+	
+		$file = new FileImportForm;
+	
+		if(!isset($_POST['cancel']) && $_POST['FileImportForm']){
+			if($_POST['FileImportForm']['path']){
+				$records = $model->importUsers($_POST['FileImportForm']['path'], $_GET['version'], $_GET['milestone']);
+				Yii::app()->user->setFlash('success', $records);
+			}else{
+				$file->attributes=$_POST['FileImportForm'];
+				$file->file = CUploadedFile::getInstance($file,'file');
+	
+				if(is_object($file->file)){
+					$file->path = "assets/media/".$file->file;
+					$path = Yii::app()->getBasePath() . "/../" . $file->path;
+	
+					$file->file->saveAs($path);
+	
+					$arrSheet = Yii::app()->yexcel->readActiveSheet($path);
+				}
+			}
+	
+		}
+	
+		//$this->loadSidebar($model);
+	
+		$this->render('import',array(
+				'filePath' => $path,
+				'sheet'=>$arrSheet,
+				'model'=>$model,
+				'file'=>$file,
+				'message' => $records
+		));
+	}
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

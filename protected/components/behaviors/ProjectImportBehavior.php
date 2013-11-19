@@ -25,9 +25,14 @@ class ProjectImportBehavior extends CBehavior
 						if($model->id)
 							$records++;
 						//Yii::trace('Import OK:' . $model->id,'models.issue');
-						/*if(!is_null($model) && !empty($row['sub-tasks'])){
-						 $relations[] = array('id' => $model->id, 'sub' => $row['sub-tasks']);
-						}*/
+						if(!is_null($model) && !empty($row['sub-tasks'])){
+						 	$relations[] = array('id' => $model->id, 'sub' => $row['sub-tasks'], 'type' => Issue::RELATED_PARENT);
+						}
+						
+						if(!is_null($model) && !empty($row['linked-issues'])){
+							$relations[] = array('id' => $model->id, 'sub' => $row['linked-issues'], 'type' => Issue::RELATED_TO);
+						}
+						
 						if(is_array($this->importParticipants) && count($this->importParticipants) > 0){
 							$this->importParticipants($model);
 						}
@@ -35,6 +40,11 @@ class ProjectImportBehavior extends CBehavior
 				}
 				$first = true;
 			}
+			
+			if(is_array($relations) && count($relations) > 0){
+				$this->importRelations($relations);
+			}
+			
 			return $records . ' Issues succesfully imported!';
 		}
 		
@@ -88,9 +98,9 @@ class ProjectImportBehavior extends CBehavior
 			);
 		elseif ($attribute == 'participants')
 			return $this->mapParticipants ( $value );
-		elseif ($attribute == 'sub-tasks')
+		elseif ($attribute == 'subtasks')
 			return $this->mapSubTasks ( $value );
-		elseif ($attribute == 'linked-issues')
+		elseif ($attribute == 'linkedissues')
 			return $this->mapRelationships ( $value );
 		else
 			return false;
@@ -98,12 +108,22 @@ class ProjectImportBehavior extends CBehavior
 	
 	protected function mapRelationships($value)
 	{
-		return false;
+		$value = str_replace(' ', '', $value);
+		
+		return array (
+				'attribute' => 'linked-issues',
+				'value' => str_replace(' ', '', $value)
+		);
 	}
 	
 	protected function mapSubTasks($value)
 	{
-		return false;
+		$value = str_replace(' ', '', $value);
+		
+		return array (
+				'attribute' => 'sub-tasks',
+				'value' => str_replace(' ', '', $value)
+		);
 	}
 	
 	protected function mapType($value)
@@ -204,8 +224,8 @@ class ProjectImportBehavior extends CBehavior
 		$arrName = split(' ', $participant);
 		
 		$criteria = new CDbCriteria;
-		$criteria->compare('firstname', $arrName[0]);
-		$criteria->compare('lastname', $arrName[1]);
+		$criteria->compare('firstname', $arrName[0], true);
+		$criteria->compare('lastname', $arrName[1], true);
 		
 		$model = User::model()->find($criteria);
 		
@@ -215,7 +235,7 @@ class ProjectImportBehavior extends CBehavior
 			$model->username = ucfirst($arrName[0]) . '.' . ucfirst($arrName[1]);
 			$model->firstname = ucfirst($arrName[0]);
 			$model->lastname = ucfirst($arrName[1]);
-			$model->save;
+			$model->save();
 		}
 			
 		if(!is_null($model))
@@ -296,17 +316,34 @@ class ProjectImportBehavior extends CBehavior
 		foreach($relations as $relation){
 			$arr = split(',', $relation['sub']);
 			foreach($arr as $rel){
-				$model = IssueRelation::model()->findByAttributes(array('related_id' => $rel, 'issue_id' => $relation->id));
-				if(is_null($model)){
-					$model = new IssueRelation;
-					$model->issue_id = $relation->id;
-					$model->related_id = $rel;
-						
-					$model->relation = 7;
-					$model->save();
+				$relModel = $this->getIssueByCode($rel);
+				
+				if(!is_null($relModel)){
+					$model = IssueRelation::model()->findByAttributes(array('related_id' => $relModel->id, 'issue_id' => $relation['id']));
+					if(is_null($model)){
+						$model = new IssueRelation;
+						$model->issue_id = $relation['id'];
+						$model->related_id = $relModel->id;
+					
+						$model->relation = $relation['type'];
+						$model->save();
+					}
 				}
+				
 			}
 		}
 	
+	}
+	
+	
+	protected function getIssueByCode($code)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->compare('code', $code);
+		$criteria->compare('project_id', $this->owner->id);
+		
+		$model = Issue::model()->find($criteria);
+		
+		return $model;
 	}
 }
