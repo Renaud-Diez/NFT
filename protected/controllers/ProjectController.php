@@ -238,6 +238,9 @@ class ProjectController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('Topic', array(
 			'criteria'=>$criteria,
+				'pagination'=>array(
+						'pageSize'=>20,
+				),
 		));
 		$dataProvider->sort->defaultOrder='label ASC';
 		
