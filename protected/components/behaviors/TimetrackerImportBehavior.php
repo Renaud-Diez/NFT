@@ -3,7 +3,7 @@ class TimetrackerImportBehavior extends CBehavior
 {
 	protected $row = false;
 	
-	public function importWorklog($filePath = false)
+	public function importTimelog($filePath = false)
 	{
 		$records = 0;
 		if($filePath && is_file($filePath)){
@@ -55,7 +55,7 @@ class TimetrackerImportBehavior extends CBehavior
 				'code',
 				'pkey'
 		) ))
-			this->mapIssue($value);
+			$this->mapIssue($value);
 		elseif (in_array ( $attribute, array (
 				'updated',
 				'update'
@@ -145,10 +145,9 @@ class TimetrackerImportBehavior extends CBehavior
 	
 	protected function mapUpdate($value)
 	{
-		$date = new DateTime::createFromFormat('d/m/Y H:i:s', $value);
+		$date = DateTime::createFromFormat('d/m/Y H:i:s', $value);
 		
 		$this->row['log_date'] = $date->format('Y-m-d H:i:s');
 	}
-	
-	
+
 }

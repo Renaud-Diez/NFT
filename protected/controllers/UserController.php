@@ -64,7 +64,7 @@ class UserController extends Controller
 	
 		if(!isset($_POST['cancel']) && $_POST['FileImportForm']){
 			if($_POST['FileImportForm']['path']){
-				$records = $model->importUsers($_POST['FileImportForm']['path'], $_GET['version'], $_GET['milestone']);
+				$records = $model->importUsers($_POST['FileImportForm']['path']);
 				Yii::app()->user->setFlash('success', $records);
 			}else{
 				$file->attributes=$_POST['FileImportForm'];

@@ -106,6 +106,43 @@ class TimetrackerController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
+	
+	
+	public function actionImport()
+	{
+		$model = Timetracker::model();
+		$model->attachBehavior('TimetrackerImportBehavior', new TimetrackerImportBehavior);
+	
+		$file = new FileImportForm;
+	
+		if(!isset($_POST['cancel']) && $_POST['FileImportForm']){
+			if($_POST['FileImportForm']['path']){
+				$records = $model->importTimelog($_POST['FileImportForm']['path']);
+				Yii::app()->user->setFlash('success', $records);
+			}else{
+				$file->attributes=$_POST['FileImportForm'];
+				$file->file = CUploadedFile::getInstance($file,'file');
+	
+				if(is_object($file->file)){
+					$file->path = "assets/media/".$file->file;
+					$path = Yii::app()->getBasePath() . "/../" . $file->path;
+	
+					$file->file->saveAs($path);
+	
+					$arrSheet = Yii::app()->yexcel->readActiveSheet($path);
+				}
+			}
+		}
+
+	
+		$this->render('import',array(
+				'filePath' => $path,
+				'sheet'=>$arrSheet,
+				'model'=>$model,
+				'file'=>$file,
+				'message' => $records
+		));
+	}
 
 	/**
 	 * Lists all models.

@@ -81,10 +81,10 @@ class ProjectImportBehavior extends CBehavior
 			return $this->mapPriority ( $value );
 		elseif ($attribute == 'assignee')
 			return $this->mapAssignee ( $value );
-		elseif ($attribute == 'original-estimate')
+		elseif ($attribute == 'original_estimate')
 			return array (
 					'attribute' => 'estimated_time',
-					'value' => $value 
+					'value' => ($value/3600) 
 			);
 		elseif ($attribute == 'progress')
 			return array (
