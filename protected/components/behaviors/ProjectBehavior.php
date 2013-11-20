@@ -439,7 +439,8 @@ class ProjectBehavior extends CActiveRecordBehavior
 			$arr[1][] = array($date, (float) round($tre, 2));
 			$arr[0][] = array($date, (float) round($ere, 2));
 			$arr[2][] = array($date, (float) round($this->greaterThanZero($record->overrun/$hoursbyday), 2));
-			$arr[3][] = array($date, (float) round($this->greaterThanZero($record->theorical_effort/$hoursbyday), 2));
+			//$arr[3][] = array($date, (float) round($this->greaterThanZero($record->theorical_effort/$hoursbyday), 2));
+			$arr[3][] = array($date, (float) round($this->greaterThanZero($record->estimated_effort/$hoursbyday), 2));
 			$arr[4][] = array($date, (float) round($this->greaterThanZero($record->spent_time/$hoursbyday), 2));
 			$arr[5][] = array($date, (float) round($this->greaterThanZero($record->budget/$hoursbyday), 2));
 		}

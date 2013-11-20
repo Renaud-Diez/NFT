@@ -15,11 +15,14 @@ class ProjectImportBehavior extends CBehavior
 				$row = false;
 				if($first){
 					foreach ( $rec as $record => $value ) {
-						$field = $this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
-						if($field)
-							$row[$field['attribute']] = $field['value'];
+						if(!is_null($value) && $value != ''){
+							$field = $this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
+							if($field)
+								$row[$field['attribute']] = $field['value'];
+						}
 					}
-					
+
+					//print_r($row);
 					if($row){
 						$model = $this->importRow($row, $version, $milestone);
 						if($model->id)
@@ -81,15 +84,26 @@ class ProjectImportBehavior extends CBehavior
 			return $this->mapPriority ( $value );
 		elseif ($attribute == 'assignee')
 			return $this->mapAssignee ( $value );
-		elseif ($attribute == 'original_estimate')
+		elseif (in_array ( $attribute, array (
+				'owner',
+				'reporter'
+		) ))
+			return $this->mapOwner ( $value );
+		elseif (in_array ( $attribute, array (
+				'original_estimate',
+				'estimated',
+				'estimate',
+				'effort',
+				'estimated_time'
+		) ))
 			return array (
 					'attribute' => 'estimated_time',
-					'value' => ($value/3600) 
+					'value' => round(($value/3600),2)
 			);
 		elseif ($attribute == 'progress')
 			return array (
 					'attribute' => 'completion',
-					'value' => substr ( $value, - 1 ) 
+					'value' => substr ( $value, 0, - 1 ) 
 			);
 		elseif ($attribute == 'description')
 			return array (
@@ -100,7 +114,10 @@ class ProjectImportBehavior extends CBehavior
 			return $this->mapParticipants ( $value );
 		elseif ($attribute == 'subtasks')
 			return $this->mapSubTasks ( $value );
-		elseif ($attribute == 'linkedissues')
+		elseif (in_array ( $attribute, array (
+				'related',
+				'linked_issues'
+		) ))
 			return $this->mapRelationships ( $value );
 		else
 			return false;
@@ -216,6 +233,21 @@ class ProjectImportBehavior extends CBehavior
 			);
 		}
 		
+		return false;
+	}
+	
+	protected function mapOwner($value)
+	{
+		$userID = $this->getUserId($value);
+	
+		if($userID){
+			$this->importParticipants[] = $userID;
+			return array (
+					'attribute' => 'owner_id',
+					'value' => $userID
+			);
+		}
+	
 		return false;
 	}
 	
