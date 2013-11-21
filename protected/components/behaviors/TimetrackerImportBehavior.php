@@ -13,8 +13,11 @@ class TimetrackerImportBehavior extends CBehavior
 				$this->row = false;
 				if($first){
 					foreach ( $rec as $record => $value ) {
-						$this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
+						if(!is_null($value) && $value != '')
+							$this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
 					}
+					
+					//print_r($this->row);
 					
 					if($this->row){
 						$model = $this->importRow($this->row);
@@ -75,25 +78,29 @@ class TimetrackerImportBehavior extends CBehavior
 	
 	protected function importRow($row)
 	{
-		$criteria=new CDbCriteria;
-		$criteria->compare('username', $row['username']);
-		$criteria->compare('issue_id', $row['issue_id']);
-		$criteria->compare('log_date', $row['log_date']);
-
-		$model = Timetracker::model()->find($criteria);
-		
-		if(is_null($model)){
-			$model = new Timetracker;
-			$model->billable = 0;
+		if(!is_null($row['issue_id'])){
+			$criteria=new CDbCriteria;
+			$criteria->compare('user_id', $row['user_id']);
+			$criteria->compare('issue_id', $row['issue_id']);
+			$criteria->compare('log_date', $row['log_date']);
 			
-			if(is_null($row['activity_id']))
-				$model->activity_id = $this->mapActivity();
+			$model = Timetracker::model()->find($criteria);
 			
-			$model->attributes = $row;
-			$model->save();
+			if(is_null($model)){
+				$model = new Timetracker;
+				$model->setScenario('import');
+				$model->billable = 0;
+					
+				if(is_null($row['activity_id']))
+					$model->activity_id = $this->mapActivity();
+					
+				$model->attributes = $row;
+				$model->save();
+			}
+			
+			return $model;
 		}
-
-		return $model;
+		return false;
 	}
 	
 	protected function mapActivity($value = null)
@@ -107,8 +114,9 @@ class TimetrackerImportBehavior extends CBehavior
 		$model = TimeActivity::model()->find($criteria);
 		
 		if(is_null($model)){
-			$model = new Activity;
+			$model = new TimeActivity;
 			$model->label = $value;
+			$model->save();
 		}
 		
 		return $model->id;
@@ -119,7 +127,7 @@ class TimetrackerImportBehavior extends CBehavior
 		$criteria=new CDbCriteria;
 		$criteria->compare('username', $value);
 		
-		$model = Issue::model()->find($criteria);
+		$model = User::model()->find($criteria);
 		
 		if(!is_null($model))
 			$this->row['user_id']  = $model->id;

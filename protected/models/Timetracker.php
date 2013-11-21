@@ -48,10 +48,10 @@ class Timetracker extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, issue_id, time_spent, billable, activity_id', 'required'),
-			array('remaining_time', 'validateRemainingTime'),
+			array('remaining_time', 'validateRemainingTime', 'on' => 'insert'),
 			array('user_id, issue_id, billable, activity_id', 'numerical', 'integerOnly'=>true),
 			array('time_spent', 'length', 'max'=>5),
-			array('comment, creation_date', 'safe'),
+			array('comment, creation_date, log_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, issue_id, time_spent, billable, comment, activity_id, log_date, creation_date', 'safe', 'on'=>'search'),

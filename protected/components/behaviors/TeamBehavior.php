@@ -282,6 +282,7 @@ class TeamBehavior extends CActiveRecordBehavior
 			$where=$criteria->condition;
 			$params=$criteria->params;
 			
+			
 			$sql = Yii::app()->db->createCommand()
 			->select('u.id as uid, u.username as label, SUM(t.time_spent) as value, WEEK(t.log_date, 1) as week')
 			->from('issue i')
@@ -291,6 +292,7 @@ class TeamBehavior extends CActiveRecordBehavior
 			->group('WEEK(t.log_date, 1), t.user_id')
 			->queryAll();
 			
+			$total = $a = 0;
 			foreach($sql as $record){
 				$categories[] = $record['week'];
 				
@@ -300,20 +302,40 @@ class TeamBehavior extends CActiveRecordBehavior
 					else
 						$value = 0;
 					
+					$total += $value;
+					$a++;
+					
 					$array[] = array($id, (float) $value);
 				}
 				
 			}//$arrData[] = array('Coding', (float) 33.0);
-			
+			$avg = floor($total/$a);
+
 			foreach($array as $data){
 				$i = 0;
 				foreach($arrUsers as $id => $name){
 					if($data[0] == $id){
+						$series[$i]['type'] = 'column';
 						$series[$i]['name'] = $name;
 						$series[$i]['data'][] = $data[1];
 					}
 					$i++;
 				}
+			}
+			
+			$u = count($arrUsers);
+			$v = $u+1;
+			$w = count($array)/$u;
+			for($i=0;$i<$w;$i++){
+				$series[$u]['type'] = 'spline';
+				$series[$u]['name'] = 'Average';
+				$series[$u]['data'][] = $avg;
+				$series[$u]['marker'] = array('lineWidth' => 2, 'lineColor' => "js:Highcharts.getOptions().colors[$u]", 'fillColor' => 'white');
+					
+				$series[$v]['type'] = 'spline';
+				$series[$v]['name'] = 'Theorical';
+				$series[$v]['data'][] = 38;
+				$series[$v]['marker'] = array('lineWidth' => 2, 'lineColor' => "js:Highcharts.getOptions().colors[$v]", 'fillColor' => 'white');	
 			}
 			
 			

@@ -59,7 +59,7 @@ class UserBehavior extends CActiveRecordBehavior
 			->queryAll();
 			
 			//echo $sql;
-				
+			$total = $a = 0;
 			foreach($sql as $record){
 				$categories[] = $record['week'];
 	
@@ -68,24 +68,37 @@ class UserBehavior extends CActiveRecordBehavior
 						$value = $record['value'];
 					else
 						$value = 0;
+					
+					$total += $value;
+					$a++;
 						
 					$array[] = array($id, (float) $value);
 				}
 	
 			}//$arrData[] = array('Coding', (float) 33.0);
-			
+			$avg = floor($total/$a);
 			
 			foreach($array as $data){
 				$i = 0;
 				foreach($arrUsers as $id => $name){
 					if($data[0] == $id){
+						$series[$i]['type'] = 'column';
 						$series[$i]['name'] = $name;
 						$series[$i]['data'][] = $data[1];
 					}
 					$i++;
 				}
+				$series[$i]['type'] = 'spline';
+				$series[$i]['name'] = 'Average';
+				$series[$i]['data'][] = $avg;
+				$series[$i]['marker'] = array('lineWidth' => 2, 'lineColor' => "js:Highcharts.getOptions().colors[$i]", 'fillColor' => 'white');
+				$i++;
+				$series[$i]['type'] = 'spline';
+				$series[$i]['name'] = 'Theorical';
+				$series[$i]['data'][] = 38;
+				$series[$i]['marker'] = array('lineWidth' => 2, 'lineColor' => "js:Highcharts.getOptions().colors[$i]", 'fillColor' => 'white');
 			}
-				
+			
 				
 			if(!empty($categories) && !empty($series))
 				return array('categories' => $categories, 'series' => $series);

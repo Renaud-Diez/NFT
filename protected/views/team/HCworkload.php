@@ -3,11 +3,12 @@
 $categories = $hcData['categories'];
 $series = $hcData['series'];
 
+
 $this->Widget('ext.highcharts.HighchartsWidget', array(
 	//'scripts' => array('highcharts-more'),   
 	'options'=>array(	
       'title' => array('text' => ''),
-		'chart' => array('type' => 'column'),
+		'chart' => array(),//'chart' => array('type' => 'column'),
       'xAxis' => array(
       		'title' => array('text' => 'Week nbr.'),
       		'categories' => $categories//array('P1', 'P2', 'P3')
