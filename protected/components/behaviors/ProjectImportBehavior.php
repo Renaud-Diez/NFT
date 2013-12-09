@@ -98,7 +98,7 @@ class ProjectImportBehavior extends CBehavior
 				'effort',
 				'estimated_time'
 		) ))
-			$this->row['estimated_time'] = round(($value/3600),2);
+			$this->mapEstimate($value);
 		elseif ($attribute == 'progress')
 			$this->row['completion'] = substr ( $value, 0, - 1 );
 		elseif ($attribute == 'description')
@@ -118,10 +118,24 @@ class ProjectImportBehavior extends CBehavior
 			return false;
 	}
 	
+	protected function mapEstimate($value)
+	{
+		$value = str_replace(',', '.', $value);
+		
+		if($value >= 1000){
+			$value = round(($value/3600),2);
+		}
+		
+		$this->row['estimated_time'] = $value;
+	}
+	
 	protected function mapRemaining($value)
 	{
 		if($value != ''){
-			$value = round(($value/3600),2);
+			$value = str_replace(',', '.', $value);
+			if($value >= 1000)
+				$value = round(($value/3600),2);
+			
 			$model = $this->getIssueByCode($this->row['code']);
 			
 			if(!is_null($model)){
@@ -133,7 +147,7 @@ class ProjectImportBehavior extends CBehavior
 				if(isset($this->row['completion']))
 					$completion = $this->row['completion'];
 				else
-					$completion = $model->estimated_time;
+					$completion = $model->completion;
 			}
 			
 			
@@ -142,13 +156,13 @@ class ProjectImportBehavior extends CBehavior
 			if(!is_numeric($spent_time))
 				$spent_time = 0;
 			
-			Yii::trace('KSPENT:' . $estimated_time,'models.issue');
+			//Yii::trace('KSPENT:' . $estimated_time,'models.issue');
 			if(is_numeric($value) && $value >= 0){
 				if($spent_time == 0)
 					$completion = round(($value/$estimated_time)*100, 0);
 				else
 					$completion = round((1-($value/($spent_time+$value)))*100, 0);
-				Yii::trace('KCOMP:' . $completion,'models.issue');
+				//Yii::trace('KCOMP:' . $completion,'models.issue');
 			}
 			
 			if((is_null($estimated_time) || $estimated_time == 0) && $completion > 0){
@@ -222,7 +236,11 @@ class ProjectImportBehavior extends CBehavior
 	
 	protected function mapParticipants($value)
 	{
-		$participants = split(' and ', $value);
+		if(strstr($value, ' and '))
+			$participants = split(' and ', $value);
+		else
+		$participants = split(', ', $value);
+		
 		foreach($participants as $participant){
 			$userID = $this->getUserId($participant);
 			if($userID){
