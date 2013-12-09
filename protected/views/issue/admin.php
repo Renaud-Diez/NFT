@@ -137,6 +137,7 @@ $this->widget('bootstrap.widgets.TbExtendedGridView', array(
        'delete' => array
         (
         'url'=>'CController::createUrl("/issue/delete", array("id"=>$data->primaryKey))',
+		'visible' => Yii::app()->user->checkAccess('Issue.Delete')? true: false
         //'url'=>'"index.php?r=leads/update&id="',
         ),
      ),

@@ -4,6 +4,7 @@
 	<?php $this->renderPartial('partials/_titleMenu', array('model'=>$model)); ?>
 </div>
 
+
 <div>
 <h3><?php echo $model->topic->label?> project <small>owned by <?php echo $model->owner->username;?></small></h3>
 </div>

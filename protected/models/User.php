@@ -218,6 +218,14 @@ class User extends CActiveRecord
 		return parent::beforeSave();
 	}
 	
+	public function afterSave()
+	{
+		if($this->isNewRecord){
+			Rights::assign('Authenticated', $this->id);
+			Rights::assign('Project Access', $this->id);
+		}
+	}
+	
 	public function hashPassword($password)
 	{
 		return md5($password);

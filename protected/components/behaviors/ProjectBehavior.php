@@ -5,6 +5,8 @@ class ProjectBehavior extends CActiveRecordBehavior
 	 * PUBLIC
 	 */
 	
+	public $arrProjectIds = null;
+	
 	/**
 	 * CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `remaining_completion` AS 
 	 * select `i`.`id` AS `id`,`i`.`project_id` AS `project_id`,`i`.`version_id` AS `version_id`,`i`.`milestone_id` AS `milestone_id`,
@@ -261,7 +263,11 @@ class ProjectBehavior extends CActiveRecordBehavior
 		$from = $to = false;
 		
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.project_id', $this->owner->id);
+		//$criteria->compare('i.project_id', $this->owner->id);
+		$this->arrProjectIds[] = $this->owner->id;
+		$arrIds = $this->relatedProjects($this->owner->id);
+		if(count($arrIds) > 1)
+			$criteria->addInCondition('i.project_id', $arrIds);
 
 		$this->setDateRangeCriteria($criteria, 'i.creation_date', $search->from, $search->to);
 		
@@ -291,7 +297,11 @@ class ProjectBehavior extends CActiveRecordBehavior
 	protected function workloadIssue($type, $search = null)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.project_id', $this->owner->id);
+		//$criteria->compare('i.project_id', $this->owner->id);
+		$this->arrProjectIds[] = $this->owner->id;
+		$arrIds = $this->relatedProjects($this->owner->id);
+		if(count($arrIds) > 1)
+			$criteria->addInCondition('i.project_id', $arrIds);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
@@ -328,7 +338,11 @@ class ProjectBehavior extends CActiveRecordBehavior
 	protected function workloadActivity($search = null)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.project_id', $this->owner->id);
+		//$criteria->compare('i.project_id', $this->owner->id);
+		$this->arrProjectIds[] = $this->owner->id;
+		$arrIds = $this->relatedProjects($this->owner->id);
+		if(count($arrIds) > 1)
+			$criteria->addInCondition('i.project_id', $arrIds);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
@@ -358,7 +372,11 @@ class ProjectBehavior extends CActiveRecordBehavior
 	protected function workloadUsers($search = null)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.project_id', $this->owner->id);
+		//$criteria->compare('i.project_id', $this->owner->id);
+		$this->arrProjectIds[] = $this->owner->id;
+		$arrIds = $this->relatedProjects($this->owner->id);
+		if(count($arrIds) > 1)
+			$criteria->addInCondition('i.project_id', $arrIds);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
@@ -930,7 +948,7 @@ class ProjectBehavior extends CActiveRecordBehavior
 		return $dataProvider;
 	}
 	
-	public function getIssues($issue, $filter = null, $order = null, $project = null)
+	public function getIssues($issue, $filter = null, $order = null, $project = null, $related = true)
 	{
 		$criteria=new CDbCriteria;
 
@@ -945,6 +963,16 @@ class ProjectBehavior extends CActiveRecordBehavior
 			$criteria->with['project'] = array('together' => true);
 			$criteria->addCondition('project.label LIKE :project  OR project.code LIKE :project');
 			$criteria->params['project'] = '%'.$project.'%';
+			
+			/*$arrIds = $this->relatedProjects(null, $project);
+
+			if(count($arrIds) > 0){
+				$criteria->addInCondition('project.id', $arrIds);
+			}else{
+				$criteria->addCondition('project.label LIKE :project  OR project.code LIKE :project');
+				$criteria->params['project'] = '%'.$project.'%';
+			}
+			*/
 		}
 	
 		
@@ -953,8 +981,17 @@ class ProjectBehavior extends CActiveRecordBehavior
 			$criteria->join = 'LEFT OUTER JOIN issue_status ist ON (ist.id = t.status_id)';
 			
 		if(!empty($this->owner->id)){
-			$criteria->condition = 'projectIssues.project_id=:project_id';
-			$criteria->params = array('project_id' => $this->owner->id);
+			if($related){
+				$this->arrProjectIds[] = $this->owner->id;
+				$arrIds = $this->relatedProjects($this->owner->id);
+				if(count($arrIds) > 1)
+					$criteria->addInCondition('projectIssues.project_id', $arrIds);
+			}
+			
+			if($related == false || count($arrIds) == 1){
+				$criteria->condition = 'projectIssues.project_id=:project_id';
+				$criteria->params = array('project_id' => $this->owner->id);
+			}			
 		}elseif(is_null($order)){
 			$order = 't.project_id ASC, t.due_date ASC';
 		}
@@ -1001,6 +1038,44 @@ class ProjectBehavior extends CActiveRecordBehavior
 			'criteria'=>$criteria,
 			'pagination' => array('pageSize' => 10)
 		));
+	}
+
+	
+	public function relatedProjects($parent_id = null, $project = null, $type = 'parent')
+	{
+		$array = array();
+		$criteria = new CDbCriteria;
+		
+		if(!is_null($parent_id)){
+			$criteria->condition = 'parent_id=:parent_id';
+			$criteria->params[':parent_id'] = $parent_id;
+		}else{
+			if(!is_null($project)){
+				$criteriaP = new CDbCriteria;
+				$criteriaP->compare('label', $project, true);
+				$criteriaP->compare('code', $project, true, 'OR');
+				$criteria->mergeWith($criteriaP, true);
+			}else{
+				$criteria->condition = 'parent_id IS NULL';
+			}
+				
+		}
+		//Yii::trace('RELATEDID: ' . $parent_id,'models.project');
+
+		$criteria->order = 'label ASC';
+		
+		$models = Project::model()->findAll($criteria);
+		
+		if(count($models) > 0)
+		{
+			foreach($models as $model){
+				//if(!in_array($model->id, $this->arrProjectIds[]))
+					$this->arrProjectIds[] = $model->id;
+				$this->relatedProjects($model->id, $project);
+			}
+		}
+		
+		return $this->arrProjectIds;
 	}
 	
 	public function getSubprojects($parent_id = null, $project = null)

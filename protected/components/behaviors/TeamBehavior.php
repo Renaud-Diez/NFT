@@ -286,10 +286,10 @@ class TeamBehavior extends CActiveRecordBehavior
 			$sql = Yii::app()->db->createCommand()
 			->select('u.id as uid, u.username as label, SUM(t.time_spent) as value, WEEK(t.log_date, 1) as week')
 			->from('issue i')
-			->join('user u', 'u.id = i.user_id')
 			->join('timetracker t', 't.issue_id = i.id')
+			->join('user u', 'u.id = t.user_id')
 			->where($where, $params)
-			->group('WEEK(t.log_date, 1), t.user_id')
+			->group('week, uid')
 			->queryAll();
 			
 			$total = $a = 0;
@@ -344,6 +344,92 @@ class TeamBehavior extends CActiveRecordBehavior
 		}
 			
 		return false;
+	}
+	
+	
+	protected function timesheet($search = null)
+	{
+		$arr = $this->getAllMembers();
+		if(is_array($arr)){
+			$arrIds = $arr['id'];
+			$arrUsers = $arr['data'];
+				
+			$sql = $this->getTimesheetQuery($arr, $search);
+				
+			$total = $a = 0;
+			foreach($sql as $record){
+				$categories[] = $record['date'];
+	
+				foreach($arrUsers as $id => $name){
+					if($record['uid'] == $id)
+						$value = $record['value'];
+					else
+						$value = 0;
+						
+					$array[] = array($id, (float) $value);
+				}
+	
+			}
+			
+			return $array;
+	
+			/*foreach($array as $data){
+				$i = 0;
+				foreach($arrUsers as $id => $name){
+					if($data[0] == $id){
+						$series[$i]['type'] = 'column';
+						$series[$i]['name'] = $name;
+						$series[$i]['data'][] = $data[1];
+					}
+					$i++;
+				}
+			}*/
+			
+		}
+			
+		return false;
+	}
+	
+	protected function getTimesheetQuery($arr, $search = null)
+	{
+		$arrIds = $arr['id'];
+		$arrUsers = $arr['data'];
+		
+		$criteria=new CDbCriteria;
+		//$criteria->with['issueUsers'] = array('together' => true);
+		$criteria->addInCondition('t.user_id', $arrIds);
+		
+		if(!is_null($search))
+			$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
+		
+		if($criteria->params['date'] != '')
+			$timeDiff = DateTimeHelper::timeDiff($criteria->params['date']);
+		elseif($criteria->params['to'] != '')
+			$timeDiff = DateTimeHelper::timeDiff($criteria->params['from'], $criteria->params['to']);
+		
+		$where=$criteria->condition;
+		$params=$criteria->params;
+		
+		if($timeDiff['d'] > 15){
+			$select = 'u.id as uid, u.username as label, SUM(t.time_spent) as value, WEEK(t.log_date, 1) as date';
+			$groubBy = 'date, uid';
+		}
+		else{
+			$select = 'i.id as id, i.label as issue, u.id as uid, u.username as label, SUM(t.time_spent) as value, DATE(t.log_date) as date';
+			$groubBy = 'id, date, uid';
+		}
+		
+		
+		$sql = Yii::app()->db->createCommand()
+		->select($select)
+		->from('issue i')
+		->join('timetracker t', 't.issue_id = i.id')
+		->join('user u', 'u.id = t.user_id')
+		->where($where, $params)
+		->group($groubBy)
+		->queryAll();
+		
+		return $sql;
 	}
 	
 	protected function setDateRangeCriteria($criteria, $field, $from = false, $to = false)

@@ -5,6 +5,8 @@ class ProjectImportBehavior extends CBehavior
 	public $importParticipants = false;
 	public $importRelationships = false;
 	
+	protected $row = false;
+	
 	public function importIssues($filePath = false, $version = null, $milestone = null)
 	{
 		$records = 0;
@@ -12,28 +14,34 @@ class ProjectImportBehavior extends CBehavior
 			$arrSheet = Yii::app ()->yexcel->readActiveSheet ( $filePath );
 			$first = false;
 			foreach ( $arrSheet as $rec ) {
-				$row = false;
+				//$row = false;
+				$this->row = false;
 				if($first){
-					foreach ( $rec as $record => $value ) {
+					/*foreach ( $rec as $record => $value ) {
 						if(!is_null($value) && $value != ''){
 							$field = $this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
 							if($field)
 								$row[$field['attribute']] = $field['value'];
 						}
+					}*/
+					
+					foreach ( $rec as $record => $value ) {
+						if(!is_null($value) && $value != '')
+							$this->mapImportedAttributes( strtolower($arrSheet[1][$record]), $value);
 					}
 
 					//print_r($row);
-					if($row){
-						$model = $this->importRow($row, $version, $milestone);
+					if($this->row){
+						$model = $this->importRow($this->row, $version, $milestone);
 						if($model->id)
 							$records++;
 						//Yii::trace('Import OK:' . $model->id,'models.issue');
-						if(!is_null($model) && !empty($row['sub-tasks'])){
-						 	$relations[] = array('id' => $model->id, 'sub' => $row['sub-tasks'], 'type' => Issue::RELATED_PARENT);
+						if(!is_null($model) && !empty($this->row['sub-tasks'])){
+						 	$relations[] = array('id' => $model->id, 'sub' => $this->row['sub-tasks'], 'type' => Issue::RELATED_PARENT);
 						}
 						
-						if(!is_null($model) && !empty($row['linked-issues'])){
-							$relations[] = array('id' => $model->id, 'sub' => $row['linked-issues'], 'type' => Issue::RELATED_TO);
+						if(!is_null($model) && !empty($this->row['linked-issues'])){
+							$relations[] = array('id' => $model->id, 'sub' => $this->row['linked-issues'], 'type' => Issue::RELATED_TO);
 						}
 						
 						if(is_array($this->importParticipants) && count($this->importParticipants) > 0){
@@ -61,34 +69,28 @@ class ProjectImportBehavior extends CBehavior
 				'key',
 				'code' 
 		) ))
-			return array (
-					'attribute' => 'code',
-					'value' => $value 
-			);
+			$this->row['code'] = $value;
 		elseif (in_array ( $attribute, array (
 				'label',
 				'summary' 
 		) ))
-			return array (
-					'attribute' => 'label',
-					'value' => $value 
-			);
+			$this->row['label'] = $value;
 		elseif (in_array ( $attribute, array (
 				'issue_type',
 				'type' 
 		) ))
-			return $this->mapType ( $value );
+			$this->mapType ( $value );
 		elseif ($attribute == 'status')
-			return $this->mapStatus ( $value );
+			$this->mapStatus ( $value );
 		elseif ($attribute == 'priority')
-			return $this->mapPriority ( $value );
+			$this->mapPriority ( $value );
 		elseif ($attribute == 'assignee')
-			return $this->mapAssignee ( $value );
+			$this->mapAssignee ( $value );
 		elseif (in_array ( $attribute, array (
 				'owner',
 				'reporter'
 		) ))
-			return $this->mapOwner ( $value );
+			$this->mapOwner ( $value );
 		elseif (in_array ( $attribute, array (
 				'original_estimate',
 				'estimated',
@@ -96,51 +98,81 @@ class ProjectImportBehavior extends CBehavior
 				'effort',
 				'estimated_time'
 		) ))
-			return array (
-					'attribute' => 'estimated_time',
-					'value' => round(($value/3600),2)
-			);
+			$this->row['estimated_time'] = round(($value/3600),2);
 		elseif ($attribute == 'progress')
-			return array (
-					'attribute' => 'completion',
-					'value' => substr ( $value, 0, - 1 ) 
-			);
+			$this->row['completion'] = substr ( $value, 0, - 1 );
 		elseif ($attribute == 'description')
-			return array (
-					'attribute' => 'description',
-					'value' => $value 
-			);
+			$this->row['description'] = $value;
 		elseif ($attribute == 'participants')
-			return $this->mapParticipants ( $value );
+			$this->mapParticipants ( $value );
 		elseif ($attribute == 'subtasks')
-			return $this->mapSubTasks ( $value );
+			$this->mapSubTasks ( $value );
 		elseif (in_array ( $attribute, array (
 				'related',
 				'linked_issues'
 		) ))
-			return $this->mapRelationships ( $value );
+			$this->mapRelationships ( $value );
+		elseif ($attribute == 'remaining')
+			$this->mapRemaining ( $value );
 		else
 			return false;
+	}
+	
+	protected function mapRemaining($value)
+	{
+		if($value != ''){
+			$value = round(($value/3600),2);
+			$model = $this->getIssueByCode($this->row['code']);
+			
+			if(!is_null($model)){
+				if(isset($this->row['estimated_time']))
+					$estimated_time = $this->row['estimated_time'];
+				else
+					$estimated_time = $model->estimated_time;
+				
+				if(isset($this->row['completion']))
+					$completion = $this->row['completion'];
+				else
+					$completion = $model->estimated_time;
+			}
+			
+			
+			
+			$spent_time = $model->getLoggedEffort();
+			if(!is_numeric($spent_time))
+				$spent_time = 0;
+			
+			Yii::trace('KSPENT:' . $estimated_time,'models.issue');
+			if(is_numeric($value) && $value >= 0){
+				if($spent_time == 0)
+					$completion = round(($value/$estimated_time)*100, 0);
+				else
+					$completion = round((1-($value/($spent_time+$value)))*100, 0);
+				Yii::trace('KCOMP:' . $completion,'models.issue');
+			}
+			
+			if((is_null($estimated_time) || $estimated_time == 0) && $completion > 0){
+				$estimated_time = round($spent_time*(100/$completion), 1);
+			}
+			
+			
+			$this->row['completion'] = $completion;
+			$this->row['estimated_time'] = $estimated_time;
+		}
 	}
 	
 	protected function mapRelationships($value)
 	{
 		$value = str_replace(' ', '', $value);
 		
-		return array (
-				'attribute' => 'linked-issues',
-				'value' => str_replace(' ', '', $value)
-		);
+		$this->row['linked-issues'] = str_replace(' ', '', $value);
 	}
 	
 	protected function mapSubTasks($value)
 	{
 		$value = str_replace(' ', '', $value);
 		
-		return array (
-				'attribute' => 'sub-tasks',
-				'value' => str_replace(' ', '', $value)
-		);
+		$this->row['sub-tasks'] = str_replace(' ', '', $value);
 	}
 	
 	protected function mapType($value)
@@ -153,10 +185,8 @@ class ProjectImportBehavior extends CBehavior
 			$model->save();
 		}
 		
-		return array (
-					'attribute' => 'type_id',
-					'value' => $model->id
-			);
+		
+		$this->row['type_id'] = $model->id;
 	}
 	
 	protected function mapStatus($value)
@@ -169,10 +199,7 @@ class ProjectImportBehavior extends CBehavior
 			$model->save();
 		}
 	
-		return array (
-				'attribute' => 'status_id',
-				'value' => $model->id
-		);
+		$this->row['status_id'] = $model->id;
 	}
 	
 	protected function mapPriority($value)
@@ -190,10 +217,7 @@ class ProjectImportBehavior extends CBehavior
 		else
 			$value = Issue::PRIORITY_NORMAL;
 	
-		return array (
-				'attribute' => 'priority',
-				'value' => $value
-		);
+		$this->row['priority'] = $value;
 	}
 	
 	protected function mapParticipants($value)
@@ -212,10 +236,7 @@ class ProjectImportBehavior extends CBehavior
 		}
 		
 		if($ownerID){
-			return array (
-					'attribute' => 'owner_id',
-					'value' => $ownerID
-			);
+			$this->row['owner_id'] = $ownerID;
 		}
 		
 		return false;
@@ -227,10 +248,7 @@ class ProjectImportBehavior extends CBehavior
 		
 		if($userID){
 			$this->importParticipants[] = $userID;
-			return array (
-					'attribute' => 'assignee_id',
-					'value' => $userID
-			);
+			$this->row['assignee_id'] = $userID;
 		}
 		
 		return false;
@@ -242,10 +260,7 @@ class ProjectImportBehavior extends CBehavior
 	
 		if($userID){
 			$this->importParticipants[] = $userID;
-			return array (
-					'attribute' => 'owner_id',
-					'value' => $userID
-			);
+			$this->row['owner_id'] = $userID;
 		}
 	
 		return false;

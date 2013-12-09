@@ -2,7 +2,8 @@
 /* @var $this ProjectController */
 /* @var $data Issue */
 
-if(empty($model->id) && $GLOBALS['project'] != $data->project_id){
+//if(empty($model->id) && $GLOBALS['project'] != $data->project_id){
+if($GLOBALS['project'] != $data->project_id){
 	if(isset($GLOBALS['project']))
 		echo '<hr style="border-color: rgb(217, 217, 217); border-width: 1px 0px 0px; margin-top: -5px;">';
 	echo '<h4>'.$data->project->label.'</h4>';

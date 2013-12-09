@@ -33,17 +33,6 @@ $('.search-form form').submit(function(){
 <?php $this->renderPartial('partials/_titleMenu', array('model'=>$model)); ?>
 
 <?php 
-/*$arrIsue = array('id' => 'related-grid',
-							'ajaxUpdate'=>true,
-							'dataProvider' => $dataProvider,
-							'itemView' => 'issue/_gtd',
-							'enableSorting' => true,
-							'viewData' => array('model' => $model));
-
-echo '<table widht="100%">';
-$this->widget('zii.widgets.CListView', $arrIsue);
-echo '</table>';*/
-
 $this->renderPartial('issue/_gtdContainer', array('issues'=>$todoIssues, 'model' => $model, 'class' => 'alert', 'group' => 'todo'));
 unset($GLOBALS['project']);
 $this->renderPartial('issue/_gtdContainer', array('issues'=>$openIssues, 'model' => $model, 'class' => 'alert', 'group' => 'open'));

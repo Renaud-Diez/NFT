@@ -46,8 +46,22 @@ class ProjectController extends Controller
 		
 		//$diff = TextDiff::compare('sdqsdqsdqsd ddf', 'sdqsdqsdqsd azaz');
 		
+		$issue=new Issue('search');
+		$issue->unsetAttributes();
+		
+		if(isset($_GET['Issue']))
+			$issue->attributes=$_GET['Issue'];
+			
+		if(Yii::app()->session['myIssues'] == 'true')
+			$issue->assignee_id = Yii::App()->user->id;
+		
+		//$dataProvider = $model->getDataProviderIssues($issue, 'ist.alias ASC, ist.rank ASC, type_id ASC');
+		$openIssues = $model->getIssues($issue, $filter = 'open', 't.project_id ASC, t.due_date ASC', null);
+		$todoIssues = $model->getIssues($issue, $filter = 'todo', 't.project_id ASC, t.due_date ASC', null);
+		$doneIssues = $model->getIssues($issue, $filter = 'done', 't.project_id ASC, t.due_date ASC', null);
+		
 		$this->render('view',array(
-			'model'=>$model,
+			'model'=>$model, 'openIssues'=>$openIssues,'todoIssues'=>$todoIssues,'doneIssues' => $doneIssues,
 		));
 	}
 	

@@ -200,9 +200,22 @@ class IssueController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Issue');
+		$model=new Issue('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if($_GET['pid'])
+		{
+			$pid = $_GET['pid'];
+			$this->project = $this->loadProject($pid);
+			$model->project_id = $pid;
+		}
+		
+		
+		if(isset($_GET['Issue']))
+			$model->attributes=$_GET['Issue'];
+		
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+				'model'=>$model,
 		));
 	}
 	

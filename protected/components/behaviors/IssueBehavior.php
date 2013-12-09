@@ -180,7 +180,7 @@ class IssueBehavior extends CActiveRecordBehavior
 	
 	public function estimatedRemainingEffort()
 	{
-		$loggedEffort = round($this->getLoggedEffort());
+		$loggedEffort = round($this->getLoggedEffort(), 2);
 		if(empty($loggedEffort))
 			$loggedEffort = 0;
 		
@@ -192,12 +192,12 @@ class IssueBehavior extends CActiveRecordBehavior
 		if(empty($completion))
 			$completion = 0;
 			
-		$theoricalEfforForCompletion = round($estimatedEffort*$completion/100);
+		$theoricalEfforForCompletion = round($estimatedEffort*$completion/100, 2);
 		$theoricalRemainingEffort = $estimatedEffort-$theoricalEfforForCompletion;
 		
 		//$estimatedRemainingEffort = $loggedEffort*$estimatedEffort*(100-$completion)/100;//19*39*(100-49)
 		if($completion > 0)
-			$estimatedRemainingEffort = round($loggedEffort*100/$completion)-$loggedEffort;
+			$estimatedRemainingEffort = round($loggedEffort*100/$completion, 2)-$loggedEffort;
 		else
 			$estimatedRemainingEffort = 0;
 

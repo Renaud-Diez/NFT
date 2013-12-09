@@ -161,6 +161,15 @@ class TeamController extends Controller
 		));
 	}
 	
+	public function actionTimesheet($id)
+	{
+		$this->setDateRangeSearch();
+	
+		$this->render('timesheet',array(
+				'model'=>$this->loadModel($id),
+		));
+	}
+	
 	public function actionWeekly($id = null)
 	{
 		$model = $this->loadModel($id);

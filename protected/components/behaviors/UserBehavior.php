@@ -52,10 +52,10 @@ class UserBehavior extends CActiveRecordBehavior
 			$sql = Yii::app()->db->createCommand()
 			->select('u.id as uid, u.username as label, SUM(t.time_spent) as value, WEEK(t.log_date, 1) as week')
 			->from('issue i')
-			->join('user u', 'u.id = i.user_id')
 			->join('timetracker t', 't.issue_id = i.id')
+			->join('user u', 'u.id = t.user_id')
 			->where($where, $params)
-			->group('WEEK(t.log_date, 1), t.user_id')
+			->group('week, uid')
 			->queryAll();
 			
 			//echo $sql;
@@ -269,7 +269,7 @@ class UserBehavior extends CActiveRecordBehavior
 		$date = date('Y-m-d', strtotime('monday this week'));//monday this week
 		
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.user_id', $this->owner->id);
+		$criteria->compare('t.user_id', $this->owner->id);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
@@ -319,7 +319,7 @@ class UserBehavior extends CActiveRecordBehavior
 	public function getActivityDetail($search = null)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.user_id', $this->owner->id);
+		$criteria->compare('t.user_id', $this->owner->id);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
@@ -353,7 +353,7 @@ class UserBehavior extends CActiveRecordBehavior
 	public function getUserWeekly($search = null)
 	{
 		$criteria=new CDbCriteria;
-		$criteria->compare('i.user_id', $this->owner->id);
+		$criteria->compare('t.user_id', $this->owner->id);
 		
 		$this->setDateRangeCriteria($criteria, 't.log_date', $search->from, $search->to);
 		
