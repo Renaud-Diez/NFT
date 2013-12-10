@@ -158,9 +158,9 @@ class ProjectImportBehavior extends CBehavior
 			
 			//Yii::trace('KSPENT:' . $estimated_time,'models.issue');
 			if(is_numeric($value) && $value >= 0){
-				if($spent_time == 0)
-					$completion = round(($value/$estimated_time)*100, 0);
-				else
+				if($spent_time == 0){
+					$completion = round(100-(($value/$estimated_time)*100), 0);
+				}else
 					$completion = round((1-($value/($spent_time+$value)))*100, 0);
 				//Yii::trace('KCOMP:' . $completion,'models.issue');
 			}
