@@ -131,6 +131,7 @@ class ProjectImportBehavior extends CBehavior
 	
 	protected function mapRemaining($value)
 	{
+		$spent_time = 0;
 		if($value != ''){
 			$value = str_replace(',', '.', $value);
 			if($value >= 1000)
@@ -148,11 +149,13 @@ class ProjectImportBehavior extends CBehavior
 					$completion = $this->row['completion'];
 				else
 					$completion = $model->completion;
+				
+				$spent_time = $model->getLoggedEffort();
 			}
 			
 			
 			
-			$spent_time = $model->getLoggedEffort();
+			
 			if(!is_numeric($spent_time))
 				$spent_time = 0;
 			
