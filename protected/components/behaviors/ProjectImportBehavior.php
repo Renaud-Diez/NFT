@@ -137,18 +137,17 @@ class ProjectImportBehavior extends CBehavior
 			if($value >= 1000)
 				$value = round(($value/3600),2);
 			
+			if(isset($this->row['estimated_time']))
+				$estimated_time = $this->row['estimated_time'];
+			
+			if(isset($this->row['completion']))
+				$completion = $this->row['completion'];
+			
 			$model = $this->getIssueByCode($this->row['code']);
 			
 			if(!is_null($model)){
-				if(isset($this->row['estimated_time']))
-					$estimated_time = $this->row['estimated_time'];
-				else
-					$estimated_time = $model->estimated_time;
-				
-				if(isset($this->row['completion']))
-					$completion = $this->row['completion'];
-				else
-					$completion = $model->completion;
+				$estimated_time = $model->estimated_time;
+				$completion = $model->completion;
 				
 				$spent_time = $model->getLoggedEffort();
 			}
